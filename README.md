@@ -5,3 +5,4 @@ This is our site
 Jason Theoharis
 Luke Dorney
 Leon Thorne
+Timothy Hickey (Advisor)
