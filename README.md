@@ -3,5 +3,5 @@ This is our site
 
 ##Members
 Jason Theoharis
-Luke Dorney
+Luke Dorney (likes computer programming)
 Leon Thorne
