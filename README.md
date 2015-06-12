@@ -2,6 +2,6 @@
 This is our site
 
 ##Members
-Jason
+Jason Theoharis
 Luke Dorney
 Leon Thorne
