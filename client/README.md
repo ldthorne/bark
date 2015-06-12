@@ -4,4 +4,4 @@ This is our site
 ##Members
 Jason
 Luke
-Leon
+Leon Thorne
