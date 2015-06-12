@@ -3,5 +3,5 @@ This is our site
 
 ##Members
 Jason
-Luke
-Leon Thorneg
+Luke Dorney
+Leon Thorne
