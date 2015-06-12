@@ -1,1 +1,7 @@
-=Readme=
+# Readme
+This is our site
+
+##Members
+Jason
+Luke
+Leon Thorneg
