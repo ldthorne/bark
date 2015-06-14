@@ -1,5 +1,26 @@
-<template name = "newsfeed">
-	<div class = "jumbotron">
-		<h3>This is where your newsfeed will be!</h3>
-	</div>
+<template name= "newsfeed">
+  <div class="posts">
+    <div class="form-style">
+      <div class="container">
+        <ul class="list-group">
+          <h3>Live feed of what people are saying around you</h3>
+          {{#each posts}}
+            {{> postInfo}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="postInfo">
+  <div class="posts">
+    <li class="list-group-item">
+      <a class="postInfo" href="#">
+        <p class="break-el">{{posts}}</p>
+        <a class="btn pull-right btn-small no" href="#"><i class="fa fa-chevron-down"></i></a>
+        <a class="btn pull-right btn-small yes" href="#"><i class="fa fa-chevron-up"></i></a>
+      </a>
+    </li>
+  </div>
 </template>

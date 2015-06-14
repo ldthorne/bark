@@ -1,0 +1,48 @@
+.navbar { background-color: white; }
+.brand { font-size: 2em;}
+a:link { text-decoration: none;}
+a:hover { text-decoration: none;}
+.navbar-inner{ padding: 1em 0em 0.8em;}
+body{background-color: #f3f3f3;}
+*{
+  font-family: 'proxima-nova', 'Proxima Nova', sans-serif;
+}
+p{margin: 0;}
+.posts p{
+	font-size: 18px;
+	color: #534540;
+	font-weight: 50;
+}
+a.postInfo {
+  color: #000;
+}
+
+a.postInfo:hover{
+  color: #000;
+}
+
+.post{
+	margin-bottom: 10px;
+}
+
+.post-form{
+	margin-bottom: 10px;
+}
+
+.break-el{
+    -ms-word-break: break-all;
+    word-break: break-all;
+
+ /* Non standard for webkit */
+     word-break: break-word;
+
+    -webkit-hyphens: auto;
+       -moz-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+}
+
+.postsSubmit h3 {
+  text-align: center;
+  margin: 5px 0px 25px;
+}
