@@ -6,4 +6,3 @@ Jason Theoharis
 Luke Dorney (likes computer programming)
 Leon Thorne
 Timothy Hickey (Advisor)
-
