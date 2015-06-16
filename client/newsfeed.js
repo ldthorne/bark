@@ -7,15 +7,15 @@ Template.newsfeed.helpers({
 Template.newsfeed.events({
     'click .posts': function(){
       var playerId = this._id;
-      Session.set('posts', playerId); 
+      Session.set('post', playerId); 
     },
     'click .increment': function () {
-      var selectedAnime = Session.get('posts');
-      posts.update(post, {$inc: {score: 1}});
+      var selectedAnime = Session.get('post');
+      Posts.update(selectedAnime, {$inc: {score: 1}});
     },
     'click .decrement': function(){
-      var selectedAnime = Session.get('posts');
-      posts.update(post, {$inc: {score: -1}});
+      var selectedAnime = Session.get('post');
+      Posts.update(selectedAnime, {$inc: {score: -1}});
     }
   
 });

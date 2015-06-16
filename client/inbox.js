@@ -10,7 +10,7 @@ Template.messageform.events({
 		var timestamp = new Date();
 		var message= event.target.message.value;
 		var to_whom= event.target.to_whom.value;
-		var sender = Meteor.ueserId();
+		var sender = Meteor.userId();
 		console.log(JSON.stringify(message));
 
 		Messages.insert({timestamp:timestamp, message:message, to_whom:to_whom, sender:sender});
