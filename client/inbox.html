@@ -1,6 +1,38 @@
-<template name = "inbox">
-	<div class = "jumbotron">
-		<h1> Welcome! </h1>
-		<p>This is our website</p>
-	</div>
+<template name="inbox">
+	<h1>Messages</h1>
+	{{#if currentUser}}
+	<p>
+		{{#each messagefunc}}
+  			{{> messageblock}}
+		{{/each}}
+	</p>
+
+	<hr/>
+	<p>
+		{{> messageform}}
+	</p>
+	{{else}}
+	<p>You need to be logged in to see messages</p>
+	{{/if}}
+
+</template>
+
+
+<template name="messageblock">
+	<p>
+		
+		{{message}}
+		<br/> {{timestamp}}
+		<hr/>
+	</p>
+
+</template>
+
+<template name="messageform">
+	<h3>new chat</h3>
+		<form id="sendmessage">
+			
+			message: <input type="text" name="message"><br/>
+			<input type="submit">
+		</form>
 </template>
