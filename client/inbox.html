@@ -20,8 +20,8 @@
 
 <template name="messageblock">
 	<p>
-		
-		{{message}}
+		{{to_whom}}
+		<br/>{{message}}
 		<br/> {{timestamp}}
 		<hr/>
 	</p>
@@ -31,7 +31,7 @@
 <template name="messageform">
 	<h3>new chat</h3>
 		<form id="sendmessage">
-			
+			to_whom: <input type="text" name="to_whom"><br/>
 			message: <input type="text" name="message"><br/>
 			<input type="submit">
 		</form>
