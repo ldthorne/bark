@@ -5,17 +5,34 @@ Template.newsfeed.helpers({
 });
 
 Template.newsfeed.events({
-    'click .posts': function(){
-      var playerId = this._id;
-      Session.set('post', playerId); 
+    'click': function(){
+      var postId = this._id;
+      Session.set('post', postId); 
     },
     'click .increment': function () {
-      var selectedAnime = Session.get('post');
-      Posts.update(selectedAnime, {$inc: {score: 1}});
+      if(Meteor.user()) {
+        var selectedAnime = Posts.findOne({_id:this._id});
+        if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
+          return "voted";
+        } else {
+          var postId = Session.get('post');
+          Posts.update(postId, {$inc: {score: 1}});
+          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
+        }
+      }
+      
     },
     'click .decrement': function(){
-      var selectedAnime = Session.get('post');
-      Posts.update(selectedAnime, {$inc: {score: -1}});
-    }
-  
+      if(Meteor.user()) {
+        var selectedAnime = Posts.findOne({_id:this._id});
+        if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
+          return "ok";
+        } else {
+          var postId =Session.get('post');
+          Posts.update(postId, {$inc: {score: -1}});
+          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
+
+        }
+      }
+  }
 });
