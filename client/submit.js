@@ -22,19 +22,6 @@ Template.submit.events({
       var current = new Point(position.coords.latitude,position.coords.longitude);
       Session.set("currentLocation",current);
     });
-    
-
-    Meteor.call("searchLocations",      
-      Session.get("currentLocation"),
-      function(error, data) {
-        if (error) {
-          console.log(error);
-        }
-        else {
-          Session.set("inLocation",data);
-        }
-      }
-    );
   }
 });
 
@@ -45,23 +32,8 @@ Template.submit.helpers({
     // and calls searchLocations to determine the new location
     navigator.geolocation.watchPosition(function(position){
       var current = new Point(position.coords.latitude,position.coords.longitude);
-      Session.set("currentLocation",current);
-
-      Meteor.call("searchLocations",      
-        Session.get("currentLocation"),
-        function(error, data) {
-          if (error) {
-            console.log(error);
-          }
-          else {
-            Session.set("inLocation",data);
-          }
-        }
-      );
-      
+      Session.set("currentLocation",current); 
     });
-
-    
     return Session.get("currentLocation");
 
   }
