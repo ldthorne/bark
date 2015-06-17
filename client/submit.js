@@ -1,5 +1,7 @@
 
-
+Meteor.startup(function() {  
+  GoogleMaps.load();
+});
 
 Template.submit.events({
   'submit .postsSubmitForm': function(event) {
@@ -64,6 +66,18 @@ Template.submit.helpers({
 
   }
 });
+
+Template.map.helpers({  
+  mapOptions: function() {
+    if (GoogleMaps.loaded()) {
+      return {
+        center: new google.maps.LatLng(-37.8136, 144.9631),
+        zoom: 8
+      };
+    }
+  }
+});
+
 
 function Point(x,y) {
   this.x = x;
