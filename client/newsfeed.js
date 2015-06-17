@@ -19,6 +19,8 @@ Template.newsfeed.events({
           Posts.update(postId, {$inc: {score: 1}});
           Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
         }
+      } else {
+        alert("You must log in to vote. Log in and try again.");
       }
       
     },
@@ -33,6 +35,8 @@ Template.newsfeed.events({
           Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
 
         }
+      } else {
+        alert("You must log in to vote. Log in and try again.");
       }
   }
 });
