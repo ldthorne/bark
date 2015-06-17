@@ -5,6 +5,8 @@
         <form class="postsSubmitForm">
           <h3>Bark! something funny. It’s anonymous</h3>
           <input autofocus="autofocus" type="text" id="post" class="post-form form-control" name="post" placeholder="Type your post here"/>
+          <p>Current location: ({{currentLocation.x}}, {{currentLocation.y}})</p>
+          <p><a id="whereAmI" class="btn btn-default" href="#locationName" data-toggle="collapse">Where am I?</a></p>
           <input type="submit" value="Send post" class="btn btn-primary">
         </form>
       </div>
