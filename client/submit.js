@@ -1,3 +1,15 @@
+window.onload = function() {
+  var startPos;
+  var geoSuccess = function(position) {
+    startPos = position;
+    document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+    document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess);
+  console.log(navigator.geolocation.getCurrentPosition(geoSuccess));
+};
+
+
 Template.submit.events({
   'submit .postsSubmitForm': function(event) {
     event.preventDefault();
