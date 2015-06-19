@@ -7,16 +7,9 @@
           <input autofocus="autofocus" type="text" id="post" class="post-form form-control" name="post" placeholder="Type your post here"/>
           <p>Current location: ({{getLat}}, {{getLng}})</p>
           <p><a id="whereAmI" class="btn btn-default" href="#locationName" data-toggle="collapse">Where am I?</a></p>
-          <p>{{> map}}</p>
           <input type="submit" value="Send post" class="btn btn-primary">
         </form>
       </div>
     </div>
   </div>
 </template>
-
-<template name="map">  
-  <div class="map-container">
-    {{> googleMap name="map" options=mapOptions}}
-  </div>
-</template> 

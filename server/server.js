@@ -4,7 +4,7 @@ Meteor.methods({
       post : post, 
       score : 0, 
       submitted : new Date(),
-      location : location,
+      location : location
     });
   }
 });

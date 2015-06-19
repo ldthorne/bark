@@ -1,9 +1,6 @@
 
 Meteor.startup(function() {
     start = currentLocation();
-    Session.set("lat", -37.8136);
-    Session.set("lng",  144.9631);
-    GoogleMaps.load();
 });
 
 Template.submit.events({
@@ -45,25 +42,12 @@ Template.submit.helpers({
   }
 });
 
-Template.map.helpers({  
-  mapOptions: function() {
-    if (GoogleMaps.loaded()) {
-        return {
-          center: new google.maps.LatLng(Session.get('lat'), Session.get('lng')),
-          zoom: 8
-      };
-    }
-  }
-});
-
 function currentLocation() {
     // watchPosition watches to see if position changes
     // the function then sets the new location
     // and calls searchLocations to determine the new location
     navigator.geolocation.watchPosition(function(position){
       var current = new Point(position.coords.latitude,position.coords.longitude);
-      Session.set("lat", position.coords.latitude);
-      Session.set("lng", position.coords.longitude);
       Session.set("currentLocation",current); 
     });
     return Session.get("currentLocation");
