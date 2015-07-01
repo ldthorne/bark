@@ -1,0 +1,13 @@
+<template name=”postpage”>
+  <div class=”form-style”>
+    <div class=”container”>
+      {{> postInfo}}
+      <div class=”comment”>
+        <h4>Comments</h4>
+        {{#each comments}}
+          {{> commentItem}}
+        {{/each}}
+      </div> 
+    </div>
+  </div>
+</template>
