@@ -1,18 +1,18 @@
-<template name=”postItem”>
-  <div class=”post”>
-    <li class=”list-group-item”>
-      <div class=”post”>
-        <p class=”break-el”>{{post}}</p>
+<template name="postItem">
+  <div class="post">
+    <li class="list-group-item">
+      <div class="post">
+        <p class="break-el">{{post}}</p>
       {{#if currentUser}}
-        <a class=”btn” href=”{{pathFor ‘postpage’}}”>{{commentsCount}} comments</a>
-        <a class=”btn pull-right btn-small no” href=”#”><i class=”fa fa-chevron-down”></i></a>
-        <a class=”btn pull-right” href=”#”> {{points}} </a>
-        <a class=”btn pull-right btn-small yes” href=”#”><i class=”fa fa-chevron-up”></i></a>
+        <a class="btn" href="{{pathFor ‘postpage’}}">{{commentsCount}} comments</a>
+        <a class="btn pull-right btn-small no" href="#"><i class="fa fa-chevron-down"></i></a>
+        <a class="btn pull-right" href="#"> {{points}} </a>
+        <a class="btn pull-right btn-small yes" href="#"><i class="fa fa-chevron-up"></i></a>
       {{else}}
-        <a class=”btn” href=”{{pathFor ‘postpage’}}”>{{commentsCount}} comments</a>
-        <a class=”btn pull-right btn-small” href=”{{pathFor 'accounts'}}”><i class=”fa fa-chevron-down”></i></a>
-        <a class=”btn pull-right” href=”#”> {{points}} </a>
-        <a class=”btn pull-right btn-small” href=”{{pathFor 'accounts'}}”><i class=”fa fa-chevron-up”></i></a>
+        <a class="btn" href="{{pathFor ‘postpage’}}">{{commentsCount}} comments</a>
+        <a class="btn pull-right btn-small" href="{{pathFor 'accounts'}}"><i class="fa fa-chevron-down"></i></a>
+        <a class="btn pull-right" href="#"> {{points}} </a>
+        <a class="btn pull-right btn-small" href="{{pathFor 'accounts'}}"><i class="fa fa-chevron-up"></i></a>
       {{/if}}
       </div>
     </li>
