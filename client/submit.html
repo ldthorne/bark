@@ -2,13 +2,16 @@
   <div class="postsSubmit">
     <div class="form-style">
       <div class="container">
+        {{#if currentUser}}
         <form class="postsSubmitForm">
-          <h3>Bark! something funny. It’s anonymous</h3>
+          <h3>Bark! something funny. It’s anonymous</h3>         
           <input autofocus="autofocus" type="text" id="post" class="post-form form-control" name="post" placeholder="Type your post here"/>
           <p>Current location: ({{getLat}}, {{getLng}})</p>
-          <p><a id="whereAmI" class="btn btn-default" href="#locationName" data-toggle="collapse">Where am I?</a></p>
-          <input type="submit" value="Send post" class="btn btn-primary">
+          <input type="submit" value="Send post" class="btn btn-primary">          
         </form>
+        {{else}}
+          <h2>You have to log in to post something</h2>
+        {{/if}}
       </div>
     </div>
   </div>
