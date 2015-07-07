@@ -1,7 +1,20 @@
+Session.set('voices',window.speechSynthesis.getVoices());
+voices = [];
+theVoice=null;
+
 Template.newsfeed.helpers({
   posts: function() {
     return Posts.find({}, {sort: {submitted: -1}});
   }
+});
+
+Template.postInfo.events({
+    'click .say': function(event){
+    currentPost = this._id;
+    var msg = new SpeechSynthesisUtterance(Posts.findOne({_id:this._id}).post);
+    if (theVoice) msg.voice=theVoice;
+    window.speechSynthesis.speak(msg);
+  },
 });
 
 Template.newsfeed.events({
