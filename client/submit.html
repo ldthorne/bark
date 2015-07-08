@@ -4,13 +4,16 @@
       <div class="container">
         {{#if currentUser}}
         <form class="postsSubmitForm">
-          <h3>Bark! something funny. It’s anonymous</h3>         
+          <h3>Bark! something funny. It’s anonymous</h3>  
+        <div>  
+          <div><a href="#" id="start_button">Dictate</a></div> 
+          <span id="final_span" class="final"></span>
+          <span id="interim_span" class="interim"></span>
           <input autofocus="autofocus" type="text" id="post" class="post-form form-control" name="post" placeholder="Type your post here"/>
+        </div>
           <p>Current location: ({{getLat}}, {{getLng}})</p>
           <input type="submit" value="Send post" class="btn btn-primary">          
         </form>
-                  <p><button onclick="geoFindMe()">Show my location</button></p>
-          <div id="out"></div>  
         {{else}}
           <h2>You have to log in to post something</h2>
         {{/if}}
