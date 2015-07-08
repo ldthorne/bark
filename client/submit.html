@@ -9,6 +9,8 @@
           <p>Current location: ({{getLat}}, {{getLng}})</p>
           <input type="submit" value="Send post" class="btn btn-primary">          
         </form>
+                  <p><button onclick="geoFindMe()">Show my location</button></p>
+          <div id="out"></div>  
         {{else}}
           <h2>You have to log in to post something</h2>
         {{/if}}
