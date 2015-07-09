@@ -51,6 +51,7 @@ Template.newsfeed.events({
       }
       
     },
+
     'click .decrement': function(){
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
@@ -78,5 +79,14 @@ Template.newsfeed.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
+  },
+
+  'click .messageButton': function(){
+    if(Meteor.user()){
+      Meteor.defer(function() {Router.go('message');});
+    } else {
+      alert("You must be logged in to send a message. Login and try again.");
+    }
   }
+
 });

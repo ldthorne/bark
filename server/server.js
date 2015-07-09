@@ -7,5 +7,18 @@ Meteor.methods({
       location : location,
       owner: Meteor.userId()
     });
+  },
+
+  messageInsert: function(text, postId, senderId, ownerId) {
+
+  	var mes = Messages.insert({
+  		text:text,
+  		postId: postId,
+  		senderId: senderId,
+  		ownerId: ownerId,
+  		submitted: new Date()
+  	});
+
   }
+
 });
