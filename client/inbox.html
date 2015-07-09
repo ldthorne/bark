@@ -7,10 +7,6 @@
 		{{/each}}
 	</p>
 
-	<hr/>
-	<p>
-		{{> messageform}}
-	</p>
 	{{else}}
 	<p>You need to be logged in to see messages</p>
 	{{/if}}
@@ -19,21 +15,11 @@
 
 
 <template name="messageblock">
+
 	<p>
-		{{to_whom}}
-		<br/>{{message}}
-		<br/> {{timestamp}}
-		<br/> {{sender}}
+		<br/>{{text}}
+		<br/> {{submitted}}
 		<hr/>
 	</p>
 
-</template>
-
-<template name="messageform">
-	<h3>new chat</h3>
-		<form id="sendmessage">
-			to_whom: <input type="text" name="to_whom"><br/>
-			message: <input type="text" name="message"><br/>
-			<input type="submit">
-		</form>
 </template>
