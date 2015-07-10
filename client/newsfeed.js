@@ -5,9 +5,13 @@ theVoice=null;
 Template.newsfeed.helpers({
   posts: function() {
     return Posts.find({}, {sort: {submitted: -1}});
+  },
+  'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
   }
 });
-
+Template.postInfo.helpers({
+  ismyrow: function(){return Meteor.userId() == this.owner}
+});
 Template.postInfo.events({
     'click .say': function(event){
     currentPost = this._id;

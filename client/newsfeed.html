@@ -36,7 +36,10 @@
         <span class="glyphicon glyphicon-envelope"></span>
         </button>
         <button class="say">Say</button>
-      </a>
+      {{#if ismyrow}} 
+        <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+      {{/if}}
+      </a> 
       <hr>
     </li>
   </div>
