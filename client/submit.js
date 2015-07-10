@@ -1,12 +1,12 @@
 Meteor.startup(function() {
-    start = currentLocation();
+    start = userLocation();
 });
 
 Template.submit.events({
   'submit .postsSubmitForm': function(event) {
     event.preventDefault();
     var post = event.target.post.value; // get post vote value
-    var location = currentLocation();
+    var location = userLocation();
     // check if the value is empty
     if (post == "") {
       alert("You can’t insert empty post. Try to write something funny instead.");
@@ -23,7 +23,7 @@ Template.submit.events({
     console.log(start);
     start = new Point(position.coords.latitude,position.coords.longitude);
     console.log(start);
-    Session.set("currentLocation",start);
+    Session.set("userLocation",start);
     });
   },
 
@@ -37,25 +37,25 @@ Template.submit.events({
 Template.submit.helpers({
 
   getLat: function(){
-    var location = Session.get('currentLocation');
+    var location = Session.get('userLocation');
     return location.x;
   },
 
   getLng: function(){
-    var location = Session.get('currentLocation');
+    var location = Session.get('userLocation');
     return location.y;
   }
 });
 
-function currentLocation() {
+function userLocation() {
     // watchPosition watches to see if position changes
     // the function then sets the new location
     // and calls searchLocations to determine the new location
     navigator.geolocation.watchPosition(function(position){
       var current = new Point(position.coords.latitude,position.coords.longitude);
-      Session.set("currentLocation",current); 
+      Session.set("userLocation",current); 
     });
-    return Session.get("currentLocation");
+    return Session.get("userLocation");
 
 }
 

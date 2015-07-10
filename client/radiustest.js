@@ -8,14 +8,14 @@ function Point(x,y) {
   	this.y = y;
 }
 
-// function currentLocation() {
-// 	navigator.geolocation.watchPosition(function(position){
-// 	  	var current = new Point(position.coords.latitude,position.coords.longitude);
-// 		Session.set("currentLocation",current); 
-// 	});
-// 	return Session.get("currentLocation");
+function currentLocation() {
+	navigator.geolocation.watchPosition(function(position){
+	  	var current = new Point(position.coords.latitude,position.coords.longitude);
+		Session.set("currentLocation",current); 
+	});
+	return Session.get("currentLocation");
 
-// }
+}
 
 Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
@@ -35,13 +35,14 @@ Template.radiustest.helpers({
 		return Posts.find({}, {sort: {submitted: -1}});
 	},
 	closePosts: function(){
-		// start = currentLocation();
+		start = currentLocation();
 		navigator.geolocation.getCurrentPosition(GetLocation);
 		
 		allPosts = Posts.find().fetch();
 		// console.log(allPosts);
 
 		if(Session.get("lat")==undefined){
+			
 			return [];
 		}
 		closePosts = _.filter(allPosts,function(post){
@@ -60,11 +61,18 @@ Template.radiustest.helpers({
 
 Template.radiInfo.events({
 	'click .say': function(event){
-	currentPost = this._id;
-	var msg = new SpeechSynthesisUtterance(Posts.findOne({_id:this._id}).post);
-	if (theVoice) msg.voice=theVoice;
-	window.speechSynthesis.speak(msg);
-  },
+		currentPost = this._id;
+		var msg = new SpeechSynthesisUtterance(Posts.findOne({_id:this._id}).post);
+		if (theVoice) msg.voice=theVoice;
+		window.speechSynthesis.speak(msg);
+	},
+  	'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
+  	}
+
+});
+
+Template.radiInfo.helpers({
+	ismyrow: function(){return Meteor.userId() == this.owner}
 });
 
 Template.radiustest.events({
