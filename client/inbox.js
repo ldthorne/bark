@@ -1,6 +1,9 @@
 
 Template.inbox.helpers({
-   messagefunc: function(){return Messages.find({},{sort:{time: 1}});}
+   messagefunc: function(){
+   	
+   	return Messages.find({},{sort:{time: 1}});
+   }
  });
 
 // Template.messageblock.helpers({
