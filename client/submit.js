@@ -7,11 +7,14 @@ Template.submit.events({
     event.preventDefault();
     var post = event.target.post.value; // get post vote value
     var location = currentLocation();
+
     // check if the value is empty
     if (post == "") {
       alert("You can’t insert empty post. Try to write something funny instead.");
     } else {
-
+      if (recognizing) {
+        recognition.stop();
+      }
       Meteor.call('postInsert', post, location);
       Router.go('newsfeed');
     }
@@ -20,9 +23,7 @@ Template.submit.events({
     event.preventDefault();
 
     navigator.geolocation.getCurrentPosition(function(position) {
-    console.log(start);
     start = new Point(position.coords.latitude,position.coords.longitude);
-    console.log(start);
     Session.set("currentLocation",start);
     });
   },
@@ -68,7 +69,6 @@ function Point(x,y) {
   var recognizing = false;
   
   if ('webkitSpeechRecognition' in window) {
-    console.log("webkit is available!");
     var recognition = new webkitSpeechRecognition();
       recognition.continuous = true;
       recognition.interimResults = true;
@@ -89,23 +89,19 @@ function Point(x,y) {
       myevent = event;
         var interim_transcript = '';
         for (var i = event.resultIndex; i < event.results.length; ++i) {
-        console.log("i="+i);
           if (event.results[i][0].transcript.indexOf("stop") > -1){
-            console.log("woord");
             recognition.stop()
             return;
           }
           if(event.results[i].isFinal) {
             final_transcript += capitalize(event.results[i][0].transcript.trim()) +".\n";
-        console.log('final events.results[i][0].transcript = '+ JSON.stringify(event.results[i][0].transcript));
           } else {
             interim_transcript += event.results[i][0].transcript;
-        console.log('interim events.results[i][0].transcript = '+ JSON.stringify(event.results[i][0].transcript));
           }
         }
         //final_transcript = capitalize(final_transcript);
        document.getElementById("post").value = linebreak(final_transcript);
-        document.getElementById("post").value = linebreak(interim_transcript);
+       document.getElementById("post").value = linebreak(interim_transcript);
         
       };
   }
