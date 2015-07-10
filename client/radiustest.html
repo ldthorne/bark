@@ -1,0 +1,49 @@
+<template name= "radiustest">
+  <div class="posts">
+    <div class="form-style">
+      <div class="container">
+        <ul class="list-group">
+          <h3>Live feed of what people are saying around you</h3>
+          {{#each closePosts}}
+            {{> radiInfo}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+<!--     <div style="bottom: 45px; right: 24px;">
+      <a id="submitFAB" class="btn btn-fab" href="/submit"><i class="fa fa-pencil"></i></a>
+    </div> -->
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+      <a id = "submitFAB" class="btn-floating btn-large" href="/submit"><i class="fa fa-pencil"></i>
+      </a>
+    </div>
+    <!-- <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+    </div>
+ -->
+
+  </div>
+</template>
+
+<template name="radiInfo">
+  <div class="posts">
+    <li class="list-group-item">
+      <a class="postInfo" href="#">
+        <p class="break-el">{{#emojione}} {{post}} {{/emojione}}</p> 
+        <p align="right">{{score}}</p>
+        <button type="button" class="increment">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+        <button type="button" class="decrement">
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+        </button>
+        <button type="button" class="message" align="center">
+        <span class="glyphicon glyphicon-envelope"></span>
+        </button>
+        <button class="say">Say</button>
+      </a>
+      <hr>
+    </li>
+  </div>
+</template>

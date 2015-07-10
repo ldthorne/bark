@@ -49,6 +49,7 @@ natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
 ordered-dict@1.0.3
+outatime:geolib@2.0.15
 qnub:emojione@0.0.3
 random@1.0.3
 reactive-dict@1.1.0

@@ -1,5 +1,3 @@
-
-
 Meteor.startup(function() {
     start = currentLocation();
 });
