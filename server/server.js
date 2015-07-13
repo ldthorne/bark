@@ -27,7 +27,8 @@ Meteor.methods({
       comment:comment,
       submitted: new Date(),
       fromPost: fromPost,
-      commenter: Meteor.userId()
+      commenter: Meteor.userId(),
+      score: 0
     })
   }
 

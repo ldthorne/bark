@@ -1,6 +1,6 @@
 <template name="comment">
-<h1>Comment</h1>
-<h3>{{postTitle}}</h3>
+<h2>{{postTitle}}</h2>
+<hr>
 {{#if isComments}}
 	{{#each commentFunc}}
 		{{> commentBloc}}
@@ -14,9 +14,19 @@
 </template>
 
 <template name="commentBloc">
+
 	
 	<h5>{{comment}}</h5>
-	<hr/>
+
+	<button type="button" class="increment">
+    <span class="glyphicon glyphicon-thumbs-up"></span>
+    </button>
+    <button type="button" class="decrement">
+    <span class="glyphicon glyphicon-thumbs-down"></span>
+    </button>
+
+    <h6 align="right">{{score}}</h6>
+	<br/>
 
 </template>
 
