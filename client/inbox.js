@@ -1,8 +1,23 @@
 
 Template.inbox.helpers({
+
+	// messageThread: function(){
+	// 	postList=[]
+	// 	for( var i = 0 ; i < Messages.find().count(); i++){
+	// 		postList.push(Messages.find()[i].postId);
+	// 	}
+	// 	console.log(postList);
+	// 	for(var k = 0; k < postList.length ; k++){
+			
+	// 	}
+	// }
    messagefunc: function(){
    	
    	return Messages.find({},{sort:{time: 1}});
+   },
+
+   origPost: function(){
+   	return Posts.findOne(this.postId).post;
    }
  });
 

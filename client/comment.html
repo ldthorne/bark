@@ -1,0 +1,37 @@
+<template name="comment">
+<h1>Comment</h1>
+<h3>{{postTitle}}</h3>
+{{#if isComments}}
+	{{#each commentFunc}}
+		{{> commentBloc}}
+	{{/each}}
+{{else}}
+<p>No comments yet...</p>
+{{/if}}
+
+{{> commentForm}}
+
+</template>
+
+<template name="commentBloc">
+	
+	<h5>{{comment}}</h5>
+	<hr/>
+
+</template>
+
+<template name="commentForm">
+
+    <div class="form-style">
+      <div class="container">
+        <form class="commentsSubmitForm"> 
+        <div>
+          <input autofocus="autofocus" type="text" id="comment" class="comment-form form-control" name="comment" placeholder="Type your comment here"/>
+        </div>
+          <input type="submit" value="Send post" class="btn btn-primary">          
+        </form>
+      </div>
+    </div>
+
+
+</template>

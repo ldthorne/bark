@@ -8,9 +8,12 @@ Template.newsfeed.helpers({
   }
 
 });
+
 Template.postInfo.helpers({
-  ismyrow: function(){return Meteor.userId() == this.owner}
+  ismyrow: function(){return Meteor.userId() == this.owner},
+  commentCount: function(){return Comments.find({fromPost:this._id}).count()}
 });
+
 Template.postInfo.events({
   'click .say': function(event){
     currentPost = this._id;
@@ -18,8 +21,18 @@ Template.postInfo.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-    'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
+  
+  'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
+  },
+
+  'click .comment': function(){
+    if(Meteor.user()){
+      Meteor.defer(function() {Router.go('comment');});
+    } else {
+      alert("You must be logged in to comment. Login and try again.");
+    }
   }
+
 });
 
 Template.newsfeed.events({

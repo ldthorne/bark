@@ -20,6 +20,15 @@ Meteor.methods({
   		submitted: new Date()
   	});
 
+  },
+
+  commentInsert: function(comment, fromPost){
+    var com = Comments.insert({
+      comment:comment,
+      submitted: new Date(),
+      fromPost: fromPost,
+      commenter: Meteor.userId()
+    })
   }
 
 });
