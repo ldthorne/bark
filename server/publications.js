@@ -11,3 +11,5 @@ Meteor.publish("theReceivedMessages", function(){
 	var currentUserId = this.userId;
 	return Messages.find({ownerId: currentUserId});
 });
+
+Meteor.publish("theEmojis", function(){return Emojis.find();});

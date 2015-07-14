@@ -14,9 +14,12 @@
           <!-- <p>Current location: ({{getLat}}, {{getLng}})</p> -->
           <input type="submit" value="Send post" class="btn btn-primary">          
         </form>
+        <hr>
+        {{> emojiTable}}
         {{else}}
           <h2>You have to log in to post something</h2>
         {{/if}}
+
       </div>
     </div>
   </div>

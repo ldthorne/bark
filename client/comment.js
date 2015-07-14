@@ -31,6 +31,10 @@ Template.commentForm.events({
 
 });
 
+Template.commentBloc.helpers({
+   ismyrow: function(){return Meteor.userId() == this.commenter}
+});
+
 
 Template.commentBloc.events({
 	'click': function(){

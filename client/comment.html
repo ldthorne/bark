@@ -1,15 +1,20 @@
 <template name="comment">
-<h2>{{postTitle}}</h2>
+<h2>{{#emojione}}{{postTitle}}{{/emojione}}</h2>
 <hr>
 {{#if isComments}}
 	{{#each commentFunc}}
+  {{#emojione}}
 		{{> commentBloc}}
+  {{/emojione}}
 	{{/each}}
 {{else}}
 <p>No comments yet...</p>
 {{/if}}
 
 {{> commentForm}}
+
+<hr>
+{{> emojiTable}}
 
 </template>
 
@@ -24,6 +29,9 @@
     <button type="button" class="decrement">
     <span class="glyphicon glyphicon-thumbs-down"></span>
     </button>
+    {{#if ismyrow}} 
+      <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+    {{/if}}
 
     
 	<br/><br/>
