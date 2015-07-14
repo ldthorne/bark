@@ -1,3 +1,7 @@
+Session.set('voices',window.speechSynthesis.getVoices());
+voices = [];
+theVoice=null;
+
 Template.comment.helpers({
 	isComments: function() {
 		return (Comments.find({fromPost: Session.get('post')}).count() > 0);
@@ -37,6 +41,12 @@ Template.commentBloc.helpers({
 
 
 Template.commentBloc.events({
+    'click .say': function(event){
+    currentComment = this._id;
+    var msg = new SpeechSynthesisUtterance(Comments.findOne({_id:this._id}).comment);
+    if (theVoice) msg.voice=theVoice;
+    window.speechSynthesis.speak(msg);
+  },
   'click .jbsapp-delete-icon': function(){Comments.remove(this._id);},
 	'click': function(){
       var commentId = this._id;
