@@ -1,10 +1,11 @@
 <template name="inbox">
 	<h1>Messages</h1>
+	<br>
 	{{#if currentUser}}
 	<p>
 		{{#each messagefunc}}
-			<h4>{{origPost}}</h4>
-  			{{> messageblock}}
+			<h4>"{{origPost}}"</h4>
+  			<blockquote>{{> messageblock}}</blockquote>
 		{{/each}}
 	</p>
 	

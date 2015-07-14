@@ -25,7 +25,7 @@ Template.commentForm.events({
     } else {
       var fromPost = Session.get('post');
       Meteor.call('commentInsert', comment, fromPost);
-      Meteor.defer(function() {Router.go('newsfeed');});
+      Meteor.defer(function() {Router.go('comment');});
     }
   }
 
