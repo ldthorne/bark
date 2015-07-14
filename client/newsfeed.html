@@ -4,6 +4,12 @@
       <div class="container">
         <ul class="list-group">
           <h3>Live feed of what people are saying around you</h3>
+
+          <div class="btn-group" role="group" aria-label="..."  style="text-align:center">
+            <button type="button" class="btn btn-default" style="text-align:center">Newest</button>
+            <button type="button" class="btn btn-default" style="text-align:center">Top</button>
+          </div>
+
           {{#each posts}}
             {{> postInfo}}
           {{/each}}
