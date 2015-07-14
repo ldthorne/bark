@@ -3,10 +3,12 @@
 	<br>
 	{{#if currentUser}}
 	<p>
+		{{#emojione}}
 		{{#each messagefunc}}
 			<h4>"{{origPost}}"</h4>
   			<blockquote>{{> messageblock}}</blockquote>
 		{{/each}}
+		{{/emojione}}
 	</p>
 	
 
