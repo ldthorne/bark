@@ -3,10 +3,8 @@
 <hr>
 {{#if isComments}}
 	{{#each commentFunc}}
-  {{#emojione}}
 		{{> commentBloc}}
-  {{/emojione}}
-	{{/each}}
+  {{/each}}
 {{else}}
 <p>No comments yet...</p>
 {{/if}}
@@ -20,9 +18,12 @@
 
 <template name="commentBloc">
 
+{{#emojione}}
 	
 	<h4>{{comment}}</h4>
   <h4 align="right">{{score}}</h4>
+  {{/emojione}}
+  
 	<button type="button" class="increment">
     <span class="glyphicon glyphicon-thumbs-up"></span>
     </button>
