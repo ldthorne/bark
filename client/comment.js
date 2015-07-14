@@ -37,6 +37,7 @@ Template.commentBloc.helpers({
 
 
 Template.commentBloc.events({
+  'click .jbsapp-delete-icon': function(){Comments.remove(this._id);},
 	'click': function(){
       var commentId = this._id;
       Session.set('comment', commentId); 
