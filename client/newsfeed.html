@@ -3,22 +3,12 @@
     <div class="form-style">
       <div class="container">
         <ul class="list-group">
-          <h3>Live feed of what people are saying around you</h3>
+          <h4>Live feed of what people are saying around you</h4>
           {{#each posts}}
             {{> postInfo}}
           {{/each}}
         </ul>
       </div>
-    </div>
-
-    <div class="fixed-action-btn" style="bottom: 118px; right: 24px;">
-      <a class="btn-floating btn-large" href="/inbox"><i class="fa fa-inbox fa-2x"></i>
-      </a>
-    </div>
-
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-      <a class="btn-floating btn-large" href="/submit"><i class="fa fa-pencil"></i>
-      </a>
     </div>
 
 
@@ -29,8 +19,8 @@
   <div class="posts">
     <li class="list-group-item">
       <a class="postInfo" href="#">
-        <p class="break-el">{{#emojione}} {{post}} {{/emojione}}</p>
-        <h4 class="comment" align="center">{{commentCount}} comment(s)</h4> 
+        <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
+        <p class="comment" align="center">{{commentCount}} comment(s)</p> 
         <p align="right">{{score}}</p>
         <button type="button" class="increment">
         <span class="glyphicon glyphicon-thumbs-up"></span>
