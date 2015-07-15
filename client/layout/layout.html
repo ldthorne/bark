@@ -3,15 +3,15 @@
 		<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 		
 		    <div class="nav-wrapper">
-		      <a href="#" class="brand-logo">bark!</a>
+		      <a href="{{pathFor '/newsfeed'}}" class="brand-logo"  style="padding-left:20px">bark!</a>
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-		      <ul class="right hide-on-med-and-down">
-		      	<li>{{> loginButtons}} </li>
+		      <ul class="right hide-on-med-and-down" style="padding-right:200px">
 		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
 				<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
 				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
 				<!-- <li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li> -->
 				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
+				<li>{{> loginButtons}} </li>
 				
 		      </ul>
 		      <ul class="side-nav" id="mobile-demo">
