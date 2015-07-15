@@ -5,8 +5,6 @@ Template.emojiTable.helpers({
 	selectedemoji: function(){
 		if(Session.get('emoji') !== "" && Session.get('emoji') != null){
 			return Session.get('emoji')
-		} else {
-			return "No emoji selected yet..."
 		}
 		
 	}
@@ -18,7 +16,12 @@ Template.emojiTable.events({
 			var emoji = this.code;
 			Session.set('emoji', emoji);
 			console.log(Session.get('emoji'))
+
+			$("#post").val($("#post").val()+this.code);
+			$("#comment").val($("#comment").val()+this.code);
 		}
+
+
       
       
     }
