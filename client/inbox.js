@@ -12,7 +12,6 @@ Template.inbox.helpers({
 	// 	}
 	// }
    messagefunc: function(){
-   	
    	return Messages.find({},{sort:{time: 1}});
    },
 

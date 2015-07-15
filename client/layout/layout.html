@@ -1,16 +1,18 @@
 <template name="layout">
 	<div class="container">
-		<nav id="navbar" class="navbar navbar-default navbar-fixed-top navbar-default">
+		<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
+		
 		    <div class="nav-wrapper">
 		      <a href="#" class="brand-logo">bark!</a>
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 		      <ul class="right hide-on-med-and-down">
+		      	<li>{{> loginButtons}} </li>
 		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
 				<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
 				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
 				<!-- <li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li> -->
 				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
-				{{> loginButtons}}
+				
 		      </ul>
 		      <ul class="side-nav" id="mobile-demo">
 		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
@@ -18,7 +20,7 @@
 				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
 				<!-- <li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li> -->
 				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
-				{{> loginButtons}}
+				<li> {{> loginButtons}} </li>
 		      </ul>
 		      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
 		        
@@ -40,7 +42,7 @@
 		      <i class="large material-icons">add</i>
 		    </a>
 		    <ul>
-		    	<li><a class="btn-floating blue"><i class="material-icons">mic</i></a></li>
+		    	<li><a class="btn-floating blue" id="micbutton"><i class="material-icons">mic</i></a></li>
 		    	<li><a class="btn-floating green" href="/inbox"><i class="material-icons">email</i></a></li>
 		     	<li><a class="btn-floating yellow darken-1" href="/submit"><i class="material-icons">mode_edit</i></a></li>
 
