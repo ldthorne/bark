@@ -15,8 +15,9 @@ mdg:geolocation
 cwaring:modernizr
 zeroasterisk:cordova-geolocation-foreground
 dburles:google-maps
-fezvrasta:bootstrap-material-design-fullpalette
+# fezvrasta:bootstrap-material-design-fullpalette
 qnub:emojione
 outatime:geolib
 # useraccounts:materialize
 # useraccounts:core
+materialize:materialize

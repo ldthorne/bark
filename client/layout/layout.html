@@ -1,35 +1,31 @@
 <template name="layout">
 	<div class="container">
-		
-		<!-- Here is the standard Bootstrap code for a Navigation bar taken directly from getbootstrap.com/components -->
-		<nav class="navbar navbar-default navbar-fixed-top navbar-material-brown">
-		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" 
-			  			data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="{{pathFor 'newsfeed'}}">Bark!</a>
+		<nav id="navbar" class="navbar navbar-default navbar-fixed-top navbar-default">
+		    <div class="nav-wrapper">
+		      <a href="#" class="brand-logo">bark!</a>
+		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+		      <ul class="right hide-on-med-and-down">
+		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
+				<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
+				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
+				<!-- <li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li> -->
+				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
+				{{> loginButtons}}
+		      </ul>
+		      <ul class="side-nav" id="mobile-demo">
+		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
+				<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
+				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
+				<!-- <li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li> -->
+				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
+				{{> loginButtons}}
+		      </ul>
+		      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+		        
+		      </ul> -->
 		    </div>
+	  	</nav>
 
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      	<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{pathFor 'newsfeed'}}">Newsfeed</a></li>
-					<li><a href="{{pathFor 'inbox'}}">Inbox</a></li>
-					<li><a href="{{pathFor 'submit'}}">Submit a Post</a></li>
-					<!-- <li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li> -->
-					<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
-					{{> loginButtons}}
-				</ul>
-		    </div><!-- /.navbar-collapse -->
-			
-		  </div><!-- /.container-fluid -->
-		</nav>
 		
 		<!-- Here is where the actual content of the page gets inserted by the router! -->
 		{{> yield}}
@@ -37,4 +33,18 @@
 	</div>
 	<body>
 	</body>
+
+	<footer>
+			<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+		    <a class="btn-floating btn-large red">
+		      <i class="large material-icons">add</i>
+		    </a>
+		    <ul>
+		    	<li><a class="btn-floating blue"><i class="material-icons">mic</i></a></li>
+		    	<li><a class="btn-floating green" href="/inbox"><i class="material-icons">email</i></a></li>
+		     	<li><a class="btn-floating yellow darken-1" href="/submit"><i class="material-icons">mode_edit</i></a></li>
+
+		    </ul>
+		  </div>
+	</footer>
 </template>
