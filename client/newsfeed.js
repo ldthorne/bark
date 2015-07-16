@@ -93,10 +93,14 @@ Template.newsfeed.events({
           Posts.update(postId, {$inc: {score: -1}});
           Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
           Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
+        } 
+        if(selectedAnime.score <= -5){
+          Posts.remove(this._id);
         }
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
+
   },
 
   'click .messageButton': function(){

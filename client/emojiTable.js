@@ -15,7 +15,7 @@ Template.emojiTable.events({
 		if(this.code != undefined){
 			var emoji = this.code;
 			Session.set('emoji', emoji);
-			console.log(Session.get('emoji'))
+			//console.log(Session.get('emoji'))
 
 			$("#post").val($("#post").val()+this.code);
 			$("#comment").val($("#comment").val()+this.code);

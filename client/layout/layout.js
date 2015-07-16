@@ -11,6 +11,7 @@ Template.layout.events({
 
   var final_transcript = '';
   var recognizing = false;
+  var dictating = false;
   
   if ('webkitSpeechRecognition' in window) {
     var recognition = new webkitSpeechRecognition();
@@ -30,9 +31,13 @@ Template.layout.events({
       };
  
       recognition.onresult = function(event) {
+
       myevent = event;
         var interim_transcript = '';
+
         for (var i = event.resultIndex; i < event.results.length; ++i) {
+        	console.log("recognizing" + event.results[i][0].transcript);
+        	//$("#test").html(interim_transcript);
           if (event.results[i][0].transcript.indexOf("stop") > -1){
             recognition.stop();
             return;
@@ -45,11 +50,33 @@ Template.layout.events({
           } if ((event.results[i][0].transcript.indexOf("newsfeed") > -1) || (event.results[i][0].transcript.indexOf("home") > -1)) {
           	recognition.stop();
           	Router.go("newsfeed");
+          } if (Router.current().route.getName() == "submit"){
+          		if((event.results[i][0].transcript.indexOf("dictate") > -1) || (event.results[i][0].transcript.indexOf("dictation") > -1)){
+          			dictating=true;
+          			
+          		}
           } 
+          // if (Router.current().route.getName() == "newsfeed"){
+
+          // }
           if(event.results[i].isFinal) {
-            final_transcript += capitalize(event.results[i][0].transcript.trim()) +".\n";
+            final_transcript += event.results[i][0].transcript.trim() +".\n";
+            console.log("final :");
+            if(dictating){
+            	dictating=false;
+            	 $("#post").val(final_transcript);
+            	} else{
+            		 $("#test").html(" final : " + final_transcript);
+            	}
+            
           } else {
             interim_transcript += event.results[i][0].transcript;
+            console.log("not final");
+            if (dictating){
+             	$("#post").val(interim_transcript);
+            } else{
+            	$("#test").html(" final : " + interim_transcript);
+            }
           }
         }
         
