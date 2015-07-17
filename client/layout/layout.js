@@ -1,6 +1,8 @@
 Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
 theVoice=null;
+audio = new Audio('audio/bark.wav');
+
 
 Template.layout.rendered = function(){
 	$(".button-collapse").sideNav();
@@ -111,12 +113,10 @@ function readPosts(){
 }
 
 function playAudio(){
-  createSound.play()
+  audio.play();
 }
 
-createSound = new buzz.sound("/audio/bark", {
-  formats: ["wav"]
-})
+
 
 
   function startMic(event) {
