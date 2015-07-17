@@ -6,7 +6,6 @@ Template.emojiTable.helpers({
 		if(Session.get('emoji') !== "" && Session.get('emoji') != null){
 			return Session.get('emoji')
 		}
-		
 	}
 })
 
@@ -20,9 +19,5 @@ Template.emojiTable.events({
 			$("#post").val($("#post").val()+this.code);
 			$("#comment").val($("#comment").val()+this.code);
 		}
-
-
-      
-      
     }
 })
