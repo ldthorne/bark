@@ -1,6 +1,7 @@
 Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
 theVoice=null;
+audio = new Audio('audio/bark.wav');
 
 
 
@@ -38,12 +39,9 @@ Template.postInfo.events({
  
 });
 
-createSound = new buzz.sound("/audio/bark", {
-  formats: ["wav"]
-})
 
 function playAudio(){
-  createSound.play()
+  audio.play();
 }
 
 Template.newsfeed.events({
