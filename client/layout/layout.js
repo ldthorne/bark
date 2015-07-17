@@ -2,7 +2,7 @@ Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
 theVoice=null;
 audio = new Audio('audio/bark.wav');
-
+alreadyRead = false;
 
 Template.layout.rendered = function(){
 	$(".button-collapse").sideNav();
@@ -65,7 +65,17 @@ Template.layout.events({
           }
           if((Router.current().route.getName() == "newsfeed")){
                 if((event.results[i][0].transcript.indexOf("read") > -1)){
-                    readPosts();
+                    if(!alreadyRead){
+                      readPosts();
+                      alreadyRead = true;
+                    }
+                    // if(
+                    //   (event.results[i][0].transcript.indexOf("upvote") > -1) || 
+                    //   (event.results[i][0].transcript.indexOf("a boat") > -1) || 
+                    //   (event.results[i][0].transcript.indexOf("like") > -1) || 
+                    //   (event.results[i][0].transcript.indexOf("up vote") > -1)){
+                    //     recognition.stop();
+                    // }
                 }
           } 
           // if (Router.current().route.getName() == "newsfeed"){
@@ -106,9 +116,10 @@ function readPosts(){
       var msg = new SpeechSynthesisUtterance(post);
       msg.onend = function(){
         playAudio();      
-      } 
+      }      
       window.speechSynthesis.speak(msg);
     })
+
 
 }
 
@@ -119,14 +130,12 @@ function playAudio(){
 
 
 
-  function startMic(event) {
-    if (recognizing) {
-      recognition.stop();
-      return;
-    }
-    final_transcript = '';
-    recognition.lang = 'en-US';
-    recognition.start();
-    //final_span.innerHTML = '';
-    //interim_span.innerHTML = '';
+function startMic(event) {
+  if (recognizing) {
+    recognition.stop();
+    return;
   }
+  final_transcript = '';
+  recognition.lang = 'en-US';
+  recognition.start();
+}

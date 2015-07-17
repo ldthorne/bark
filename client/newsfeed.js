@@ -18,17 +18,17 @@ Template.postInfo.helpers({
 });
 
 Template.postInfo.events({
-  'click .say': function(event){
+  'click #say': function(event){
     currentPost = this._id;
     var msg = new SpeechSynthesisUtterance(Posts.findOne({_id:this._id}).post);
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
   
-  'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
+  'click #jbsapp-delete-icon': function(){Posts.remove(this._id);
   },
 
-  'click .comment': function(){
+  'click #comment': function(){
     if(Meteor.user()){
       Meteor.defer(function() {Router.go('comment');});
     } else {
@@ -50,7 +50,7 @@ Template.newsfeed.events({
       Session.set('post', postId);
       //checkVotes(Posts.findOne({_id: postId})); 
     },
-    'click .increment': function () {
+    'click #increment': function () {
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
         if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
@@ -80,7 +80,7 @@ Template.newsfeed.events({
       
     },
 
-    'click .decrement': function(){
+    'click #decrement': function(){
 
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
@@ -112,7 +112,7 @@ Template.newsfeed.events({
       
   },
 
-  'click .messageButton': function(){
+  'click #messageButton': function(){
     if(Meteor.user()){
       Meteor.defer(function() {Router.go('message');});
     } else {
@@ -120,7 +120,7 @@ Template.newsfeed.events({
     }
   },
 
-   'click .readAll': function(){
+   'click #readAll': function(){
     allPosts = Posts.find().fetch();
     console.log(allPosts);
     
