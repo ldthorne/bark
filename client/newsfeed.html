@@ -5,7 +5,7 @@
         <ul class="list-group">
 
           <h4>Live feed of what people are saying around you</h4>
-          <button class="readAll">Read All</button>
+          <button class="waves-effect waves-light btn" id="readAll">Read All</button>
 
           {{#each posts}}
             {{> postInfo}}
@@ -24,21 +24,23 @@
     <li class="list-group-item">
       <a class="postInfo" href="#">
         <h4 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h4>
-        <h5 class="comment" align="center">{{commentCount}} comment(s)</h5> 
+        <h5 id="comment" align="center">{{commentCount}} comment(s)</h5> 
         <p align="right">{{score}}</p>
-        <button type="button" class="increment">
+        <button class="waves-effect waves-light btn" id="increment">
         <span class="glyphicon glyphicon-thumbs-up"></span>
         </button>
-        <button type="button" class="decrement">
+        <button class="waves-effect waves-light btn" id="decrement">
         <span class="glyphicon glyphicon-thumbs-down"></span>
         </button>
-        <button type="button" class="messageButton" align="center">
+        <button class= "btn waves-effect waves-light" id="messageButton" align="center">
         <span class="glyphicon glyphicon-envelope"></span>
         </button>
-        <button class="say">Say</button>
+        <button class="waves-effect waves-light btn" id="say">Say</button>
 
         {{#if ismyrow}} 
+          <button class="waves-effect waves-light btn">
           <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+          </button>
         {{/if}}
 
       </a> 
