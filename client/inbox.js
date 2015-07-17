@@ -41,15 +41,21 @@ Template.inbox.helpers({
 // 		Router.go('/inbox');	
 // 	}
 // })
-
+Template.inbox.events({
+	'click': function(){
+		if(this._id != undefined && this._id != null){
+	 		//console.log(this._id);
+      		var messageId = this._id;
+      		//console.log(messageId)
+      		Session.set('message', messageId);
+      		console.log(Session.get('message'));
+      	}
+    },
+})
 
 Template.messagereply.events({
-	'click': function(){
-      var messageId = this._id;
-      Session.set('message', messageId);
-    },
 
-  'submit .messageForm': function(event) {
+  'submit .replyForm': function(event) {
     event.preventDefault();
     var text = event.target.messageReply.value; // get post vote value
     // check if the value is empty

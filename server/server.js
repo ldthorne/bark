@@ -24,9 +24,10 @@ Meteor.methods({
   },
 
   messageReply: function(text, messageId, isOrig){
+    var block = {message:text, originalPoster:isOrig, createdAt: new Date()};
     Messages.update({_id: messageId}, 
       {$set:{lastUpdate: new Date()}, 
-      $push: {messageArray: {message:text, originalPoster:isOrig, createdAt: new Date()}}}
+      $push: {messageArray: block}}
     );
 
   },
