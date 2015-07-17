@@ -41,3 +41,26 @@ Template.inbox.helpers({
 // 		Router.go('/inbox');	
 // 	}
 // })
+
+
+Template.messagereply.events({
+	'click': function(){
+      var messageId = this._id;
+      Session.set('message', messageId);
+    },
+
+  'submit .messageForm': function(event) {
+    event.preventDefault();
+    var text = event.target.messageReply.value; // get post vote value
+    // check if the value is empty
+    if (text == "") {
+      alert("You can’t send a blank message. Try sending something funny instead.");
+    } else {
+      messageId = Session.get('message');
+      isOrig=(Messages.find(messageId).ownerId == Meteor.userId());
+      Meteor.call('messageReply', text, messageId, isOrig);
+      Meteor.defer(function() { Router.go('inbox'); });
+    }
+  },
+ 
+});

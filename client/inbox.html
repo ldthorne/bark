@@ -5,13 +5,14 @@
 	<p>
 		{{#emojione}}
 		{{#each messagefunc}}
-			<h4>"{{origPost}}"</h4>
-  			<blockquote>{{> messageblock}}</blockquote>
+			<h4 align="center">"{{origPost}}"</h4>
+  			{{#each messages}}
+  				{{> messageblock}}
+  			{{/each}}
+  		{{> messagereply}}
 		{{/each}}
 		{{/emojione}}
 	</p>
-	
-
 	{{else}}
 	<p>You need to be logged in to see messages</p>
 	{{/if}}
@@ -20,11 +21,28 @@
 
 
 <template name="messageblock">
-
-	<p>
-		<br/>{{text}}
-		<br/> {{submitted}}
+	{{#if originalPoster}}
+	<p align="right">
+		<br/>{{message}}
+		<br/> {{createdAt}}
 		<hr/>
 	</p>
+	{{else}}
+	<p align="left">
+		<br/>{{message}}
+		<br/> {{createdAt}}
+		<hr/>
+	</p>
+	{{/if}}
+		
+
+</template>
+
+<template name="messagereply">
+
+	<form class="messageForm">
+		<input type="text" id="messageReply" class="message-form form-control" placeholder="Type your reply here"/>
+		<input type="submit" value="Send reply" class="btn btn-primary">
+	</form>
 
 </template>

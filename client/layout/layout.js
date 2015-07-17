@@ -66,7 +66,7 @@ Template.layout.events({
             	dictating=false;
             	 $("#post").val(final_transcript);
             	} else{
-            		 $("#test").html(" final : " + final_transcript);
+            		 $("#test").html("bark! thinks you said: " + final_transcript);
             	}
             
           } else {
@@ -75,7 +75,7 @@ Template.layout.events({
             if (dictating){
              	$("#post").val(interim_transcript);
             } else{
-            	$("#test").html(" final : " + interim_transcript);
+            	$("#test").html("bark! thinks you said: " + interim_transcript);
             }
           }
         }

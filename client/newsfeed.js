@@ -38,7 +38,8 @@ Template.postInfo.events({
 Template.newsfeed.events({
     'click': function(){
       var postId = this._id;
-      Session.set('post', postId); 
+      Session.set('post', postId);
+      //checkVotes(Posts.findOne({_id: postId})); 
     },
     'click .increment': function () {
       if(Meteor.user()) {
@@ -71,6 +72,7 @@ Template.newsfeed.events({
     },
 
     'click .decrement': function(){
+
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
         if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
@@ -94,13 +96,11 @@ Template.newsfeed.events({
           Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
           Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
         } 
-        if(selectedAnime.score <= -5){
-          Posts.remove(this._id);
-        }
+        checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-
+      
   },
 
   'click .messageButton': function(){
@@ -112,3 +112,12 @@ Template.newsfeed.events({
   }
 
 });
+
+function checkVotes(selected){
+  if(selected.score <= -4){
+    Posts.remove(selected._id);
+    //console.log("should delete");
+  } else {
+    //console.log('should not delete');
+  }
+}

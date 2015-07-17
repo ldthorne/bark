@@ -10,15 +10,24 @@ Meteor.methods({
     });
   },
 
-  messageInsert: function(text, postId, senderId, ownerId) {
-
-  	var mes = Messages.insert({
-  		text:text,
+  messageStart: function(text, postId, senderId, ownerId) {
+    
+    var mes = Messages.insert({
   		postId: postId,
+      origPost: Posts.findOne({_id:postId}).post,
   		senderId: senderId,
   		ownerId: ownerId,
-  		submitted: new Date()
+  		lastUpdate: new Date(),
+      messageArray: [{message:text, originalPoster:false, createdAt: new Date()}]
   	});
+
+  },
+
+  messageReply: function(text, messageId, isOrig){
+    Messages.update({_id: messageId}, 
+      {$set:{lastUpdate: new Date()}, 
+      $push: {messageArray: {message:text, originalPoster:isOrig, createdAt: new Date()}}}
+    );
 
   },
 
