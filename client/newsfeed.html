@@ -5,10 +5,13 @@
         <ul class="list-group">
 
           <h4>Live feed of what people are saying around you</h4>
+          <button class="readAll">Read All</button>
+
           {{#each posts}}
             {{> postInfo}}
           {{/each}}
         </ul>
+
       </div>
     </div>
 
@@ -33,6 +36,7 @@
         <span class="glyphicon glyphicon-envelope"></span>
         </button>
         <button class="say">Say</button>
+
         {{#if ismyrow}} 
           <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
         {{/if}}
