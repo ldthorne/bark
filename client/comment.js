@@ -30,6 +30,7 @@ Template.commentForm.events({
       var fromPost = Session.get('post');
       Meteor.call('commentInsert', comment, fromPost);
       Meteor.defer(function() {Router.go('comment');});
+      $("#comment").val('');
     }
   }
 
