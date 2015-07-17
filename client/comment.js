@@ -28,9 +28,16 @@ Template.commentForm.events({
       alert("You can’t insert an empty comment. Try to write something funny instead.");
     } else {
       var fromPost = Session.get('post');
-      Meteor.call('commentInsert', comment, fromPost);
-      Meteor.defer(function() {Router.go('comment');});
-      $("#comment").val('');
+      Meteor.call('commentInsert', comment, fromPost, function(error,data) {
+        if (error) {
+          console.log(error);
+        }
+        else {
+          Meteor.defer(function() {Router.go('comment');});
+          $("#comment").val('');
+        }
+      });
+      
     }
   }
 
