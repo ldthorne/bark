@@ -1,3 +1,7 @@
+Session.set('voices',window.speechSynthesis.getVoices());
+voices = [];
+theVoice=null;
+
 Template.layout.rendered = function(){
 	$(".button-collapse").sideNav();
 }
@@ -47,14 +51,20 @@ Template.layout.events({
           } if ((event.results[i][0].transcript.indexOf("inbox") > -1) || (event.results[i][0].transcript.indexOf("messages") > -1)) {
           	recognition.stop();
           	Router.go("inbox");
-          } if ((event.results[i][0].transcript.indexOf("newsfeed") > -1) || (event.results[i][0].transcript.indexOf("home") > -1)) {
+          } if ((event.results[i][0].transcript.indexOf("newsfeed") > -1) || (event.results[i][0].transcript.indexOf("home") > -1) || (event.results[i][0].transcript.indexOf("news feed") > -1)) {
           	recognition.stop();
           	Router.go("newsfeed");
+
           } if (Router.current().route.getName() == "submit"){
           		if((event.results[i][0].transcript.indexOf("dictate") > -1) || (event.results[i][0].transcript.indexOf("dictation") > -1)){
           			dictating=true;
           			
           		}
+          }
+          if((Router.current().route.getName() == "newsfeed")){
+                if((event.results[i][0].transcript.indexOf("read") > -1)){
+                    readPosts();
+                }
           } 
           // if (Router.current().route.getName() == "newsfeed"){
 
@@ -83,7 +93,32 @@ Template.layout.events({
       };
   }
 
- 
+function readPosts(){
+    allPosts = Posts.find().fetch();
+    console.log(allPosts);
+    
+    var posts = _.pluck(allPosts, 'post');
+    var reversePosts = posts.reverse()
+
+    _.each(reversePosts, function(post){
+      var msg = new SpeechSynthesisUtterance(post);
+      msg.onend = function(){
+        playAudio();      
+      } 
+      window.speechSynthesis.speak(msg);
+    })
+
+}
+
+function playAudio(){
+  createSound.play()
+}
+
+createSound = new buzz.sound("/audio/bark", {
+  formats: ["wav"]
+})
+
+
   function startMic(event) {
     if (recognizing) {
       recognition.stop();

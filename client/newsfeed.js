@@ -2,6 +2,8 @@ Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
 theVoice=null;
 
+
+
 Template.newsfeed.helpers({
   posts: function() {
     return Posts.find({}, {sort: {submitted: -1}});
@@ -33,7 +35,16 @@ Template.postInfo.events({
     }
   }
 
+ 
 });
+
+createSound = new buzz.sound("/audio/bark", {
+  formats: ["wav"]
+})
+
+function playAudio(){
+  createSound.play()
+}
 
 Template.newsfeed.events({
     'click': function(){
@@ -109,6 +120,22 @@ Template.newsfeed.events({
     } else {
       alert("You must be logged in to send a message. Login and try again.");
     }
+  },
+
+   'click .readAll': function(){
+    allPosts = Posts.find().fetch();
+    console.log(allPosts);
+    
+    var posts = _.pluck(allPosts, 'post');
+    var reversePosts = posts.reverse()
+
+    _.each(reversePosts, function(post){
+      var msg = new SpeechSynthesisUtterance(post);
+      msg.onend = function(){
+        playAudio();      
+      }      
+      window.speechSynthesis.speak(msg);
+    })
   }
 
 });
