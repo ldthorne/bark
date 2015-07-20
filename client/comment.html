@@ -1,5 +1,8 @@
 <template name="comment">
-<h2>{{#emojione}}{{postTitle}}{{/emojione}}</h2>
+<h4>{{#emojione}}
+      "{{postTitle}}"
+    {{/emojione}}
+    </h4>
 <hr>
 {{#if isComments}}
 	{{#each commentFunc}}
@@ -20,8 +23,8 @@
 
 {{#emojione}}
 	
-	<h4>{{comment}}</h4>
-  <h4 align="right">{{score}}</h4>
+	<h6>{{comment}}</h6>
+  <h6 align="right">{{score}}</h6>
   {{/emojione}}
   
 	<button type="button" class="increment">
