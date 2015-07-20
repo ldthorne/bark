@@ -25,9 +25,7 @@ Template.postInfo.events({
     window.speechSynthesis.speak(msg);
   },
   
-  'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
-    console.log("no")
-  },
+  'click .jbsapp-delete-icon': function(){Posts.remove(this._id);},
 
   'click #comment': function(){
     if(Meteor.user()){
