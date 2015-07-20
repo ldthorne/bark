@@ -69,13 +69,15 @@ Template.layout.events({
                       readPosts();
                       alreadyRead = true;
                     }
-                    // if(
-                    //   (event.results[i][0].transcript.indexOf("upvote") > -1) || 
-                    //   (event.results[i][0].transcript.indexOf("a boat") > -1) || 
-                    //   (event.results[i][0].transcript.indexOf("like") > -1) || 
-                    //   (event.results[i][0].transcript.indexOf("up vote") > -1)){
-                    //     recognition.stop();
-                    // }
+                    if(
+                      (event.results[i][0].transcript.indexOf("upvote") > -1) || 
+                      (event.results[i][0].transcript.indexOf("a boat") > -1) || 
+                      (event.results[i][0].transcript.indexOf("like") > -1) || 
+                      (event.results[i][0].transcript.indexOf("upload") > -1) || 
+                      (event.results[i][0].transcript.indexOf("up vote") > -1)){
+                        console.log("done");
+                        recognition.stop();
+                    }
                 }
           } 
           // if (Router.current().route.getName() == "newsfeed"){
@@ -110,10 +112,16 @@ function readPosts(){
     console.log(allPosts);
     
     var posts = _.pluck(allPosts, 'post');
+    var postsId = _.pluck(allPosts, '_id')
     var reversePosts = posts.reverse()
-
-    _.each(reversePosts, function(post){
-      var msg = new SpeechSynthesisUtterance(post);
+    var reversePostsId = postsId.reverse()
+    var zipped = _.zip(reversePosts, reversePostsId)
+    _.each(zipped, function(pair){
+      // console.log(pair[0]);
+      // console.log(pair[1]);
+      Session.set("currentPost", pair[1])
+      console.log(Session.get("currentPost"));
+      var msg = new SpeechSynthesisUtterance(pair[0]);
       msg.onend = function(){
         playAudio();      
       }      

@@ -23,8 +23,8 @@
   <div class="posts">
     <li class="list-group-item">
       <a class="postInfo" href="#">
-        <h4 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h4>
-        <h5 id="comment" align="center">{{commentCount}} comment(s)</h5> 
+        <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
+        <h6 id="comment" align="center">{{commentCount}} comment(s)</h6> 
         <p align="right">{{score}}</p>
         <button class="waves-effect waves-light btn" id="increment">
         <span class="glyphicon glyphicon-thumbs-up"></span>
@@ -39,7 +39,7 @@
 
         {{#if ismyrow}} 
           <button class="waves-effect waves-light btn">
-          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" id ="delete" aria-hidden="true"></span>
           </button>
         {{/if}}
 

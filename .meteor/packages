@@ -8,17 +8,14 @@ meteor-platform
 insecure
 iron:router
 accounts-password
-materialize:materialize
 twbs:bootstrap
-
 ian:accounts-ui-bootstrap-3
-
-natestrauser:font-awesome
+materialize:materialize
+#joshowens:accounts-entry
+#natestrauser:font-awesome
 mdg:geolocation
 cwaring:modernizr
 zeroasterisk:cordova-geolocation-foreground
-dburles:google-maps
-# fezvrasta:bootstrap-material-design-fullpalette
 qnub:emojione
 outatime:geolib
 # useraccounts:materialize
