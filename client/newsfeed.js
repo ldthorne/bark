@@ -25,8 +25,8 @@ Template.postInfo.events({
     window.speechSynthesis.speak(msg);
   },
   
-  'click #delete': function(){
-    Posts.remove(this._id);
+  'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
+    console.log("no")
   },
 
   'click #comment': function(){
