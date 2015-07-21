@@ -10,7 +10,7 @@ Template.submit.events({
 
     // check if the value is empty
     if (post == "") {
-      alert("You can’t insert empty post. Try to write something funny instead.");
+      alert("You can’t insert empty post. Bark something instead!");
     } else {
       if (recognizing) {
         recognition.stop();

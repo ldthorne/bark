@@ -12,12 +12,9 @@ useraccounts:materialize
 accounts-password
 twbs:bootstrap
 #ian:accounts-ui-bootstrap-3
-natestrauser:font-awesome
 mdg:geolocation
 cwaring:modernizr
 zeroasterisk:cordova-geolocation-foreground
-dburles:google-maps
-# fezvrasta:bootstrap-material-design-fullpalette
 qnub:emojione
 outatime:geolib
 
