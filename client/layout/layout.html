@@ -19,7 +19,7 @@
 				<li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Advanced<i class="material-icons right">arrow_drop_down</i></a></li>
 				{{#if loggedIn}}
-					<li> {{> atNavButton}} </li>
+					{{> atNavButton}}
 				{{else}}
 					<li><a href="{{pathFor 'login'}}">Login</a></li>
 				{{/if}}
@@ -32,7 +32,7 @@
 				<li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
 				{{#if loggedIn}}
-					<li> {{> atNavButton}} </li>
+					{{> atNavButton}}
 				{{else}}
 					<li><a href="{{pathFor 'login'}}">Login</a></li>
 				{{/if}}
