@@ -139,3 +139,10 @@ function startMic(event) {
   recognition.lang = 'en-US';
   recognition.start();
 }
+
+
+Template.layout.helpers({
+  loggedIn: function(){
+    return (Meteor.userId() != null && Meteor.userId() != undefined && Meteor.userId() !="");
+  }
+})

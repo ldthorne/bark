@@ -11,8 +11,11 @@
 				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
 				<li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li>
 				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
-				<li>{{> loginButtons}} </li>
-				
+				{{#if loggedIn}}
+					{{> atNavButton}}
+				{{else}}
+					<li><a href="{{pathFor 'login'}}">Login</a></li>
+				{{/if}}
 		      </ul>
 		      <ul class="side-nav" id="mobile-demo">
 		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
@@ -20,11 +23,12 @@
 				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
 				<li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li>
 				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
-				<li> {{> loginButtons}} </li>
-		      </ul>
-		      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
-		        
-		      </ul> -->
+				{{#if loggedIn}}
+					{{> atNavButton}}
+				{{else}}
+					<li><a href="{{pathFor 'login'}}">Login</a></li>
+				{{/if}}
+			</ul>
 		    </div>
 	  	</nav>
 	  	<div id="test">

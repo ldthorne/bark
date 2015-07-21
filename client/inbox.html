@@ -3,17 +3,17 @@
 	<br>
 	{{#if currentUser}}
 	<p>
-		
 		{{#each messagefunc}}
 		{{#emojione}}
 			<h4 align="center">"{{origPost}}"</h4>
   			{{#each messageArray}}
   				{{> messageblock}}
   			{{/each}}
-  		{{> messagereply}}
+  		{{#if selected}}
+  			{{> messagereply}}
+  		{{/if}}
   		{{/emojione}}
 		{{/each}}
-		
 	</p>
 	{{else}}
 	<p>You need to be logged in to see messages</p>
@@ -43,7 +43,7 @@
 <template name="messagereply">
 
 	<form class="replyForm">
-		<input type="text" id="messageReply" class="message-form form-control" placeholder="Type your reply here"/>
+		<input type="text" class="messageReply" name="messageReply" id="messageReply" placeholder="Type your reply here"/>
 		<input type="submit" value="Send reply" class="btn btn-primary">
 	</form>
 
