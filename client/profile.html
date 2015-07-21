@@ -5,17 +5,28 @@
         <ul class="list-group">
 
         <h4>Your posts</h4>
-        <button class="waves-effect waves-light btn" id="readAllPosts">Read All</button>
-		{{#each posts}}
-			{{> yourPosts}}
-		{{/each}}
+        {{#if hasPosts}}
+          <button class="waves-effect waves-light btn" id="readAllPosts">Read All</button>
+  		    {{#each posts}}
+  			  {{> yourPosts}}
+  		    {{/each}}
+          <p>Sum of votes on all your posts: {{totalPostScore}}</p>
+        {{else}}
+          <p> Maybe try making a post... </p>
+        {{/if}}
         </ul>
         <ul>
         <h4>Your comments</h4>
-        <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
-		{{#each comments}}
-			{{> yourComments}}
-		{{/each}}
+        {{#if hasComments}}
+          <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
+  		    {{#each comments}}
+  			   {{> yourComments}}
+  		    {{/each}}
+          <p>Sum of votes on all your comments: {{totalCommentScore}}</p>
+        {{else}}
+          <p> Maybe try making a comment on a post... </p>
+        {{/if}}
+         
         </ul>
         
 
