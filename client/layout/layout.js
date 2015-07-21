@@ -6,7 +6,10 @@ alreadyRead = false;
 
 Template.layout.rendered = function(){
   $(".button-collapse").sideNav();
-  $(".dropdown-button").dropdown({ hover: false });
+  $(".dropdown-button").dropdown({ 
+    hover: true,
+    belowOrigin: true
+  });
 
 }
 
