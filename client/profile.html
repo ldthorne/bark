@@ -1,0 +1,86 @@
+<template name= "profile">
+  <div class="posts">
+    <div class="form-style">
+      <div class="container">
+        <ul class="list-group">
+
+        <h4>Your posts</h4>
+        <button class="waves-effect waves-light btn" id="readAllPosts">Read All</button>
+		{{#each posts}}
+			{{> yourPosts}}
+		{{/each}}
+        </ul>
+        <ul>
+        <h4>Your comments</h4>
+        <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
+		{{#each comments}}
+			{{> yourComments}}
+		{{/each}}
+        </ul>
+
+      </div>
+    </div>
+
+
+  </div>
+</template>
+
+<template name="yourPosts">
+  <div class="posts">
+    <li class="list-group-item">
+      <a class="yourPosts" href="#">
+        <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
+        <h6 id="comment" align="center">{{commentCount}} comment(s)</h6> 
+        <p align="right">{{score}}</p>
+        <button class="waves-effect waves-light btn" id="incrementPost">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+        <button class="waves-effect waves-light btn" id="decrementPost">
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+        </button>
+        <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+        <span class="glyphicon glyphicon-envelope"></span>
+        </button>
+        <button class="waves-effect waves-light btn" id="say">Say</button>
+
+       <!--  {{#if ismyrow}} 
+          <button class="waves-effect waves-light btn">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        {{/if}} -->
+        {{#if ismyrow}} 
+          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+        {{/if}}
+
+      </a> 
+    </li>
+  </div>
+</template>
+
+<template name = "yourComments">
+	<div class="posts">
+    <li class="list-group-item">
+      <a class="yourComments" href="#">
+        <h5 class="break-el">{{#emojione}} {{comment}} {{/emojione}}</h5>
+        <p align="right">{{score}}</p>
+        <button class="waves-effect waves-light btn" id="incrementComment">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+        <button class="waves-effect waves-light btn" id="decrementComment">
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+        </button>
+        <button class="waves-effect waves-light btn" id="say">Say</button>
+
+       <!--  {{#if ismyrow}} 
+          <button class="waves-effect waves-light btn">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        {{/if}} -->
+        {{#if ismyrow}} 
+          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+        {{/if}}
+
+      </a> 
+    </li>
+  </div>
+</template>

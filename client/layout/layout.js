@@ -131,6 +131,35 @@ function readPosts(){
 
 }
 
+// function readPosts(){
+//     allPosts = Posts.find().fetch();
+//     console.log(allPosts);
+    
+//     var posts = _.pluck(allPosts, 'post');
+//     var postsId = _.pluck(allPosts, '_id')
+//     var reversePosts = posts.reverse()
+//     var reversePostsId = postsId.reverse()
+//     var zipped = _.zip(reversePosts, reversePostsId)
+//     _.each(zipped, function(pair){
+//       // var myVar=setInterval(function () {timedOutput(pair)}, 1000);
+//       timedOutput(pair);      
+
+//     })
+//   }
+
+// function timedOutput(pair){
+//   Session.set("currentPost", pair[1])
+//   var msg = new SpeechSynthesisUtterance(pair[0]);
+//   msg.onend = function(){
+//     playAudio();      
+//   }      
+//   var myVar=setInterval(function() {readOut()},10000);
+//   function readOut(){
+//     window.speechSynthesis.speak(msg);
+//   }
+// }
+
+
 function playAudio(){
   audio.play();
 }
