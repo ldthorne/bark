@@ -10,7 +10,7 @@
 		<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 		
 		    <div class="nav-wrapper">
-		      <a href="{{pathFor 'newsfeed'}}" class="brand-logo"  style="padding-left:20px">bark!</a>
+		      <a href="{{pathFor 'newsfeed'}}" class="brand-logo" style="padding-left:20px">bark!</a>
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 		      <ul class="right hide-on-med-and-down">
 		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
@@ -19,7 +19,7 @@
 				<li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Advanced<i class="material-icons right">arrow_drop_down</i></a></li>
 				{{#if loggedIn}}
-					<li> {{> atNavButton}} </li>
+					{{> atNavButton}}
 				{{else}}
 					<li><a href="{{pathFor 'login'}}">Login</a></li>
 				{{/if}}
@@ -32,7 +32,7 @@
 				<li><a href="{{pathFor 'radiustest'}}">Radius Test</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
 				{{#if loggedIn}}
-					<li> {{> atNavButton}} </li>
+					{{> atNavButton}}
 				{{else}}
 					<li><a href="{{pathFor 'login'}}">Login</a></li>
 				{{/if}}

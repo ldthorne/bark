@@ -76,27 +76,39 @@
     <li class="list-group-item">
       <a class="postInfo" href="#">
         <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
+        {{#if ismyrow}} 
+          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+        {{/if}}
         <h6 id="comment" align="center">{{commentCount}} comment(s)</h6> 
         <p align="right">{{score}}</p>
-        <button class="waves-effect waves-light btn" id="increment">
-        <span class="glyphicon glyphicon-thumbs-up"></span>
-        </button>
-        <button class="waves-effect waves-light btn" id="decrement">
-        <span class="glyphicon glyphicon-thumbs-down"></span>
-        </button>
-        <button class= "btn waves-effect waves-light" id="messageButton" align="center">
-        <span class="glyphicon glyphicon-envelope"></span>
-        </button>
-        <button class="waves-effect waves-light btn" id="say">Say</button>
+        <div class="saymes">
+            {{#if ismyrow}}
+              <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
+              <span class="glyphicon glyphicon-envelope"></span>
+              </button>
+            {{else}}
+              <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+              <span class="glyphicon glyphicon-envelope"></span>
+              </button>
+            {{/if}}
+            <button class="waves-effect waves-light btn" id="say">Say</button>
+        </div>
+        <div class="votebut">
+            <button class="waves-effect waves-light btn" id="increment">
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+            </button>
+            <button class="waves-effect waves-light btn" id="decrement">
+            <span class="glyphicon glyphicon-thumbs-down"></span>
+            </button>
+        </div>
+
 
        <!--  {{#if ismyrow}} 
           <button class="waves-effect waves-light btn">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           </button>
         {{/if}} -->
-        {{#if ismyrow}} 
-          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
-        {{/if}}
+
 
       </a> 
     </li>

@@ -125,3 +125,15 @@ button.waves-effect.waves-light {
   background-color: #A5A6A7;
   width: auto;
 }
+
+.votebut{
+  text-align: right;
+}
+
+.saymes{
+  text-align: left;
+}
+
+.jbsapp-delete-icon {
+  text-align: right;
+}

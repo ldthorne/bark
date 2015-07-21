@@ -13,9 +13,7 @@ twbs:bootstrap
 materialize:materialize
 #ian:accounts-ui-bootstrap-3
 mdg:geolocation
-cwaring:modernizr
-zeroasterisk:cordova-geolocation-foreground
+#cwaring:modernizr
+#zeroasterisk:cordova-geolocation-foreground
 qnub:emojione
 outatime:geolib
-
-

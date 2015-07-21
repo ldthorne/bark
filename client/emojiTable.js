@@ -15,7 +15,7 @@ Template.emojiTable.events({
 			var emoji = this.code;
 			Session.set('emoji', emoji);
 			//console.log(Session.get('emoji'))
-
+			$("#messageText").val($("#messageText").val()+this.code);
 			$("#post").val($("#post").val()+this.code);
 			$("#comment").val($("#comment").val()+this.code);
 		}

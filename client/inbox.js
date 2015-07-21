@@ -43,8 +43,9 @@ Template.inbox.helpers({
 // })
 Template.inbox.events({
 	'click': function(){
+    console.log(this._id);
 		if(this._id != undefined && this._id != null){
-	 		//console.log(this._id);
+	 		
       		var messageId = this._id;
       		//console.log(messageId)
       		Session.set('message', messageId);
@@ -59,9 +60,9 @@ Template.inbox.helpers({
   }
 })
 
-Template.messagereply.events({
+Template.reply.events({
 
-  'submit .replyForm': function(event) {
+  'submit #replyForm': function(event) {
     event.preventDefault();
     console.log("kkkk");
     var text = event.target.messageReply.value; // get reply value
