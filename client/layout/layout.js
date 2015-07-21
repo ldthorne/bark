@@ -5,7 +5,9 @@ audio = new Audio('audio/bark.wav');
 alreadyRead = false;
 
 Template.layout.rendered = function(){
-	$(".button-collapse").sideNav();
+  $(".button-collapse").sideNav();
+  $(".dropdown-button").dropdown({ hover: false });
+
 }
 
 Template.layout.events({

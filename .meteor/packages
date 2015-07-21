@@ -7,10 +7,10 @@
 meteor-platform
 insecure
 iron:router
-materialize:materialize
 useraccounts:materialize
 accounts-password
 twbs:bootstrap
+materialize:materialize
 #ian:accounts-ui-bootstrap-3
 mdg:geolocation
 #cwaring:modernizr
