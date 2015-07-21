@@ -3,17 +3,22 @@
 	<br>
 	{{#if currentUser}}
 	<p>
-		{{#each messagefunc}}
-		{{#emojione}}
-			<h4 align="center">"{{origPost}}"</h4>
-  			{{#each messageArray}}
-  				{{> messageblock}}
-  			{{/each}}
-  		{{#if selected}}
-  			{{> messagereply}}
-  		{{/if}}
-  		{{/emojione}}
-		{{/each}}
+		
+			{{#each messagefunc}}
+			{{#emojione}}
+				<h4 align="center">" {{origPost}} "</h4>
+	  			
+	  			{{#each messageArray}}
+	  			
+	  				{{> messageblock}}
+	  			
+	  			{{/each}}
+	  			{{/emojione}}
+		  		{{#if selected}}
+		  			{{> reply}}
+		  		{{/if}}
+			{{/each}}
+		
 	</p>
 	{{else}}
 	<p>You need to be logged in to see messages</p>
@@ -25,13 +30,13 @@
 <template name="messageblock">
 	{{#if originalPoster}}
 		<p align="right">
-			<br/>{{message}}
+			<br/> {{message}}
 			<br/> {{createdAt}}
 			<hr/>
 		</p>
 	{{else}}
 		<p align="left">
-			<br/>{{message}}
+			<br/> {{message}}
 			<br/> {{createdAt}}
 			<hr/>
 		</p>
@@ -40,9 +45,9 @@
 
 </template>
 
-<template name="messagereply">
+<template name="reply">
 
-	<form class="replyForm">
+	<form id="replyForm">
 		<input type="text" class="messageReply" name="messageReply" id="messageReply" placeholder="Type your reply here"/>
 		<input type="submit" value="Send reply" class="btn btn-primary">
 	</form>

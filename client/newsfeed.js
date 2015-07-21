@@ -13,7 +13,9 @@ Template.newsfeed.helpers({
 });
 
 Template.postInfo.helpers({
-  ismyrow: function(){return Meteor.userId() == this.owner},
+  ismyrow: function(){
+    return Meteor.userId() == this.owner;
+  },
   commentCount: function(){return Comments.find({fromPost:this._id}).count()}
 });
 

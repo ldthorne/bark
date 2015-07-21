@@ -9,7 +9,6 @@ boilerplate-generator@1.0.3
 callback-hook@1.0.3
 check@1.0.5
 coffeescript@1.0.6
-cwaring:modernizr@3.0.0_1
 ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
@@ -72,4 +71,3 @@ useraccounts:core@1.11.1
 useraccounts:materialize@1.11.1
 webapp@1.2.0
 webapp-hashing@1.0.3
-zeroasterisk:cordova-geolocation-foreground@0.0.3

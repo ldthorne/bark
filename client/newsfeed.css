@@ -124,3 +124,15 @@ button.btn-floating {
 button.waves-effect.waves-light {
   background-color: #A5A6A7;
 }
+
+.votebut{
+  text-align: right;
+}
+
+.saymes{
+  text-align: left;
+}
+
+.jbsapp-delete-icon {
+  text-align: right;
+}
