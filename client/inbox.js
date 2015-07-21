@@ -79,6 +79,7 @@ Template.reply.events({
 
       Meteor.call('messageReply', text, messageId, isOrig);
       Meteor.defer(function() { Router.go('inbox'); });
+      $("#messageReply").val('');
       //$("#messageReply").val('');
     }
   },
