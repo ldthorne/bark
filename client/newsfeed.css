@@ -123,4 +123,5 @@ button.btn-floating {
 }
 button.waves-effect.waves-light {
   background-color: #A5A6A7;
+  width: auto;
 }
