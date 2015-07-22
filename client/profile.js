@@ -5,6 +5,36 @@ Template.profile.helpers({
 
   comments: function() {
     return Comments.find({commenter: Meteor.userId()}, {sort: {submitted: -1}});
+  },
+
+  totalPostScore: function() {
+    sum=0;
+    yourPosts = Posts.find({owner: Meteor.userId()}).fetch();
+    var scores = _.pluck(yourPosts, 'score');
+    _.each(scores, function(score){
+      sum+=score;
+    });
+  
+    return sum;
+  },
+
+  totalCommentScore: function() {
+    sum=0;
+    yourComments= Comments.find({commenter: Meteor.userId()}).fetch();
+    var scores = _.pluck(yourComments, 'score');
+    _.each(scores, function(score){
+      sum+=score;
+    });
+  
+    return sum;
+  },
+
+  hasPosts: function(){
+    return Posts.find({owner:Meteor.userId()}).count == 0;
+  },
+
+  hasComments: function(){
+    return Comments.find({commenter:Meteor.userId()}).count == 0;
   }
 
 });

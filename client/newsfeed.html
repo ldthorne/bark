@@ -57,7 +57,22 @@
         <ul class="list-group">
 
           <h4>Live feed of what people are saying around you</h4>
-          <button class="waves-effect waves-light btn" id="readAll">Read All</button>
+          <button class="waves-effect waves-light btn" id="readAll">Read All</button> 
+          <i class="material-icons">access_time</i>
+          <button id="timeUp" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+          </button>
+          <button id="timeDown" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+          </button>
+          <i class="material-icons">whatshot</i>
+          <button id="voteUp" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+          </button>
+          <button id="voteDown" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+          </button>
+          <br><br>
 
           {{#each posts}}
             {{> postInfo}}

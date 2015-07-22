@@ -2,7 +2,7 @@ Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
 theVoice=null;
 audio = new Audio('audio/bark.wav');
-
+Session.set('postsSort', {submitted: -1});
 
 
 
@@ -56,7 +56,7 @@ Template.searchBox.events({
 
 Template.newsfeed.helpers({
   posts: function() {
-    return Posts.find({}, {sort: {submitted: -1}});
+    return Posts.find({}, {sort: Session.get('postsSort')});
   }
 
 });
@@ -184,7 +184,26 @@ Template.newsfeed.events({
       }      
       window.speechSynthesis.speak(msg);
     })
-  }
+  },
+
+  'click #timeUp':function(){
+        Session.set('postsSort', {submitted: -1});
+               
+    },
+
+    'click #timeDown':function(){
+        Session.set('postsSort', {submitted: 1});
+       
+    },
+    'click #voteUp':function(){
+        Session.set('postsSort', {score: -1});
+             
+    },
+
+    'click #voteDown':function(){
+        Session.set('postsSort', {score: 1});
+        
+    },
 
 });
 
