@@ -30,11 +30,11 @@ Template.profile.helpers({
   },
 
   hasPosts: function(){
-    return Posts.find({owner:Meteor.userId()}).count == 0;
+    return Posts.find({owner:Meteor.userId()}).count() >= 0;
   },
 
   hasComments: function(){
-    return Comments.find({commenter:Meteor.userId()}).count == 0;
+    return Comments.find({commenter:Meteor.userId()}).count() >= 0;
   }
 
 });
