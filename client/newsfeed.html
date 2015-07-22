@@ -57,21 +57,26 @@
         <ul class="list-group">
 
           <h4>Live feed of what people are saying around you</h4>
-          <button class="waves-effect waves-light btn" id="readAll">Read All</button> 
-          <i class="material-icons">access_time</i>
-          <button id="timeUp" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+          <div class = "readAllPosts">
+           <a class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</a>
+           </div>
+          <hr>
+          <p>Sort by</p>
+          <div class = "newOld">
+            <!-- <i class="material-icons">access_time</i> -->
+            <a class="waves-effect waves-light btn" id="timeUp"><i class="material-icons left">keyboard_arrow_up</i>Newest</a>
+            <a class="waves-effect waves-light btn" id="timeDown"><i class="material-icons left">keyboard_arrow_down</i>Oldest</a>
+          </div>
+          <br>
+<!--           <button id="timeDown" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">Oldest</span>
           </button>
-          <button id="timeDown" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-          </button>
-          <i class="material-icons">whatshot</i>
-          <button id="voteUp" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-          </button>
-          <button id="voteDown" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-          </button>
+ -->      
+          <div class = "hotNot">
+            <!-- <i class="material-icons">whatshot</i> -->
+            <a class="waves-effect waves-light btn" id="voteUp"><i class="material-icons left">favorite</i>Highest Score</a>
+            <a class="waves-effect waves-light btn" id="voteDown"><i class="material-icons left">favorite_border</i>Lowest Score</a>
+          </div>
           <br><br>
 
           {{#each posts}}
@@ -121,14 +126,6 @@
             <span class="glyphicon glyphicon-thumbs-down"></span>
             </button>
         </div>
-
-
-       <!--  {{#if ismyrow}} 
-          <button class="waves-effect waves-light btn">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          </button>
-        {{/if}} -->
-
 
       </a> 
     </li>

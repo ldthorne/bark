@@ -236,7 +236,7 @@ Template.profile.events({
   },
 
    'click #readAllPosts': function(){
-    allPosts = Posts.find().fetch();
+    allPosts = Posts.find({owner:Meteor.userId()}).fetch();
     console.log(allPosts);
     
     var posts = _.pluck(allPosts, 'post');
@@ -252,7 +252,7 @@ Template.profile.events({
   },
 
     'click #readAllComments': function(){
-    allComments = Comments.find().fetch();
+    allComments = Comments.find({commenter:Meteor.userId()}).fetch();
     console.log(allComments);
     
     var comments = _.pluck(allComments, 'comment');
