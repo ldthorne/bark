@@ -10,6 +10,10 @@ Template.layout.rendered = function(){
     hover: true,
     belowOrigin: true
   });
+  $(".dropdown-button1").dropdown({ 
+    hover: false,
+    belowOrigin: true
+  });
 
 }
 

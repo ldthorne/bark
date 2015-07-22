@@ -127,13 +127,21 @@ button.waves-effect.waves-light {
 }
 
 .votebut{
-  text-align: center;
+text-align: right;
 }
 
 .saymes{
-  text-align: center;
+  float: left;
 }
 
-.jbsapp-delete-icon {
-  text-align: center;
+.deletebutton{
+  float: left;
+}
+
+.commentnum{
+  float: center;
+}
+
+.scorenum{
+  float:right;
 }
