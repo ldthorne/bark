@@ -1,7 +1,7 @@
 Meteor.methods({
   postInsert: function(post, location) {
     var postId = Posts.insert({
-      radius : 5,
+      radius : 2,
       post : post, 
       score : 0, 
       submitted : new Date(),

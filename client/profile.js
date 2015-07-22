@@ -56,7 +56,7 @@ Template.yourPosts.events({
     window.speechSynthesis.speak(msg);
   },
   
-  'click .jbsapp-delete-icon': function(){Posts.remove(this._id);
+  'click .jbsapp-delete-icon': function(){removePost(this._id);
   },
 
   'click #comment': function(){
@@ -270,10 +270,51 @@ Template.profile.events({
 });
 
 function checkVotes(selected){
+    var p = Posts.findOne({_id:selected._id});
+    //numbers may seem off.. were not sure how to fix
+
+    //console.log(selected.score);
+   if(selected.score >=5 && selected.score <10){
+    Posts.update({_id: p._id}, {$set: {radius:4}});
+    //console.log("radius should be 4");
+     //console.log(selected.radius);
+  } else if(selected.score >=10 && selected.score <20){
+    Posts.update({_id: p._id}, {$set: {radius:6}});
+     //console.log("radius should be 6");
+     //console.log(selected.radius);
+  }else if(selected.score >=20 && selected.score <40){
+    Posts.update({_id: p._id}, {$set: {radius:8}});
+  }else if(selected.score >=40 && selected.score <50){
+    Posts.update({_id: p._id}, {$set: {radius:10}});
+  }else if(selected.score >=50 && selected.score <100){
+    Posts.update({_id: p._id}, {$set: {radius:15}});
+  }else if(selected.score >=100 && selected.score <200){
+    Posts.update({_id: p._id}, {$set: {radius:20}});
+  }else if(selected.score >=200 && selected.score <400){
+    Posts.update({_id: p._id}, {$set: {radius:30}});
+  }else if(selected.score >=400 && selected.score <800){
+    Posts.update({_id: p._id}, {$set: {radius:35}});
+  }else if(selected.score >=800 && selected.score <1600){
+    Posts.update({_id: p._id}, {$set: {radius:50}});
+  }else if(selected.score >=1600 && selected.score <3200){
+    Posts.update({_id: p._id}, {$set: {radius:100}});
+  }else if(selected.score >=1600){
+    Posts.update({_id: p._id}, {$set: {radius:1000000}});
+  }
   if(selected.score <= -4){
-    Posts.remove(selected._id);
+    removePost(selected._id);
     //console.log("should delete");
   } else {
     //console.log('should not delete');
   }
+}
+
+function removePost(selectedId){
+  _.each(Comments.find({fromPost:selectedId}).fetch(), function(comment){
+    Comments.remove(comment._id);
+  }); 
+  _.each(Messages.find({postId:selectedId}).fetch(), function(message){
+    Messages.remove(message._id)
+  });
+  Posts.remove(selectedId);
 }
