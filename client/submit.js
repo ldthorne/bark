@@ -15,7 +15,15 @@ Template.submit.events({
       if (recognizing) {
         recognition.stop();
       }
-      Meteor.call('postInsert', post, location);
+      console.log("my location = "+JSON.stringify(location))
+      Meteor.call('postInsert', post, {'loc':{
+        "type": "Point",
+        "coordinates": [
+          Session.get("lng"),
+          Session.get("lat")
+          ]
+        }
+      });
       Router.go('newsfeed');
     }
   },
@@ -23,9 +31,7 @@ Template.submit.events({
     event.preventDefault();
 
     navigator.geolocation.getCurrentPosition(function(position) {
-    start = new Point(position.coords.latitude,position.coords.longitude);
-    console.log(start);
-    Session.set("userLocation",start);
+    Session.set("userLocation",position);
     });
   },
 
@@ -40,12 +46,12 @@ Template.submit.helpers({
 
   getLat: function(){
     var location = Session.get('userLocation');
-    return location.x;
+    return location.coords.latitude;
   },
 
   getLng: function(){
     var location = Session.get('userLocation');
-    return location.y;
+    return location.coords.longitude;
   }
 });
 
@@ -54,17 +60,18 @@ function userLocation() {
     // the function then sets the new location
     // and calls searchLocations to determine the new location
     navigator.geolocation.watchPosition(function(position){
-      var current = new Point(position.coords.latitude,position.coords.longitude);
-      Session.set("userLocation",current); 
+      console.dir(position);
+      var myPosition = {longitude: position.coords.longitude, latitude:position.coords.latitude};
+      console.dir(myPosition);
+      Session.set("myLocation", myPosition); 
+      Session.set("lat",position.coords.latitude);
+      Session.set("lng",position.coords.longitude);
     });
-    return Session.get("userLocation");
+    return Session.get("myLocation");
 
 }
 
-function Point(x,y) {
-  this.x = x;
-  this.y = y;
-}
+ulfun = userLocation;
 
   var final_transcript = '';
   var recognizing = false;

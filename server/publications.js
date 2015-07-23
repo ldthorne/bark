@@ -13,3 +13,24 @@ Meteor.publish("theReceivedMessages", function(){
 });
 
 Meteor.publish("theEmojis", function(){return Emojis.find();});
+
+Meteor.publish("closePosts",function(position){
+	console.log("published closePosts with p="+JSON.stringify(position));
+	return Posts.find({level:0}, { "location.loc": {
+		$nearSphere: {
+			$geometry: {
+				type: "Point",
+				coordinates: [ position.longitude, position.latitude]
+			},
+			$minDistance: 0,
+			$maxDistance: 3218.68
+		}}
+	});
+});
+
+Meteor.publish("farPosts",function(){
+	console.log("published level 1 posts");
+	return Posts.find({level:1});
+});
+
+ 
