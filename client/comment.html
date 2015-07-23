@@ -29,8 +29,15 @@
   
   <div class="saymes">
       <button class="waves-effect waves-light btn" id="say">Say</button>
-      {{#if ismyrow}} 
+      {{#if ismyrow}}
+        <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
+        <span class="glyphicon glyphicon-envelope"></span>
+        </button>
         <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+      {{else}}
+        <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+        <span class="glyphicon glyphicon-envelope"></span>
+        </button>
       {{/if}}
   </div>
   <div class="votebut">
@@ -41,17 +48,7 @@
       <span class="glyphicon glyphicon-thumbs-down"></span>
       </button>
   </div>
-
-<!--   <button type="button" class="increment">
-    <span class="glyphicon glyphicon-thumbs-up"></span>
-    </button>
-    <button type="button" class="decrement">
-    <span class="glyphicon glyphicon-thumbs-down"></span>
-    </button>
-    <button class="say">Say</button> -->
-
-
-    
+  
 	<br/><br/>
 
 </template>

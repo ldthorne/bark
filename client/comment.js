@@ -110,5 +110,13 @@ Template.commentBloc.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
+  },
+
+  'click #messageButton': function(){
+    if(Meteor.user()){
+      Meteor.defer(function() {Router.go('commentMessage');});
+    } else {
+      alert("You must be logged in to send a message. Login and try again.");
+    }
   }
 })
