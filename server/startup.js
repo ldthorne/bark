@@ -541,7 +541,7 @@ Meteor.startup(function() {
 		{code:":tomato:", section:"third"},
 		{code:":corn:", section:"third"},
 		//third break
-				{code:":house:", section:"fourth"},
+		{code:":house:", section:"fourth"},
 		{code:":house_with_garden:", section:"fourth"},
 		{code:":school:", section:"fourth"},
 		{code:":office:", section:"fourth"},
