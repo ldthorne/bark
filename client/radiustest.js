@@ -9,9 +9,10 @@ function Point(x,y) {
 }
 
 function currentLocation() {
-	navigator.geolocation.watchPosition(function(position){
+	watcher = navigator.geolocation.watchPosition(function(position){
 	  	var current = new Point(position.coords.latitude,position.coords.longitude);
 		Session.set("currentLocation",current); 
+		console.log("in currentlocation: lat="+ current.x+", lng="+current.y);
 	});
 	return Session.get("currentLocation");
 
@@ -20,14 +21,15 @@ function currentLocation() {
 Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
 theVoice=null;
+var watcher=null;
 
 function GetLocation(location) {
   	lat = location.coords.latitude;
   	Session.set("lat",lat);
-  	// console.log(Session.get("lat"));
+  	//console.log(Session.get("lat"));
   	lng = location.coords.longitude;
   	Session.set("lng",lng);
-  	// console.log(Session.get("lng"));
+  	console.log("in GetLocation: lat="+ Session.get("lat")+", lng="+Session.get("lng"));
 }
 
 Template.radiustest.helpers({
@@ -35,25 +37,35 @@ Template.radiustest.helpers({
 		return Posts.find({}, {sort: {submitted: -1}});
 	},
 	closePosts: function(){
+		console.log(" reactively computing the closePosts!!");
 		start = currentLocation();
-		navigator.geolocation.getCurrentPosition(GetLocation);
+		//watcher = navigator.geolocation.watchPosition(GetLocation);
+		var myLocation = Session.get("currentLocation");
+		if (myLocation == undefined) {
+			console.log("my location is undefined, watcher="+watcher);
+			return;
+		}
+		console.log("myLocation = ");console.dir(myLocation);
+		var mylat = myLocation.x;
+		var mylng = myLocation.y;
 		
 		allPosts = Posts.find().fetch();
 		// console.log(allPosts);
-
-		if(Session.get("lat")==undefined){
-			
-			return [];
-		}
+		console.log("allPosts size = "+allPosts.length);
+		
 		closePosts = _.filter(allPosts,function(post){
 		// console.dir(post);
 		// console.dir(Session.get("lat"));
 		// console.dir(Session.get("lng"));
-			return geolib.isPointInCircle(
+		console.log("filtering "+JSON.stringify(post));
+		
+		var isInCircle = geolib.isPointInCircle(
 			{latitude: post.location.x, longitude: post.location.y},
-			{latitude: Session.get("lat"), longitude: Session.get("lng")},
+			{latitude: mylat, longitude: mylng},
 			post.radius*1609.34
 	  		);
+			console.log("is in Circle = "+isInCircle+"/n/n");
+			return isInCircle
 		});
 		return closePosts;
 	}

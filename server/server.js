@@ -28,6 +28,26 @@ Meteor.methods({
     Messages.update({_id: messageId}, {$push: {messageArray: {message:text, originalPoster:isOrig, createdAt: new Date()}}});
   },
 
+
+  comMessageStart: function(text, commentId, senderId, ownerId) {
+    
+    var comMes = ComMessages.insert({
+      commentId: commentId,
+      origComment: Comments.findOne({_id:commentId}).comment,
+      senderId: senderId,
+      ownerId: ownerId,
+      lastUpdate: new Date(),
+      messageArray: [{message:text, originalPoster:false, createdAt: new Date()}]
+    });
+
+  },
+
+  comMessageReply: function(text, comMessageId, isOrig){
+    ComMessages.update({_id: comMessageId}, {$set:{lastUpdate: new Date()}}); 
+    ComMessages.update({_id: comMessageId}, {$push: {messageArray: {message:text, originalPoster:isOrig, createdAt: new Date()}}});
+  },
+
+
   commentInsert: function(comment, fromPost){
     var com = Comments.insert({
       comment:comment,

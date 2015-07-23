@@ -42,7 +42,7 @@ Template.commentBloc.helpers({
 
 
 Template.commentBloc.events({
-    'click .say': function(event){
+    'click #say': function(event){
     currentComment = this._id;
     var msg = new SpeechSynthesisUtterance(Comments.findOne({_id:this._id}).comment);
     if (theVoice) msg.voice=theVoice;
@@ -53,7 +53,7 @@ Template.commentBloc.events({
       var commentId = this._id;
       Session.set('comment', commentId); 
     },
-    'click .increment': function () {
+    'click #increment': function () {
       if(Meteor.user()) {
         var selectedAnime = Comments.findOne({_id:this._id});
         if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
@@ -83,7 +83,7 @@ Template.commentBloc.events({
       
     },
 
-    'click .decrement': function(){
+    'click #decrement': function(){
       if(Meteor.user()) {
         var selectedAnime = Comments.findOne({_id:this._id});
         if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
@@ -110,5 +110,13 @@ Template.commentBloc.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
+  },
+
+  'click #messageButton': function(){
+    if(Meteor.user()){
+      Meteor.defer(function() {Router.go('commentMessage');});
+    } else {
+      alert("You must be logged in to send a message. Login and try again.");
+    }
   }
 })

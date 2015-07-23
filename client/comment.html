@@ -27,18 +27,28 @@
   <h6 align="right">{{score}}</h6>
   {{/emojione}}
   
-	<button type="button" class="increment">
-    <span class="glyphicon glyphicon-thumbs-up"></span>
-    </button>
-    <button type="button" class="decrement">
-    <span class="glyphicon glyphicon-thumbs-down"></span>
-    </button>
-    <button class="say">Say</button>
-    {{#if ismyrow}} 
-      <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
-    {{/if}}
-
-    
+  <div class="saymes">
+      <button class="waves-effect waves-light btn" id="say">Say</button>
+      {{#if ismyrow}}
+        <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
+        <span class="glyphicon glyphicon-envelope"></span>
+        </button>
+        <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+      {{else}}
+        <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+        <span class="glyphicon glyphicon-envelope"></span>
+        </button>
+      {{/if}}
+  </div>
+  <div class="votebut">
+      <button class="waves-effect waves-light btn" id="increment">
+      <span class="glyphicon glyphicon-thumbs-up"></span>
+      </button>
+      <button class="waves-effect waves-light btn" id="decrement">
+      <span class="glyphicon glyphicon-thumbs-down"></span>
+      </button>
+  </div>
+  
 	<br/><br/>
 
 </template>
