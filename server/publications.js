@@ -12,7 +12,7 @@ Meteor.publish("theReceivedMessages", function(){
 	return Messages.find({ownerId: currentUserId});
 });
 
-Meteor.publish("theEmojis", function(){return Emojis.find();});
+
 
 Meteor.publish("closePosts",function(position){
 	console.log("published closePosts with p="+JSON.stringify(position));
@@ -34,3 +34,18 @@ Meteor.publish("farPosts",function(){
 });
 
  
+
+Meteor.publish("theSentComMessages",function(){
+	var currentUserId = this.userId;
+	return ComMessages.find({senderId: currentUserId});;
+});
+
+Meteor.publish("theReceivedComMessages", function(){
+	var currentUserId = this.userId;
+	return ComMessages.find({ownerId: currentUserId});
+});
+
+
+
+Meteor.publish("theEmojis", function(){return Emojis.find();});
+

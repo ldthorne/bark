@@ -3,7 +3,11 @@ Meteor.subscribe("theComments");
 Meteor.subscribe("theProfiles");
 Meteor.subscribe("theSentMessages");
 Meteor.subscribe("theReceivedMessages");
+Meteor.subscribe("theSentComMessages");
+Meteor.subscribe("theReceivedComMessages");
+
 Meteor.subscribe("theEmojis");
+
 Meteor.subscribe("farPosts");
 // Meteor.subscribe("closePosts")
 
@@ -39,3 +43,6 @@ Deps.autorun(function(){
 	Meteor.subscribe('closePosts', {latitude:lat,longitude:lng});
 	console.log("in Autorun: changed position to "+ JSON.stringify(position));
 })
+
+
+
