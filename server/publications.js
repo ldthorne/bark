@@ -15,7 +15,7 @@ Meteor.publish("theReceivedMessages", function(){
 
 
 Meteor.publish("closePosts",function(position){
-	console.log("published closePosts with p="+JSON.stringify(position));
+	// console.log("published closePosts with p="+JSON.stringify(position));
 	var closePosts = Posts.find(
 		{level:0, 
 		 location:{
@@ -30,14 +30,14 @@ Meteor.publish("closePosts",function(position){
 	);
 	var cpArray = closePosts.fetch();
 	console.log("closePosts = "+cpArray);
-	_.each(cpArray,function(x){console.dir(x)});
+	// _.each(cpArray,function(x){console.dir(x)});
 	return closePosts;
 });
 
 var levels = [5,50,500,5000,50000]; // distance in miles for each level
 
 Meteor.publish("viewablePosts",function(level, position){
-	console.log("published closePosts with p="+JSON.stringify(position));
+	// console.log("published closePosts with p="+JSON.stringify(position));
 	var closePosts = Posts.find(
 		{level:level, 
 		 location:{
@@ -51,13 +51,13 @@ Meteor.publish("viewablePosts",function(level, position){
 		}
 	);
 	var cpArray = closePosts.fetch();
-	console.log("closePosts = "+cpArray);
-	_.each(cpArray,function(x){console.dir(x)});
+	// console.log("closePosts = "+cpArray);
+	// _.each(cpArray,function(x){console.dir(x)});
 	return closePosts;
 });
 
 Meteor.publish("farPosts",function(){
-	console.log("published level 1 posts");
+	// console.log("published level 1 posts");
 	return Posts.find({level:1});
 });
 
