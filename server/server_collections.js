@@ -1,0 +1,1 @@
+Posts._ensureIndex({ 'location.coordinates': "2dsphere"});

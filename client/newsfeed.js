@@ -10,53 +10,19 @@ Session.set('postsSort', {submitted: -1});
 
 
 
-/*
-
-var options = {
-  keepHistory: 1000 * 60 * 5,
-  localSearch: true
-};
-var fields = ['packageName', 'description'];
-
-PackageSearch = new SearchSource('packages', fields, options);
-
-Template.searchResult.helpers({
-  getPackages: function() {
-    return PackageSearch.getData({
-      transform: function(matchText, regExp) {
-        return matchText.replace(regExp, "<b>$&</b>")
-      },
-      sort: {isoScore: -1}
-    });
-  },
-  
-  isLoading: function() {
-    return PackageSearch.getStatus().loading;
-  }
-});
-
-Template.searchResult.rendered = function() {
-  PackageSearch.search('');
-};
-
-Template.searchBox.events({
-  "keyup #search-box": _.throttle(function(e) {
-    var text = $(e.target).val().trim();
-    PackageSearch.search(text);
-  }, 200)
-});
-
-*/
-
-
-
-
-
-
-
 Template.newsfeed.helpers({
   posts: function() {
     return Posts.find({}, {sort: Session.get('postsSort')});
+	/*
+	return Posts.find({location:{
+		$near:
+		{
+			$geometry: { type: "Point",  coordinates: [ -71.2586913, 42.3669788 ] },
+			$minDistance: 0,
+			$maxDistance: 5000
+		}
+	}})
+	*/
   }
 
 });
@@ -258,3 +224,51 @@ function removePost(selectedId){
   });
   Posts.remove(selectedId);
 }
+
+
+function FindNext() {
+            var str = document.getElementById ("findField").value;
+            if (str == "") {
+                alert ("Please enter some text to search!");
+                return;
+            }
+
+            var supported = false;
+            var found = false;
+            if (window.find) {        // Firefox, Google Chrome, Safari
+                supported = true;
+                    // if some content is selected, the start position of the search 
+                    // will be the end position of the selection
+                found = window.find (str);
+            }
+            else {
+                if (document.selection && document.selection.createRange) { // Internet Explorer, Opera before version 10.5
+                    var textRange = document.selection.createRange ();
+                    if (textRange.findText) {   // Internet Explorer
+                        supported = true;
+                            // if some content is selected, the start position of the search 
+                            // will be the position after the start position of the selection
+                        if (textRange.text.length > 0) {
+                            textRange.collapse (true);
+                            textRange.move ("character", 1);
+                        }
+
+                        found = textRange.findText (str);
+                        if (found) {
+                            textRange.select ();
+                        }
+                    }
+                }
+            }
+
+            if (supported) {
+                if (!found) {
+                    alert ("The following text was not found:\n" + str);
+                }
+            }
+            else {
+                alert ("Your browser does not support this!");
+            }
+        }
+
+

@@ -4,10 +4,13 @@ body{
 body { 
     background: url(/images/cream_dust.png) repeat 0 0;
 }
+body {
+    font-family: 'Tangerine', serif;
+}
 /* navbar */
 
 #navbar {
-    background-color: #72bcd4;
+    background-color: #79BEDB;
 /*    border-color: #E7E7E7;
 */}
 /* title */

@@ -1,4 +1,47 @@
 Meteor.startup(function() {
+	
+	if (Posts.find().count()==0){
+		
+
+		Posts.insert({level:0,post:"Volen0",location:{type:"Point", coordinates:[ -71.25868609999999, 42.366987099999996 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:1,post:"Volen1",location:{type:"Point", coordinates:[ -71.25868609999999, 42.366987099999996 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:2,post:"Volen2",location:{type:"Point", coordinates:[ -71.25868609999999, 42.366987099999996 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:3,post:"Volen3",location:{type:"Point", coordinates:[ -71.25868609999999, 42.366987099999996 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:4,post:"Volen4",location:{type:"Point", coordinates:[ -71.25868609999999, 42.366987099999996 ]},owner:"h25oaSTq5MyTPpRbx"})
+		
+		Posts.insert({level:0,post:"Boston0",location:{type:"Point", coordinates:[ -71.063810, 42.358777 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:1,post:"Boston1",location:{type:"Point", coordinates:[ -71.063810, 42.358777 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:2,post:"Boston2",location:{type:"Point", coordinates:[ -71.063810, 42.358777 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:3,post:"Boston3",location:{type:"Point", coordinates:[ -71.063810, 42.358777 ]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:4,post:"Boston4",location:{type:"Point", coordinates:[ -71.063810, 42.358777 ]},owner:"h25oaSTq5MyTPpRbx"})
+		
+		
+		Posts.insert({level:0,post:"NYC0",location:{type:"Point",coordinates:[-74.006955,40.705142]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:1,post:"NYC1",location:{type:"Point",coordinates:[-74.006955,40.705142]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:2,post:"NYC2",location:{type:"Point",coordinates:[-74.006955,40.705142]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:3,post:"NYC3",location:{type:"Point",coordinates:[-74.006955,40.705142]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:4,post:"NYC4",location:{type:"Point",coordinates:[-74.006955,40.705142]},owner:"h25oaSTq5MyTPpRbx"})
+
+		Posts.insert({level:0,post:"ABQ0",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:1,post:"ABQ1",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:2,post:"ABQ2",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:3,post:"ABQ3",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:4,post:"ABQ4",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
+		
+		
+		Posts.insert({level:0,post:"England0",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:1,post:"England1",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:2,post:"England2",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:3,post:"England3",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:4,post:"England4",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
+		
+		Posts.insert({level:0,post:"Tokyo0",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:1,post:"Tokyo1",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:2,post:"Tokyo2",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:3,post:"Tokyo3",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
+		Posts.insert({level:4,post:"Tokyo4",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
+		
+	}
 
 	if (Emojis.find().count() == 0){
 
