@@ -3,8 +3,8 @@ Meteor.methods({
     var postId = Posts.insert({
       level: 0,
       radius : 2,
-      post : post, 
-      score : 0, 
+      post : post,
+      score : 0,
       submitted : new Date(),
       location : location,
       owner: Meteor.userId()
@@ -12,26 +12,26 @@ Meteor.methods({
   },
 
   messageStart: function(text, postId, senderId, ownerId) {
-    
+
     var mes = Messages.insert({
-  		postId: postId,
+      postId: postId,
       origPost: Posts.findOne({_id:postId}).post,
-  		senderId: senderId,
-  		ownerId: ownerId,
-  		lastUpdate: new Date(),
+      senderId: senderId,
+      ownerId: ownerId,
+      lastUpdate: new Date(),
       messageArray: [{message:text, originalPoster:false, createdAt: new Date()}]
-  	});
+    });
 
   },
 
   messageReply: function(text, messageId, isOrig){
-    Messages.update({_id: messageId}, {$set:{lastUpdate: new Date()}}); 
+    Messages.update({_id: messageId}, {$set:{lastUpdate: new Date()}});
     Messages.update({_id: messageId}, {$push: {messageArray: {message:text, originalPoster:isOrig, createdAt: new Date()}}});
   },
 
 
   comMessageStart: function(text, commentId, senderId, ownerId) {
-    
+
     var comMes = ComMessages.insert({
       commentId: commentId,
       origComment: Comments.findOne({_id:commentId}).comment,
@@ -44,7 +44,7 @@ Meteor.methods({
   },
 
   comMessageReply: function(text, comMessageId, isOrig){
-    ComMessages.update({_id: comMessageId}, {$set:{lastUpdate: new Date()}}); 
+    ComMessages.update({_id: comMessageId}, {$set:{lastUpdate: new Date()}});
     ComMessages.update({_id: comMessageId}, {$push: {messageArray: {message:text, originalPoster:isOrig, createdAt: new Date()}}});
   },
 

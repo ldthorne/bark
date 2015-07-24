@@ -138,20 +138,20 @@ Template.newsfeed.events({
   },
 
    'click #readAll': function(){
-    allPosts = Posts.find().fetch();
-    console.log(allPosts);
-    
-    var posts = _.pluck(allPosts, 'post');
-    var reversePosts = posts.reverse()
+      allPosts = Posts.find().fetch();
+      console.log(allPosts);
+      
+      var posts = _.pluck(allPosts, 'post');
+      var reversePosts = posts.reverse()
 
-    _.each(reversePosts, function(post){
-      var msg = new SpeechSynthesisUtterance(post);
-      msg.onend = function(){
-        playAudio();      
-      }      
-      window.speechSynthesis.speak(msg);
-    })
-  },
+      _.each(reversePosts, function(post){
+        var msg = new SpeechSynthesisUtterance(post);
+        msg.onend = function(){
+          playAudio();      
+        }      
+        window.speechSynthesis.speak(msg);
+      })
+    },
 
   'click #timeUp':function(){
         Session.set('postsSort', {submitted: -1});
