@@ -3,20 +3,43 @@
 		{{#if currentUser}}
 			<h4>Messages</h4>
 			<br>
-			<p>
-				{{#each messagefunc}}
-				{{#emojione}}
-					<h4 align="center">" {{origPost}} "</h4>
-		  			{{#each messageArray}}
-		  				{{> messageblock}}
-		  			{{/each}}
-		  		{{/emojione}}
-			  		{{#if selected}}
-			  			{{> reply}}
-			  		{{/if}}
-			  	<br>
-				{{/each}}
-			</p>
+			{{#if isMessages}}
+				
+				
+				<div class="radios">
+					<form class="choose">
+				      <input class="with-gap" name="group1" type="radio" id="posMes" selected/>
+				      <label for="posMes">Posts</label>
+				      <input class="with-gap" name="group1" type="radio" id="comMes"/>
+				      <label for="comMes">Comments</label>
+					</form>
+				</div>
+
+				<div class = "newOld">
+		            <!-- <i class="material-icons">access_time</i> -->
+		            <button class="waves-effect waves-light btn" id="updateUp"><i class="material-icons left">keyboard_arrow_up</i>Newest</button>
+		            <button class="waves-effect waves-light btn" id="updateDown"><i class="material-icons left">keyboard_arrow_down</i>Oldest</button>
+	          	</div>
+	          	<br>
+				<p>
+					{{#each messagefunc}}
+					{{#emojione}}
+						<h4 align="center">" {{origTitle}} "</h4>
+			  			{{#each messageArray}}
+			  				{{> messageblock}}
+			  			{{/each}}
+			  		{{/emojione}}
+				  		{{#if selected}}
+				  			{{> reply}}
+				  		{{/if}}
+				  	<br>
+					{{/each}}
+				</p>
+			{{else}}
+			<h5>No messages yet... maybe try sending one to someone else, or make a post or comment and wait for someone to send one to you
+			</h5>
+
+			{{/if}}
 		{{else}}
 			<h4 style="text-align:center">You need to log in to see messages</h4>
 			<hr>
@@ -47,10 +70,18 @@
 
 <template name="reply">
 
-	<form id="replyForm">
-		<input type="text" class="messageReply" name="messageReply" id="messageReply" placeholder="Type your reply here"/>
+	{{#if isPost}}
+	<form id="postReplyForm">
+		<input type="text" class="postReply" name="postReply" id="postReply" placeholder="Type your reply here"/>
 		<button class="btn waves-effect waves-light" type="submit" name="action">Send reply
 		</button>  
  	</form>
+ 	{{else}}
+ 	<form id="commentReplyForm">
+		<input type="text" class="commentReply" name="commentReply" id="commentReply" placeholder="Type your reply here"/>
+		<button class="btn waves-effect waves-light" type="submit" name="action">Send reply
+		</button>  
+ 	</form>
+ 	{{/if}}
 
 </template>
