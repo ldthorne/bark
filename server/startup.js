@@ -26,20 +26,20 @@ Meteor.startup(function() {
 		Posts.insert({level:1,post:"ABQ1",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:2,post:"ABQ2",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:3,post:"ABQ3",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
-
+		Posts.insert({level:4,post:"ABQ4",location:{type:"Point",coordinates:[-106.508512,35.121090]},owner:"h25oaSTq5MyTPpRbx"})
+		
+		
 		Posts.insert({level:0,post:"England0",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:1,post:"England1",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:2,post:"England2",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:3,post:"England3",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:4,post:"England4",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
-		Posts.insert({level:5,post:"England5",location:{type:"Point",coordinates:[-0.141890,51.501364]},owner:"h25oaSTq5MyTPpRbx"})
-
+		
 		Posts.insert({level:0,post:"Tokyo0",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:1,post:"Tokyo1",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:2,post:"Tokyo2",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:3,post:"Tokyo3",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
 		Posts.insert({level:4,post:"Tokyo4",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
-		Posts.insert({level:5,post:"Tokyo5",location:{type:"Point",coordinates:[139.731992,35.709026]},owner:"h25oaSTq5MyTPpRbx"})
 		
 	}
 
