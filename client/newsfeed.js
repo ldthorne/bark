@@ -13,6 +13,16 @@ Session.set('postsSort', {submitted: -1});
 Template.newsfeed.helpers({
   posts: function() {
     return Posts.find({}, {sort: Session.get('postsSort')});
+	/*
+	return Posts.find({location:{
+		$near:
+		{
+			$geometry: { type: "Point",  coordinates: [ -71.2586913, 42.3669788 ] },
+			$minDistance: 0,
+			$maxDistance: 5000
+		}
+	}})
+	*/
   }
 
 });

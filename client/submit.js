@@ -16,13 +16,12 @@ Template.submit.events({
         recognition.stop();
       }
       console.log("my location = "+JSON.stringify(location))
-      Meteor.call('postInsert', post, {'loc':{
+      Meteor.call('postInsert', post, {
         "type": "Point",
         "coordinates": [
           Session.get("lng"),
           Session.get("lat")
           ]
-        }
       });
       Router.go('newsfeed');
     }
