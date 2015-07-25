@@ -29,7 +29,7 @@ Meteor.publish("closePosts",function(position){
 		}
 	);
 	var cpArray = closePosts.fetch();
-	console.log("closePosts = "+cpArray);
+	// console.log("closePosts = "+cpArray);
 	// _.each(cpArray,function(x){console.dir(x)});
 	return closePosts;
 });
