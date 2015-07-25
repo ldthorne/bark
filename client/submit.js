@@ -59,9 +59,9 @@ function userLocation() {
     // the function then sets the new location
     // and calls searchLocations to determine the new location
     navigator.geolocation.watchPosition(function(position){
-      console.dir(position);
+      // console.dir(position);
       var myPosition = {longitude: position.coords.longitude, latitude:position.coords.latitude};
-      console.dir(myPosition);
+      // console.dir(myPosition);
       Session.set("myLocation", myPosition); 
       Session.set("lat",position.coords.latitude);
       Session.set("lng",position.coords.longitude);
