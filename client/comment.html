@@ -5,9 +5,13 @@
     </h4>
 <hr>
 {{#if isComments}}
-	{{#each commentFunc}}
-		{{> commentBloc}}
-  {{/each}}
+	<div class = "container">
+    <ul class = "list-group">
+      {{#each commentFunc}}
+    		{{> commentBloc}}
+      {{/each}}
+    </ul>
+  </div>
 {{else}}
 <p>No comments yet...</p>
 {{/if}}
@@ -21,38 +25,43 @@
 
 <template name="commentBloc">
 
-  {{#emojione}}
-    <h6>{{comment}}</h6>
-    <h6 align="right">{{score}}</h6>
-  {{/emojione}}
-   <div class = "deleteFlagButton">
-    {{#if ismyrow}} 
-      <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
-    {{/if}}
-    <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left">flag</i></button>
-  </div>
-  <div class="saymes">
-      <button class="waves-effect waves-light btn" id="say">Say</button>
-      {{#if ismyrow}}
-        <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
-        <span class="glyphicon glyphicon-envelope"></span>
-        </button>
-      {{else}}
-        <button class= "btn waves-effect waves-light" id="messageButton" align="center">
-        <span class="glyphicon glyphicon-envelope"></span>
-        </button>
+  <li class = "list-group-item">
+    
+    <h5 class="break-el">{{#emojione}} {{comment}} {{/emojione}}</h5>
+    <div class = "deletebutton">
+      {{#if ismyrow}} 
+        <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
       {{/if}}
-  </div>
-  <div class="votebut">
-      <button class="waves-effect waves-light btn" id="increment">
-      <span class="glyphicon glyphicon-thumbs-up"></span>
-      </button>
-      <button class="waves-effect waves-light btn" id="decrement">
-      <span class="glyphicon glyphicon-thumbs-down"></span>
-      </button>
-  </div>
+      <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left">flag</i></button>
+
+    </div>
+
+    <div class ="commentnum">
+      <p id = "scorenum" align="right" style="font: 18px">{{score}}</p>
+    </div>
+    <br><br>
+    <div class="saymes">
+        <button class="waves-effect waves-light btn" id="say">Say</button>
+        {{#if ismyrow}}
+          <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
+          <span class="glyphicon glyphicon-envelope"></span>
+          </button>
+        {{else}}
+          <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+          <span class="glyphicon glyphicon-envelope"></span>
+          </button>
+        {{/if}}
+    </div>
+    <div class="votebut">
+        <button class="waves-effect waves-light btn" id="increment">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+        <button class="waves-effect waves-light btn" id="decrement">
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+        </button>
+    </div>
   
-	<br/><br/>
+  </li>
 
 </template>
 
