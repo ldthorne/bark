@@ -51,6 +51,14 @@ Template.submit.helpers({
   getLng: function(){
     var location = Session.get('userLocation');
     return location.coords.longitude;
+  },
+  charatersLeft: function(){
+    var post = $("#post");
+    console.log(post);
+    var total = post.attr("maxlength");
+    Session.set('typing', post.val());
+    Session.set('remaining', (total - Session.get('typing').length()));
+    return Session.get('remaining');
   }
 });
 
