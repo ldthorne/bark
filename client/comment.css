@@ -17,3 +17,7 @@ p{
 	color: #534540;
 	font-weight: 50;
 }
+
+.commentScore{
+	text-align: right;
+}

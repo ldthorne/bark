@@ -16,7 +16,16 @@ Template.postInfo.helpers({
   ismyrow: function(){
     return Meteor.userId() == this.owner;
   },
-  commentCount: function(){return Comments.find({fromPost:this._id}).count()}
+  commentCount: function(){
+    return Comments.find({fromPost:this._id}).count()
+  },
+  commentPlural: function(){
+    if(Comments.find({fromPost:this._id}).count()==1){
+      return "comment";
+    } else {
+      return "comments";
+    }
+  }
 });
 
 Template.postInfo.events({

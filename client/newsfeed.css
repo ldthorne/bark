@@ -154,11 +154,12 @@ text-align: right;
 }
 
 .commentnum{
-  float: center;
+  float: left;
+  margin-left: 20%;
 }
 
 .scorenum{
-  float:right;
+  float: right;
 }
 
 .newOld{
