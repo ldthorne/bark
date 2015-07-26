@@ -5,7 +5,7 @@ Meteor.startup(function() {
 Template.submit.events({
   'submit .postsSubmitForm': function(event) {
     event.preventDefault();
-    var post = event.target.post.value; // get post vote value
+    var post = event.target.postInput.value; // get post vote value
     var location = userLocation();
 
     // check if the value is empty
@@ -52,15 +52,20 @@ Template.submit.helpers({
     var location = Session.get('userLocation');
     return location.coords.longitude;
   },
-  charatersLeft: function(){
-    var post = $("#post");
-    console.log(post);
-    var total = post.attr("maxlength");
-    Session.set('typing', post.val());
-    Session.set('remaining', (total - Session.get('typing').length()));
-    return Session.get('remaining');
-  }
+  // charatersLeft: function(){
+  //   return left();
+  // }
 });
+
+// function left(){
+//   var total = document.getElementById('postInput').getAttribute('maxlength');
+//   console.log(total);
+//   Session.set('typing', document.getElementById("postInput").value);
+//   console.log(Session.get('typing'));
+//   Session.set('remaining', (total - Session.get('typing').length));
+//   console.log(Session.get('remaining'));
+//   return Session.get('remaining');
+// }
 
 function userLocation() {
     // watchPosition watches to see if position changes
