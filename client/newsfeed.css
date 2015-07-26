@@ -126,6 +126,21 @@ button.waves-effect.waves-light {
   width: auto;
 }
 
+
+#delete {
+    background-color: #FFF;
+    padding-left:0;
+    border:0;
+    width:20px;
+    padding-right: 0;
+}
+#flag {
+    background-color: #FFF;
+    padding-left:0;
+    border:0;
+    padding-right:20px;
+}
+
 .votebut{
 text-align: right;
 }
@@ -139,11 +154,12 @@ text-align: right;
 }
 
 .commentnum{
-  float: center;
+  float: left;
+  margin-left: 20%;
 }
 
 .scorenum{
-  float:right;
+  float: right;
 }
 
 .newOld{
@@ -157,4 +173,5 @@ text-align: right;
 .readAllPosts{
   text-align: center;
 }
+
 

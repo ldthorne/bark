@@ -3,6 +3,7 @@ Meteor.methods({
     var postId = Posts.insert({
       level: 0,
       radius : 2,
+      numberFlags: 0,
       post : post,
       score : 0,
       submitted : new Date(),

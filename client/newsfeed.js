@@ -5,24 +5,9 @@ audio = new Audio('audio/bark.wav');
 Session.set('postsSort', {submitted: -1});
 
 
-
-
-
-
-
 Template.newsfeed.helpers({
   posts: function() {
     return Posts.find({}, {sort: Session.get('postsSort')});
-	/*
-	return Posts.find({location:{
-		$near:
-		{
-			$geometry: { type: "Point",  coordinates: [ -71.2586913, 42.3669788 ] },
-			$minDistance: 0,
-			$maxDistance: 5000
-		}
-	}})
-	*/
   }
 
 });
@@ -31,7 +16,16 @@ Template.postInfo.helpers({
   ismyrow: function(){
     return Meteor.userId() == this.owner;
   },
-  commentCount: function(){return Comments.find({fromPost:this._id}).count()}
+  commentCount: function(){
+    return Comments.find({fromPost:this._id}).count()
+  },
+  commentPlural: function(){
+    if(Comments.find({fromPost:this._id}).count()==1){
+      return "comment";
+    } else {
+      return "comments";
+    }
+  }
 });
 
 Template.postInfo.events({
@@ -42,7 +36,7 @@ Template.postInfo.events({
     window.speechSynthesis.speak(msg);
   },
   
-  'click .jbsapp-delete-icon': function(){removePost(this._id);},
+  'click #delete': function(){removePost(this._id);},
 
   'click #comment': function(){
     if(Meteor.user()){
@@ -61,10 +55,31 @@ function playAudio(){
 }
 
 Template.newsfeed.events({
+    
     'click': function(){
       var postId = this._id;
       Session.set('post', postId);
       //checkVotes(Posts.findOne({_id: postId})); 
+    },
+
+    'click #flag': function(){
+      if(Meteor.user()) {
+        var selectedPost = Posts.findOne({_id:this._id});
+        console.log($.inArray(Meteor.userId(), selectedPost.hasFlagged));
+        if($.inArray(Meteor.userId(), selectedPost.hasFlagged) == -1){
+          var r = confirm('This cannot be undone. Are you sure you want to flag the post?');
+          if(r){
+            var postId = Session.get('post');
+            Posts.update(postId, {$inc: {numberFlags: 1}});
+            Posts.update(postId, {$addToSet: {hasFlagged: Meteor.userId()}});
+          }
+        checkFlags(selectedPost)
+        } else{
+          alert("You've already flagged this post.")  
+        }
+      }else{
+        alert("You must log in to vote. Log in and try again.");
+      }
     },
     'click #increment': function () {
       if(Meteor.user()) {
@@ -209,8 +224,13 @@ function checkVotes(selected){
   if(selected.score <= -4){
     removePost(selected._id);
     //console.log("should delete");
-  } else {
-    //console.log('should not delete');
+  }
+}
+
+function checkFlags(selected){
+  if(selected.numberFlags >= 4){
+    removePost(selected._id);
+    //should delete if more than 4 flags
   }
 }
 

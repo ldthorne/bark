@@ -4,6 +4,7 @@ theVoice=null;
 audio = new Audio('audio/bark.wav');
 alreadyRead = false;
 
+
 Template.layout.rendered = function(){
   $(".button-collapse").sideNav({
     closeOnClick:true
