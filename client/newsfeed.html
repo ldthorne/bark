@@ -19,17 +19,12 @@
            </div>
           <hr>
           <div class = "newOld">
-            <!-- <i class="material-icons">access_time</i> -->
             <button class="waves-effect waves-light btn" id="timeUp"><i class="material-icons left">keyboard_arrow_up</i>Newest</button>
             <button class="waves-effect waves-light btn" id="timeDown"><i class="material-icons left">keyboard_arrow_down</i>Oldest</button>
           </div>
           <br>
-<!--           <button id="timeDown" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">Oldest</span>
-          </button>
- -->      
+
           <div class = "hotNot">
-            <!-- <i class="material-icons">whatshot</i> -->
             <button class="btn waves-effect waves-light" id="voteUp"><i class="material-icons left">favorite</i>Highest Score</button>
             <button class="btn waves-effect waves-light" id="voteDown"><i class="material-icons left">favorite_border</i>Lowest Score</button>
           </div>
@@ -54,8 +49,10 @@
         <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
         <div class = "deletebutton">
           {{#if ismyrow}} 
-            <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
+            <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
           {{/if}}
+          <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left">flag</i></button>
+
         </div>
         <div class ="commentnum">
           <p id="comment" align="center">{{commentCount}} comment(s)</p>

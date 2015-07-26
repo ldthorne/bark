@@ -48,10 +48,33 @@ Template.commentBloc.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-  'click .jbsapp-delete-icon': function(){Comments.remove(this._id);},
+  'click #delete': function(){
+    removeComment(this._id);
+    // Comments.remove(this._id);
+  },
 	'click': function(){
       var commentId = this._id;
       Session.set('comment', commentId); 
+    },
+
+    'click #flag': function(){
+      if(Meteor.user()) {
+        var selectedComment = Comments.findOne({_id:this._id});
+        console.log($.inArray(Meteor.userId(), selectedComment.hasFlagged));
+        if($.inArray(Meteor.userId(), selectedComment.hasFlagged) == -1){
+          var r = confirm('This cannot be undone. Are you sure you want to flag the comment?');
+          if(r){
+            var commentId = Session.get('comment');
+            Comments.update(commentId, {$inc: {numberFlags: 1}});
+            Comments.update(commentId, {$addToSet: {hasFlagged: Meteor.userId()}});
+          }
+        checkFlags(selectedComment)
+        } else{
+          alert("You've already flagged this comment.")  
+        }
+      }else{
+        alert("You must log in to vote. Log in and try again.");
+      }
     },
     'click #increment': function () {
       if(Meteor.user()) {
@@ -120,3 +143,22 @@ Template.commentBloc.events({
     }
   }
 })
+
+
+function checkFlags(selected){
+  if(selected.numberFlags >= 4){
+    removeComment(selected._id);
+    //should delete if more than 5 flags
+  }
+}
+
+function removeComment(selectedId){ 
+  _.each(ComMessages.find({commentId:selectedId}).fetch(), function(message){
+    ComMessages.remove(message._id)
+  });
+  Comments.remove(selectedId);
+}
+
+
+
+
