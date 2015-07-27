@@ -47,9 +47,9 @@ Template.inbox.events({
 		if(this._id != undefined && this._id != null){
 	 		
       		var messageId = this._id;
-      		console.log(messageId)
+      		//console.log(messageId)
       		Session.set('message', messageId);
-      	  console.log(Session.get('message'));
+      	  //console.log(Session.get('message'));
       	}
     },
 

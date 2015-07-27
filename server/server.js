@@ -58,6 +58,42 @@ Meteor.methods({
       commenter: Meteor.userId(),
       score: 0
     })
+  },
+
+  removeAccount: function(user){
+      _.each(Messages.find({ownerId:user}).fetch(), function(message){
+          Messages.remove(message._id)
+      });
+      _.each(Messages.find({senderId:user}).fetch(), function(message){
+          Messages.remove(message._id)
+      });
+      _.each(ComMessages.find({ownerId:user}).fetch(), function(commessage){
+          ComMessages.remove(commessage._id)
+      });
+      _.each(ComMessages.find({senderId:user}).fetch(), function(commessage){
+          ComMessages.remove(commessage._id)
+      });
+
+      _.each(Comments.find({commenter:user}).fetch(), function(comment){  
+          _.each(ComMessages.find({comment:comment._id}).fetch(), function(commessage){
+            ComMessages.remove(commessage._id);
+          });
+          Comments.remove(comment._id);
+      });
+
+      _.each(Posts.find({owner:user}).fetch(), function(post){
+          _.each(Comments.find({fromPost:post._id}).fetch(), function(comment){
+            _.each(ComMessages.find({commentId:comment._id}.fetch()), function(commessage){
+              ComMessages.remove(commessage._id);
+            });
+            Comments.remove(comment._id);
+          });
+          _.each(Messages.find({postId:post._id}).fetch(), function(message){
+            Messages.remove(message._id);
+          });
+          Posts.remove(post._id);
+      });
+      Meteor.users.remove(Meteor.userId());
   }
 
 });
