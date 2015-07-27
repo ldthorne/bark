@@ -2,38 +2,47 @@
   <div class="posts">
     <div class="form-style">
       <div class="container">
-        <ul class="list-group">
-
-        <h4>Your posts</h4>
-        {{#if hasPosts}}
-          <button class="waves-effect waves-light btn" id="readAllPosts">Read All</button>
-  		    {{#each posts}}
-  			   {{> yourPosts}}
-  		    {{/each}}
-          <p>Sum of votes on all your posts: {{totalPostScore}}</p>
-        {{else}}
-          <p> Maybe try making a post... </p>
-        {{/if}}
-        </ul>
-        <ul>
-        <h4>Your comments</h4>
-        {{#if hasComments}}
-          <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
-  		    {{#each comments}}
-  			   {{> yourComments}}
-  		    {{/each}}
-          <p>Sum of votes on all your comments: {{totalCommentScore}}</p>
-        {{else}}
-          <p> Maybe try making a comment on a post... </p>
-        {{/if}}
-         
-        </ul>
         
+        {{#if currentUser}}
+
+          <h4>Your posts</h4>
+          {{#if hasPosts}}
+            <button class="waves-effect waves-light btn" id="readAllPosts">Read All</button>
+            <ul class="list-group">
+    		    {{#each posts}}
+    			   {{> yourPosts}}
+    		    {{/each}}
+            </ul>
+            <p>Sum of votes on all your posts: {{totalPostScore}}</p>
+          {{else}}
+              <p> Maybe try making a post... </p>
+          {{/if}}
+            
+          
+          <h4>Your comments</h4>
+         
+          {{#if hasComments}}
+            <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
+            <ul class="list-group">
+    		    {{#each comments}}
+    			   {{> yourComments}}
+    		    {{/each}}
+            </ul>
+            <p>Sum of votes on all your comments: {{totalCommentScore}}</p>
+          {{else}}
+            <p> Maybe try making a comment on a post... </p>
+          {{/if}}
+            
+        {{else}}
+          <h4 style="text-align:center">You have to log in to see your profile</h4>
+          <hr>
+          <div class="container">
+            {{> atForm}}
+          </div>
+        {{/if}}
 
       </div>
     </div>
-
-
   </div>
 </template>
 
