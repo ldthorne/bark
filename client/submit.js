@@ -3,9 +3,10 @@ Meteor.startup(function() {
 });
 
 Template.submit.events({
-  'submit .postsSubmitForm': function(event) {
+  'click #submitButton': function(event) {
     event.preventDefault();
-    var post = event.target.postInput.value; // get post vote value
+    var post = postInput.value; // get post vote value
+    console.log(post);
     var location = userLocation();
 
     // check if the value is empty
