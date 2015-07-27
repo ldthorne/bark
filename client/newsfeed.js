@@ -247,93 +247,93 @@ function removePost(selectedId){
 
 
 function submittime(submitted){
-var tTime=new Date(submitted);
-    var cTime=new Date();
-    var sinceMin=Math.round((cTime-tTime)/60000);
-    if(sinceMin==0)
-    {
-        var sinceSec=Math.round((cTime-tTime)/1000);
-        if(sinceSec<10)
-          var since='less than 10 seconds ago';
-        else if(sinceSec<20)
-          var since='less than 20 seconds ago';
-        else
-          var since='half a minute ago';
-    }
-    else if(sinceMin==1)
-    {
-        var sinceSec=Math.round((cTime-tTime)/1000);
-        if(sinceSec==30)
-          var since='half a minute ago';
-        else if(sinceSec<60)
-          var since='less than a minute ago';
-        else
-          var since='1 minute ago';
-    }
-    else if(sinceMin<45)
-        var since=sinceMin+' minutes ago';
-    else if(sinceMin>44&&sinceMin<60)
+  var tTime=new Date(submitted);
+      var cTime=new Date();
+      var sinceMin=Math.round((cTime-tTime)/60000);
+      if(sinceMin==0)
+      {
+          var sinceSec=Math.round((cTime-tTime)/1000);
+          if(sinceSec<10)
+            var since='less than 10 seconds ago';
+          else if(sinceSec<20)
+            var since='less than 20 seconds ago';
+          else
+            var since='half a minute ago';
+      }
+      else if(sinceMin==1)
+      {
+          var sinceSec=Math.round((cTime-tTime)/1000);
+          if(sinceSec==30)
+            var since='half a minute ago';
+          else if(sinceSec<60)
+            var since='less than a minute ago';
+          else
+            var since='1 minute ago';
+      }
+      else if(sinceMin<45)
+          var since=sinceMin+' minutes ago';
+      else if(sinceMin>44&&sinceMin<60)
+          var since='about 1 hour ago';
+      else if(sinceMin<1440){
+          var sinceHr=Math.round(sinceMin/60);
+      if(sinceHr==1)
         var since='about 1 hour ago';
-    else if(sinceMin<1440){
-        var sinceHr=Math.round(sinceMin/60);
-    if(sinceHr==1)
-      var since='about 1 hour ago';
-    else
-      var since='about '+sinceHr+' hours ago';
-    }
-    else if(sinceMin>1439&&sinceMin<2880)
-        var since='1 day ago';
-    else
-    {
-        var sinceDay=Math.round(sinceMin/1440);
-        var since=sinceDay+' days ago';
-    }
-    return since;
+      else
+        var since='about '+sinceHr+' hours ago';
+      }
+      else if(sinceMin>1439&&sinceMin<2880)
+          var since='1 day ago';
+      else
+      {
+          var sinceDay=Math.round(sinceMin/1440);
+          var since=sinceDay+' days ago';
+      }
+      return since;
 }
 
 
 
-function FindNext() {
-            var str = document.getElementById ("findField").value;
-            if (str == "") {
-                alert ("Please enter some text to search!");
-                return;
-            }
+// function FindNext() {
+//             var str = document.getElementById ("findField").value;
+//             if (str == "") {
+//                 alert ("Please enter some text to search!");
+//                 return;
+//             }
 
-            var supported = false;
-            var found = false;
-            if (window.find) {        // Firefox, Google Chrome, Safari
-                supported = true;
-                    // if some content is selected, the start position of the search 
-                    // will be the end position of the selection
-                found = window.find (str);
-            }
-            else {
-                if (document.selection && document.selection.createRange) { // Internet Explorer, Opera before version 10.5
-                    var textRange = document.selection.createRange ();
-                    if (textRange.findText) {   // Internet Explorer
-                        supported = true;
-                            // if some content is selected, the start position of the search 
-                            // will be the position after the start position of the selection
-                        if (textRange.text.length > 0) {
-                            textRange.collapse (true);
-                            textRange.move ("character", 1);
-                        }
+//             var supported = false;
+//             var found = false;
+//             if (window.find) {        // Firefox, Google Chrome, Safari
+//                 supported = true;
+//                     // if some content is selected, the start position of the search 
+//                     // will be the end position of the selection
+//                 found = window.find (str);
+//             }
+//             else {
+//                 if (document.selection && document.selection.createRange) { // Internet Explorer, Opera before version 10.5
+//                     var textRange = document.selection.createRange ();
+//                     if (textRange.findText) {   // Internet Explorer
+//                         supported = true;
+//                             // if some content is selected, the start position of the search 
+//                             // will be the position after the start position of the selection
+//                         if (textRange.text.length > 0) {
+//                             textRange.collapse (true);
+//                             textRange.move ("character", 1);
+//                         }
 
-                        found = textRange.findText (str);
-                        if (found) {
-                            textRange.select ();
-                        }
-                    }
-                }
-            }
+//                         found = textRange.findText (str);
+//                         if (found) {
+//                             textRange.select ();
+//                         }
+//                     }
+//                 }
+//             }
 
-            if (supported) {
-                if (!found) {
-                    alert ("The following text was not found:\n" + str);
-                }
-            }
-            else {
-                alert ("Your browser does not support this!");
-            }
-        }
+//             if (supported) {
+//                 if (!found) {
+//                     alert ("The following text was not found:\n" + str);
+//                 }
+//             }
+//             else {
+//                 alert ("Your browser does not support this!");
+//             }
+//         }

@@ -62,10 +62,7 @@
             <p id = "score">{{score}}</p>
           </div>
         </div>
-        <div row = "time">
-          <small id = "submitted">{{submitted}}</small>
-        </div>
-        <br>
+        <br><br>
 
         <div class="saymes">
             {{#if ismyrow}}
@@ -86,6 +83,11 @@
             <button class="waves-effect waves-light btn" id="decrement">
             <span class="glyphicon glyphicon-thumbs-down"></span>
             </button>
+        </div>
+        <div row = "time" style ="text-align: right">
+          <small id = "submitted">
+            {{submitted}}
+          </small>
         </div>
 
       </a> 
