@@ -4,7 +4,10 @@
 a:link { text-decoration: none;}
 a:hover { text-decoration: none;}
 .navbar-inner{ padding: 1em 0em 0.8em;}
-body{background-color: #f3f3f3;}
+body{
+  background-color: #f3f3f3;
+  padding-bottom: 70px;
+}
 *{
     font-family: 'Ubuntu', sans-serif;
 }
