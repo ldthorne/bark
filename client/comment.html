@@ -15,11 +15,14 @@
 {{else}}
 <p>No comments yet...</p>
 {{/if}}
-
-{{> commentForm}}
-
-<hr>
-{{> emojiTable}}
+{{#if currentUser}}
+  {{> commentForm}}
+  <hr>
+  {{> emojiTable}}
+{{else}}
+  <hr>
+  <h5 style="text-align:center">Please <a href="{{pathFor 'login'}}">log in</a> to make comment</h5>
+{{/if}}
 
 </template>
 
@@ -39,6 +42,9 @@
 
     <div class ="commentScore">
       <p style="font: 18px">{{score}}</p>
+    </div>
+    <div row = "time">
+     <small id = "submitted">{{submitted}}</small>
     </div>
     <br><br>
     <div class="saymes">

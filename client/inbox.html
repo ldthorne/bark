@@ -43,7 +43,11 @@
 		{{else}}
 			<h4 style="text-align:center">You need to log in to see messages</h4>
 			<hr>
-			{{> login}}
+			<div class="container">
+				<div class="postsSubmit">
+		            {{> atForm}}
+		        </div>
+		    </div>
 		{{/if}}
 	</div>
 
