@@ -250,7 +250,6 @@ function removePost(selectedId){
 }
 
 
-<<<<<<< HEAD
 function submittime(submitted){
 var tTime=new Date(submitted);
     var cTime=new Date();
