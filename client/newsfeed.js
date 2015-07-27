@@ -237,6 +237,9 @@ function checkFlags(selected){
 
 function removePost(selectedId){
   _.each(Comments.find({fromPost:selectedId}).fetch(), function(comment){
+    _.each(ComMessages.find().fetch(), function(commes){
+      ComMessages.remove(commes._id);
+    })
     Comments.remove(comment._id);
   }); 
   _.each(Messages.find({postId:selectedId}).fetch(), function(message){
