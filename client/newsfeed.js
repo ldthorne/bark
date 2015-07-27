@@ -39,11 +39,7 @@ Template.postInfo.events({
   'click #delete': function(){removePost(this._id);},
 
   'click #comment': function(){
-    if(Meteor.user()){
       Meteor.defer(function() {Router.go('comment');});
-    } else {
-      alert("You must be logged in to comment. Login and try again.");
-    }
   }
 
  
