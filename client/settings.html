@@ -1,18 +1,27 @@
 <template name = "settings">
-	<h4>In progress...</h4>
-
-	<p> Messaging </p>
-	<div class="switch">
-	    <label>
-	      Off
-	      <input type="checkbox" id="mesOnOff">
-	      <span class="lever"></span>
-	      On
-	    </label>
-  	</div>
-
-  	<br>
-
-  	<button id="deleteAccount" class="btn waves-effect waves-light">Delete Account</button>
+	<div class="container">
+		{{#if currentUser}}
+		<h4>In progress...</h4>
+		<p> Messaging </p>
+		<div class="switch">
+		    <label>
+		      Off
+		      <input type="checkbox" id="mesOnOff">
+		      <span class="lever"></span>
+		      On
+		    </label>
+	  	</div>
+	  	<br>
+	  	<button id="deleteAccount" class="btn waves-effect waves-light">Delete Account</button>
+	  	{{else}}
+	  		<h4 style="text-align:center">You have to log in to edit your settings</h4>
+	          <hr>
+	          <div class="container">
+	          	<div class="postsSubmit">
+	            {{> atForm}}
+	        	</div>
+	          </div>
+	  	{{/if}}
+	</div>
 
 </template>
