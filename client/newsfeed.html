@@ -46,27 +46,23 @@
   <div class="posts">
     <li class="list-group-item">
       <a class="postInfo" href="#">
-        <table style="width:100%">
-          <tr>
-            <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
-          </tr>
-          <tr>
-            <td>
-              {{#if ismyrow}} 
-                <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
-              {{/if}}
-              <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left">flag</i></button>
-
-            </td>
-            <td>
-              <p id="comment" >{{commentCount}} {{commentPlural}}</p>
-            </td>
-            <td>
-              <p id = "score">{{score}}</p>
-            </td>
-          </tr>
-        </table>
-        <br><br>
+          <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
+          <br>
+        <div class = "postInformation">
+          <div class="col-md-4" align="left">
+            {{#if ismyrow}} 
+              <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
+            {{/if}}
+            <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left" style="vertical-align: middle;">flag</i></button>
+          </div>
+          <div class="col-md-4" align="center">
+            <p id="comment" >{{commentCount}} {{commentPlural}}</p>
+          </div>
+          <div class="col-md-4" align="right">
+            <p id = "score">{{score}}</p>
+          </div>
+        </div>
+        <br>
         <div class="saymes">
             {{#if ismyrow}}
               <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
