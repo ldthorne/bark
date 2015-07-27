@@ -21,7 +21,9 @@ Meteor.publish("closePosts",function(position){
 		 location:{
 				$near:
 				{
-					$geometry: { type: "Point",  coordinates: [ -71.2586913, 42.3669788 ] },
+					$geometry: { 
+						type: "Point",  
+						coordinates: [ position.longitude, position.latitude ] },
 					$minDistance: 0,
 					$maxDistance: 5000
 				}
@@ -34,10 +36,10 @@ Meteor.publish("closePosts",function(position){
 	return closePosts;
 });
 
-var levels = [5,50000,500,5000,50000]; // distance in miles for each level
+var levels = [5,50,500,5000,50000]; // distance in miles for each level
 
 Meteor.publish("viewablePosts",function(level, position){
-	// console.log("published closePosts with p="+JSON.stringify(position));
+	console.log("published closePosts with p="+JSON.stringify(position));
 	var closePosts = Posts.find(
 		{level:level, 
 		 location:{
