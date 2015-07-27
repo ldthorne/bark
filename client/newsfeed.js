@@ -4,6 +4,12 @@ theVoice=null;
 audio = new Audio('audio/bark.wav');
 Session.set('postsSort', {submitted: -1});
 
+Template.newsfeed.rendered = function(){
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+};
+
 
 Template.newsfeed.helpers({
   posts: function() {
@@ -26,7 +32,7 @@ Template.postInfo.helpers({
     }
   },
   submitted:function(){
-console.log(this.submitted);
+// console.log(this.submitted);
     return submittime(this.submitted);
   }
 
@@ -168,25 +174,19 @@ Template.newsfeed.events({
       })
     },
 
-  'click #timeUp':function(){
+    'change #selectSort' : function(){
+      var val = $("#selectSort option:selected").text();
+      console.log(val);
+      if(val == "Newest"){
         Session.set('postsSort', {submitted: -1});
-               
-    },
-
-    'click #timeDown':function(){
+      } else if (val == "Oldest"){
         Session.set('postsSort', {submitted: 1});
-       
-    },
-    'click #voteUp':function(){
+      } else if (val == "Highest Score"){
         Session.set('postsSort', {score: -1});
-             
-    },
-
-    'click #voteDown':function(){
+      } else if (val == "Lowest Score"){
         Session.set('postsSort', {score: 1});
-        
+      }
     },
-
 });
 
 function checkVotes(selected){
