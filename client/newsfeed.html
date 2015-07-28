@@ -1,21 +1,24 @@
 
 <template name= "newsfeed">
 
-
+<!--
+<div align="center">
 <form>
 <p>Highlight keywords as you type: <input id="keywords" size="24"></p>
 </form>
+</div>
+-->
 
   <div class="posts">
     <div class="form-style">
       <div class="container">
         <ul class="list-group">
 
-          <h4>Live feed of what people are saying around you</h4>
+          <h5>Live feed of what people are saying around you</h5>
           <div class = "readAllPosts">
            <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
            </div>
-
+           <br><br><br>
           <div class="selector">
             <label>Sorting by:</label>
             <select id="selectSort">
@@ -26,7 +29,7 @@
               <option value="4" id="voteUp">Lowest Score</option>
             </select>
           </div>
-          <br><br><br>
+          <br><br>
 
           <hr>
 <!--           <div class = "newOld">
