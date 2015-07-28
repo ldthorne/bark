@@ -294,29 +294,29 @@ function startDictation(event) {
   //     };
   // }
 
-function readPosts(){
-    allPosts = Posts.find().fetch();
-    console.log(allPosts);
+// function readPosts(){
+//     allPosts = Posts.find().fetch();
+//     console.log(allPosts);
     
-    var posts = _.pluck(allPosts, 'post');
-    var postsId = _.pluck(allPosts, '_id')
-    var reversePosts = posts.reverse()
-    var reversePostsId = postsId.reverse()
-    var zipped = _.zip(reversePosts, reversePostsId)
-    _.each(zipped, function(pair){
-      // console.log(pair[0]);
-      // console.log(pair[1]);
-      Session.set("currentPost", pair[1])
-      console.log(Session.get("currentPost"));
-      var msg = new SpeechSynthesisUtterance(pair[0]);
-      msg.onend = function(){
-        playAudio();      
-      }      
-      window.speechSynthesis.speak(msg);
-    })
+//     var posts = _.pluck(allPosts, 'post');
+//     var postsId = _.pluck(allPosts, '_id')
+//     var reversePosts = posts.reverse()
+//     var reversePostsId = postsId.reverse()
+//     var zipped = _.zip(reversePosts, reversePostsId)
+//     _.each(zipped, function(pair){
+//       // console.log(pair[0]);
+//       // console.log(pair[1]);
+//       Session.set("currentPost", pair[1])
+//       console.log(Session.get("currentPost"));
+//       var msg = new SpeechSynthesisUtterance(pair[0]);
+//       msg.onend = function(){
+//         playAudio();      
+//       }      
+//       window.speechSynthesis.speak(msg);
+//     })
 
 
-}
+// }
 
 // function readPosts(){
 //     allPosts = Posts.find().fetch();

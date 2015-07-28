@@ -8,7 +8,8 @@ Meteor.methods({
       score : 0,
       submitted : new Date(),
       location : location,
-      owner: Meteor.userId()
+      owner: Meteor.userId(),
+      tag: ""
     });
   },
 

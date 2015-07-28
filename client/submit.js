@@ -1,3 +1,7 @@
+Session.set('voices',window.speechSynthesis.getVoices());
+voices = [];
+theVoice=null;
+
 Meteor.startup(function() {
     start = userLocation();
 });

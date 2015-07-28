@@ -51,11 +51,11 @@ a.postInfo:hover{
   margin: 5px 0px 25px;
 }
 
-.btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
+.btn i, .btn-medium i, .btn-floating i, .btn-large i, .btn-flat i {
   font-size: 1.3rem;
   line-height: inherit; }
 
-.btn, .btn-large {
+.btn, .btn-medium {
   text-decoration: none;
   color: #fff;
   background-color: #72bcd4;
@@ -182,9 +182,13 @@ text-align: right;
 }
 
 .readAllPosts{
-  text-align: center;
+  float: left;
 }
 
 .postInformation{
   max-height: 2em;
+}
+.selector{
+  width: 35%;
+  float:left;
 }
