@@ -15,17 +15,30 @@
           <div class = "readAllPosts">
            <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
            </div>
+
+          <div class="selector">
+            <label>Sorting by:</label>
+            <select id="selectSort">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="1" id="timeUp">Newest</option>
+              <option value="2" id="timeDown">Oldest</option>
+              <option value="3" id="voteUp">Highest Score</option>
+              <option value="4" id="voteUp">Lowest Score</option>
+            </select>
+          </div>
+          <br><br><br>
+
           <hr>
-          <div class = "newOld">
+<!--           <div class = "newOld">
             <button class="waves-effect waves-light btn" id="timeUp"><i class="material-icons left">keyboard_arrow_up</i>Newest</button>
             <button class="waves-effect waves-light btn" id="timeDown"><i class="material-icons left">keyboard_arrow_down</i>Oldest</button>
-          </div>
-          <br>
+          </div> -->
+<!--           <br>
 
           <div class = "hotNot">
             <button class="btn waves-effect waves-light" id="voteUp"><i class="material-icons left">favorite</i>Highest Score</button>
             <button class="btn waves-effect waves-light" id="voteDown"><i class="material-icons left">favorite_border</i>Lowest Score</button>
-          </div>
+          </div> -->
           <br><br>
 
           {{#each posts}}
@@ -35,9 +48,20 @@
 
       </div>
     </div>
-
-
   </div>
+  <footer>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">add</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating blue" id="micbutton"><i class="material-icons">mic</i></a></li>
+        <li><a class="btn-floating green" href="/inbox"><i class="material-icons">email</i></a></li>
+        <li><a class="btn-floating yellow darken-1" href="/submit"><i class="material-icons">mode_edit</i></a></li>
+
+      </ul>
+    </div>
+  </footer>
 </template>
 
 <template name="postInfo">

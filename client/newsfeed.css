@@ -182,9 +182,13 @@ text-align: right;
 }
 
 .readAllPosts{
-  text-align: center;
+  float: left;
 }
 
 .postInformation{
   max-height: 2em;
+}
+.selector{
+  width: 35%;
+  float:left;
 }
