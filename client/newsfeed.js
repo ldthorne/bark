@@ -26,7 +26,7 @@ Template.postInfo.helpers({
     }
   },
   submitted:function(){
-console.log(this.submitted);
+//console.log(this.submitted);
     return submittime(this.submitted);
   }
 
@@ -109,6 +109,8 @@ Template.newsfeed.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
+
+      //Meteor.call('upVote', )
       
     },
 

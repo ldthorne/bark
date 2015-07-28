@@ -20,19 +20,25 @@ Template.layout.rendered = function(){
 
 }
 
+var running = false;
+
 Template.layout.events({
 	// 'click #micbutton': function(event) {
 	// 	startMic(event);
 	// }
   'click #micbutton': function(event){
     console.log("starting dictation");
-    if ($('#speaker-turn').html()=="start") {
-      $('#speaker-turn').html('stop');
-      startDictation(event);
+    if (!running) {
+      running = true;
+      i = 0;
+      numbers= Posts.find({}, {limit: 3, sort: Session.get('postsSort')}).fetch();
+      sayitnow("what would you like me to do? I can read posts or navigate to a new page for you");
+      //sayitnow(numbers[i++].post);
+
     } else {
-      $('#speaker-turn').html('start');
       recognition.stop();
       recognizing=false;
+      running = false;
       /*
       var user_utterance = final_span.innerHTML;
       user_utterance = user_utterance.substring(0,user_utterance.indexOf(' --'));
@@ -47,27 +53,31 @@ Template.layout.events({
 
 })
 
-function say(text){
-  if (pauseTimeout){
-    console.log("clearing pause Timeout");
-    window.clearTimeout(pauseTimeout);
-    pauseTimeout = null;
-  }
-  recognition.onend = function(){console.log("recognition is stopped"); sayitnow(text);};
+function say(text, stop){
+  // if (pauseTimeout){
+  //   console.log("clearing pause Timeout");
+  //   window.clearTimeout(pauseTimeout);
+  //   pauseTimeout = null;
+  // }
+  recognition.onend = function(){console.log("recognition is stopped"); sayitnow(text, stop);};
   console.log("stopping recognition");
   recognition.stop();
 }
 
-var pauseTimeout = null;
+//var pauseTimeout = null;
 
-function sayitnow(text){
+function sayitnow(text, stop){
   console.log("starting to talk");
-  var msg = new SpeechSynthesisUtterance(text+".  Ready");
+
+  var msg = new SpeechSynthesisUtterance(text+". "+ (stop ? "goodbye":"ready"));
   msg.onend = function(event){
     console.log("speech over"+ "said '"+msg.text+"' .... starting recognition!"); 
     final_transcript = '';
-    recognition.start();
-    pauseTimeout = window.setTimeout(function(){handle_user_input("next")},5000);
+    if(!stop){
+      recognition.start();
+    }
+    
+    //pauseTimeout = window.setTimeout(function(){handle_user_input("next")},5000);
   };
   window.speechSynthesis.speak(msg);
 }
@@ -78,12 +88,13 @@ function handle_user_input(u){
   var responded = false;
   console.log("hui: "+u+" i="+i);
   u = u.toLowerCase();
-  if ((u.indexOf("next")>-1) || (u.indexOf("start")>-1)) {
+  if ((u.indexOf("next")>-1) || (u.indexOf("start")>-1) || (u.indexOf("read")>-1)) {
     if (i < numbers.length){
-      console.log("saying "+i+"th number");
-      say(numbers[i++]);
+      console.log("saying "+i+"th post");
+      say(numbers[i++].post);
     } else {
-      say("there are no more numbers")
+      say("there are no more posts", "stop");
+      return;
     };
 
     responded = true;
@@ -92,11 +103,29 @@ function handle_user_input(u){
     say("OK!  Resetting!");
     responded = true;
   } else if (u.indexOf("repeat")>-1){
-    say(numbers[i-1]);  
+    say(numbers[i-1].post);  
     responded = true;
+  } else if (u.indexOf("stop")>-1){
+    say("okay", "stop");
+  } else if (u.indexOf('navigate')>-1){
+    if(u.indexOf('submit')>-1 || u.indexOf('post')>-1){
+      recognition.stop();
+      Router.go('submit');
+    } else if(u.indexOf('newsfeed')>-1 || u.indexOf('home')>-1 || u.indexOf('news feed')>-1){
+      recognition.stop();
+      Router.go('newsfeed');
+    } else if(u.indexOf('messages')>-1 || u.indexOf('inbox')>-1 || u.indexOf('message')>-1){
+      recognition.stop();
+      Router.go('inbox');
+    }
+  } else if (u.indexOf('up vote')>-1 || u.indexOf('upvote')>-1){
+    console.log("score : "+numbers[i-1].score);
   }
+  // } else {
+  //   say("eh?");
+  // }
   
-}
+};
 
   // var final_transcript = '';
   // var recognizing = false;
@@ -132,14 +161,14 @@ if ('webkitSpeechRecognition' in window) {
       console.log("i="+i+" words="+words);
     var words = event.results[i][0].transcript;
     console.log("ready to handle input: '"+words+"'");
-    if (words) handle_user_input(words);
-    //handle_user_input(words);
-    if (words.includes("stop dictation")) {
-      recognition.stop();
-    } else if (words.includes("read it back")){
-      var msg = new SpeechSynthesisUtterance(words);
-      window.speechSynthesis.speak(msg);
-    }
+    // if (words) handle_user_input(words);
+    // //handle_user_input(words);
+    // if (words.includes("stop dictation")) {
+    //   recognition.stop();
+    // } else if (words.includes("read it back")){
+    //   var msg = new SpeechSynthesisUtterance(words);
+    //   window.speechSynthesis.speak(msg);
+    // }
         if (event.results[i].isFinal) {
           console.log("final result is |"+event.results[i][0].transcript.trim()+"|");
           final_transcript += 
@@ -151,11 +180,11 @@ if ('webkitSpeechRecognition' in window) {
         }
       }
       //final_transcript = capitalize(final_transcript);
-    //console.log("ready to handle input: '"+final_transcript+"'");
-    //handle_user_input(final_transcript);
+    console.log("ready to handle input: '"+final_transcript+"'");
+    handle_user_input(final_transcript);
     
-      final_span.innerHTML = linebreak(final_transcript);
-      interim_span.innerHTML = linebreak(interim_transcript);
+      //final_span.innerHTML = linebreak(final_transcript);
+      //interim_span.innerHTML = linebreak(interim_transcript);
     
     
     };
@@ -174,16 +203,6 @@ function capitalize(s) {
 
 function startDictation(event) {
   console.log("starting dictation");
-
-  if (recognizing) {
-    //recognition.stop();
-    return;
-  }
-  final_transcript = '';
-  recognition.lang = 'en-US';
-  
-  final_span.innerHTML = '';
-  interim_span.innerHTML = '';
   recognition.start();
 }
 
