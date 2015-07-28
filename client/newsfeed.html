@@ -2,11 +2,9 @@
 <template name= "newsfeed">
 
 
-<!-- 
-<input type="text" id="findInput" size="20" />
-    <button onclick="FindNext();">Find</button>
-
- -->
+<form>
+<p>Highlight keywords as you type: <input id="keywords" size="24"></p>
+</form>
 
   <div class="posts">
     <div class="form-style">
@@ -55,13 +53,14 @@
             {{/if}}
             <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left" style="vertical-align: middle;">flag</i></button>
           </div>
-          <div class="col-md-4" align="center">
-            <p id="comment" >{{commentCount}} {{commentPlural}}</p>
-          </div>
           <div class="col-md-4" align="right">
             <p id = "score">{{score}}</p>
           </div>
+          <div class="col-md-4" align="center">
+            <p id="comment" >{{commentCount}} {{commentPlural}}</p>
+          </div>
         </div>
+        <br>
         <br><br>
 
         <div class="saymes">
