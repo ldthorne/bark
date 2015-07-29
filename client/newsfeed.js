@@ -64,6 +64,30 @@ function playAudio(){
 var clicked = false;
 
 Template.newsfeed.events({
+  'click #submitButton': function(event) {
+    event.preventDefault();
+    var search = searchInput.value; // get post vote value
+    console.log(search);
+    var location = userLocation();
+
+    // check if the value is empty
+    if (search == "") {
+      alert("You can’t search a blank space!");
+    } else {
+      if (recognizing) {
+        recognition.stop();
+      }
+      console.log("my location = "+JSON.stringify(location))
+      Meteor.call('searchInsert', search, {
+        "type": "Point",
+        "coordinates": [
+          Session.get("lng"),
+          Session.get("lat")
+          ]
+      });
+      Router.go('newsfeed');
+    }
+  },
   'click #micbutton': function(event){
     clicked = !clicked;
     console.log("clicked")
@@ -460,49 +484,26 @@ function submittime(submitted){
       return since;
 }
 
+function search(){
+  var s = document.querySelector('input[type="search"]'),
+    p = document.querySelector('p'),
+    find = function(){
+        var words = p.innerText.split(' '),
+            i = words.length,
+            word = '';
 
+        while(--i) {
+            word = words[i];
+            if(word.toLowerCase() == s.value.toLowerCase()){
+                words[i] = '<span class="highlight">' + word + "</span>";
+            }
+            else{
+            }   
+        }
+        p.innerHTML = words.join(' ');
+    }
 
-// function FindNext() {
-//             var str = document.getElementById ("findField").value;
-//             if (str == "") {
-//                 alert ("Please enter some text to search!");
-//                 return;
-//             }
+s.addEventListener('keydown', find , false);
+s.addEventListener('keyup', find , false);
+}
 
-//             var supported = false;
-//             var found = false;
-//             if (window.find) {        // Firefox, Google Chrome, Safari
-//                 supported = true;
-//                     // if some content is selected, the start position of the search 
-//                     // will be the end position of the selection
-//                 found = window.find (str);
-//             }
-//             else {
-//                 if (document.selection && document.selection.createRange) { // Internet Explorer, Opera before version 10.5
-//                     var textRange = document.selection.createRange ();
-//                     if (textRange.findText) {   // Internet Explorer
-//                         supported = true;
-//                             // if some content is selected, the start position of the search 
-//                             // will be the position after the start position of the selection
-//                         if (textRange.text.length > 0) {
-//                             textRange.collapse (true);
-//                             textRange.move ("character", 1);
-//                         }
-
-//                         found = textRange.findText (str);
-//                         if (found) {
-//                             textRange.select ();
-//                         }
-//                     }
-//                 }
-//             }
-
-//             if (supported) {
-//                 if (!found) {
-//                     alert ("The following text was not found:\n" + str);
-//                 }
-//             }
-//             else {
-//                 alert ("Your browser does not support this!");
-//             }
-//         }

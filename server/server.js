@@ -8,8 +8,7 @@ Meteor.methods({
       score : 0,
       submitted : new Date(),
       location : location,
-      owner: Meteor.userId(),
-      tag: ""
+      owner: Meteor.userId()
     });
   },
 
@@ -23,7 +22,6 @@ Meteor.methods({
       lastUpdate: new Date(),
       messageArray: [{message:text, originalPoster:false, createdAt: new Date()}]
     });
-
   },
 
   messageReply: function(text, messageId, isOrig){
@@ -42,7 +40,6 @@ Meteor.methods({
       lastUpdate: new Date(),
       messageArray: [{message:text, originalPoster:false, createdAt: new Date()}]
     });
-
   },
 
   comMessageReply: function(text, comMessageId, isOrig){

@@ -1,13 +1,12 @@
 
 <template name= "newsfeed">
 
-
 <!--
-<input type="text" id="findInput" size="20" />
-    <button onclick="FindNext();">Find</button>
-
- -->
-
+<div row="searchRow">
+<input type="search" placeholder="Search posts here" id="searchInput" name="search"/>
+<button class="btn waves-effect waves-light" type="submit" id="submitButton" name="action">Search</button>
+</div>
+-->
   <div class="posts">
     <div class="form-style">
       <div class="container">
@@ -27,7 +26,6 @@
               <option value="4" id="voteUp">Lowest Score</option>
             </select>
           </div>
-          <br><br><br>
 
           <hr>
 <!--           <div class = "newOld">
@@ -40,7 +38,7 @@
             <button class="btn waves-effect waves-light" id="voteUp"><i class="material-icons left">favorite</i>Highest Score</button>
             <button class="btn waves-effect waves-light" id="voteDown"><i class="material-icons left">favorite_border</i>Lowest Score</button>
           </div> -->
-          <br><br>
+          
 
           {{#each posts}}
             {{> postInfo}}
@@ -84,8 +82,9 @@
           <div class="col-md-4" align="right">
             <p id = "score">{{score}}</p>
           </div>
+          <br><br><br>
         </div>
-        <br><br>
+        <br><br><br>
 
         <div class="saymes">
             {{#if ismyrow}}
