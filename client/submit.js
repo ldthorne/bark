@@ -7,10 +7,10 @@ Meteor.startup(function() {
 });
 
 Template.submit.events({
-  'click #submitButton': function(event) {
+  'submit .postsSubmitForm': function(event) {
     event.preventDefault();
-    var post = postInput.value; // get post vote value
-    console.log(post);
+    var post = event.target.post.value; // get post vote value
+    //console.log(post);
     var location = userLocation();
 
     // check if the value is empty
@@ -20,7 +20,7 @@ Template.submit.events({
       if (recognizing) {
         recognition.stop();
       }
-      console.log("my location = "+JSON.stringify(location))
+      //console.log("my location = "+JSON.stringify(location))
       Meteor.call('postInsert', post, {
         "type": "Point",
         "coordinates": [
@@ -125,6 +125,7 @@ ulfun = userLocation;
           }
         }
         //final_transcript = capitalize(final_transcript);
+       
        document.getElementById("post").value = linebreak(final_transcript);
        document.getElementById("post").value = linebreak(interim_transcript);
         
