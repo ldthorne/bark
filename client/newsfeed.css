@@ -1,4 +1,7 @@
-
+.postInformation .col-md-4{
+  padding-right: 0px;
+  padding-left: 0px;
+}
 .navbar { background-color: white; }
 .brand { font-size: 2em;}
 a:link { text-decoration: none;}

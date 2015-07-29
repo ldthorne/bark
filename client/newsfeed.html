@@ -5,11 +5,10 @@
 <div row="searchRow">
 <input type="search" placeholder="Search posts here" id="searchInput" name="search"/>
 <button class="btn waves-effect waves-light" type="submit" id="submitButton" name="action">Search</button>
-</div>
--->
+</div> -->
+
   <div class="posts">
     <div class="form-style">
-      <div class="container">
         <ul class="list-group">
           <div class="title">
             <h4>See what's happening around you!</h4>
@@ -55,7 +54,6 @@
           </div>
         </ul>
 
-      </div>
     </div>
   </div>
   <footer>
@@ -80,16 +78,16 @@
             <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
             <br>
           <div class = "postInformation">
-            <div class="col-md-4 col-xs-4" id="flagDelete" align="left">
+            <div class="col-md-4 col-xs-3" id="flagDelete" align="left">
               {{#if ismyrow}}
                 <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
               {{/if}}
               <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left" style="vertical-align: middle;">flag</i></button>
             </div>
-            <div class="col-md-4 col-xs-4" align="center">
+            <div class="col-md-4 col-xs-6" align="center">
               <p id="comment" >{{commentCount}} {{commentPlural}}</p>
             </div>
-            <div class="col-md-4 col-xs-4" align="right">
+            <div class="col-md-4 col-xs-3" align="right">
               <p id = "score">{{score}}</p>
             </div>
           </div>
