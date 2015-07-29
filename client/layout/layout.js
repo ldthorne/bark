@@ -27,7 +27,7 @@ Template.layout.events({
 	// 	startMic(event);
 	// }
   'click #micbutton': function(event){
-    console.log("starting dictation");
+    console.log("starting dictation in layout");
     if (!running) {
       running = true;
       i = 0;
@@ -118,8 +118,19 @@ function handle_user_input(u){
       recognition.stop();
       Router.go('inbox');
     }
-  } else if (u.indexOf('up vote')>-1 || u.indexOf('upvote')>-1){
-    console.log("score : "+numbers[i-1].score);
+  } else if (u.indexOf('up vote')>-1 || u.indexOf('upvote')>-1 || u.indexOf('like')>-1){
+    // console.log("score : "+numbers[i-1].score);
+    Meteor.call('increase', numbers[i-1]);
+    say("upvote recorded");
+    //checkVotes(numbers[i-1]);
+  } else if (u.indexOf('down vote')>-1 || u.indexOf('downvote')>-1 || u.indexOf('dislike')>-1){
+    // console.log("score : "+numbers[i-1].score);
+    Meteor.call('decrease', numbers[i-1]);
+    say("downvote recorded");
+    //checkVotes(numbers[i-1]);
+  } else if (u.indexOf('comment')>-1 || u.indexOf('comments'>-1)){
+    Session.set('post', numbers[i-1]._id);
+    Router.go('comment');
   }
   // } else {
   //   say("eh?");
