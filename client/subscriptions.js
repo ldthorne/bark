@@ -17,7 +17,7 @@ function currentLocation() {
 	watcher = navigator.geolocation.watchPosition(function(position){
 		currentPosition = position;
 	  	var current = new Point(position.coords.latitude,position.coords.longitude);
-		Session.set("currentLocation",position.coords); 
+		Session.set("currentLocation",position.coords);
 		Session.set("theLat",position.coords.latitude);
 		Session.set("theLng",position.coords.longitude);
 		// console.log("in currentlocation: lat="+ current.x+", lng="+current.y);
@@ -46,9 +46,7 @@ Deps.autorun(function(){
 	Meteor.subscribe('viewablePosts', 2, {latitude:lat,longitude:lng});
 	Meteor.subscribe('viewablePosts', 3, {latitude:lat,longitude:lng});
 	Meteor.subscribe('viewablePosts', 4, {latitude:lat,longitude:lng});
+	Meteor.subscribe("myPosts");
 	// console.log("in Autorun: changed position to "+ JSON.stringify(position));
 	// _.each(Posts.find().fetch(),function(x){console.dir(x);})
 })
-
-
-
