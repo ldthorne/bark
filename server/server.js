@@ -92,6 +92,56 @@ Meteor.methods({
           Posts.remove(post._id);
       });
       Meteor.users.remove(Meteor.userId());
+  },
+
+    increase: function(selectedAnime){
+    if(_.contains(selectedAnime.voted, Meteor.userId()) !== -1) {
+          if(_.contains(selectedAnime.upVoted, Meteor.userId()) !== -1){
+            //console.log("up vote & vote removed");
+            var postId = selectedAnime._id;
+            Posts.update(postId, {$inc: {score: -1}});
+            Posts.update(postId, {$pull: {voted: Meteor.userId()}});
+            Posts.update(postId, {$pull: {upVoted: Meteor.userId()}});
+          } else {
+            //console.log("up voted; down vote removed");
+             var postId = selectedAnime._id;
+            Posts.update(postId, {$inc: {score: 2}});
+            Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
+            Posts.update(postId, {$pull: {downVoted: Meteor.userId()}});
+          }
+        } else {
+          //console.log("up voted & voted");
+          var postId = selectedAnime._id;
+          Posts.update(postId, {$inc: {score: 1}});
+          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
+          Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
+        }
+  },
+
+  decrease: function(selectedAnime){
+
+    if(_.contains(selectedAnime.voted, Meteor.userId()) !== -1) {
+        if(_.contains(selectedAnime.downVoted, Meteor.userId()) !== -1){
+          //console.log("down vote & vote removed");
+          var postId = selectedAnime._id;
+          Posts.update(postId, {$inc: {score: 1}});
+          Posts.update(postId, {$pull: {voted: Meteor.userId()}});
+          Posts.update(postId, {$pull: {downVoted: Meteor.userId()}});
+        } else {
+          //console.log("down voted; up vote removed");
+          var postId = selectedAnime._id;
+          Posts.update(postId, {$inc: {score: -2}});
+          Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
+          Posts.update(postId, {$pull: {upVoted: Meteor.userId()}});
+        }
+      } else {
+        //console.log("down voted & voted");
+        var postId = selectedAnime._id;
+        Posts.update(postId, {$inc: {score: -1}});
+        Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
+        Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
+      } 
+
   }
 
 });

@@ -142,27 +142,7 @@ Template.newsfeed.events({
     'click #increment': function () {
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
-        if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
-          if($.inArray(Meteor.userId(), selectedAnime.upVoted) !== -1){
-            //console.log("up vote & vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: -1}});
-            Posts.update(postId, {$pull: {voted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {upVoted: Meteor.userId()}});
-          } else {
-            //console.log("up voted; down vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: 2}});
-            Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {downVoted: Meteor.userId()}});
-          }
-        } else {
-          //console.log("up voted & voted");
-          var postId = Session.get('post');
-          Posts.update(postId, {$inc: {score: 1}});
-          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
-          Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
-        }
+        Meteor.call('increase');
         checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
