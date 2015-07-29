@@ -6,7 +6,14 @@ Session.set('postsSort', {submitted: -1});
 
 Template.newsfeed.rendered = function(){
   $(document).ready(function() {
-    $('select').material_select();
+    $(".dropdown").dropdown({
+      hover:false,
+      belowOrigin: true
+    });
+
+    $('select').material_select({
+      belowOrigin: true
+    });
   });
   putPosts();
 
@@ -47,14 +54,14 @@ Template.postInfo.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-  
+
   'click #delete': function(){removePost(this._id);},
 
   'click #comment': function(){
       Meteor.defer(function() {Router.go('comment');});
   }
 
- 
+
 });
 
 
@@ -88,9 +95,10 @@ Template.newsfeed.events({
       Router.go('newsfeed');
     }
   },
-  'click #micbutton': function(event){
+  'click #notmicbutton': function(event){
     clicked = !clicked;
-    console.log("clicked")
+    console.log("clicked in newsfeed")
+
 
     _.each(postArray, function(post){
       console.log(post.post);
@@ -117,7 +125,7 @@ Template.newsfeed.events({
     'click': function(){
       var postId = this._id;
       Session.set('post', postId);
-      //checkVotes(Posts.findOne({_id: postId})); 
+      //checkVotes(Posts.findOne({_id: postId}));
     },
 
     'click #flag': function(){
@@ -133,75 +141,35 @@ Template.newsfeed.events({
           }
         checkFlags(selectedPost)
         } else{
-          alert("You've already flagged this post.")  
+          alert("You've already flagged this post.")
         }
       }else{
         alert("You must log in to vote. Log in and try again.");
       }
     },
     'click #increment': function () {
+      console.log("incrementing");
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
-        if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
-          if($.inArray(Meteor.userId(), selectedAnime.upVoted) !== -1){
-            //console.log("up vote & vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: -1}});
-            Posts.update(postId, {$pull: {voted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {upVoted: Meteor.userId()}});
-          } else {
-            //console.log("up voted; down vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: 2}});
-            Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {downVoted: Meteor.userId()}});
-          }
-        } else {
-          //console.log("up voted & voted");
-          var postId = Session.get('post');
-          Posts.update(postId, {$inc: {score: 1}});
-          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
-          Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
-        }
-        checkVotes(selectedAnime);
+        console.log("about to meteor call");
+        Meteor.call('increase', selectedAnime);
+        //checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
 
-      //Meteor.call('upVote', )
-      
     },
 
     'click #decrement': function(){
 
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
-        if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
-          if($.inArray(Meteor.userId(), selectedAnime.downVoted) !== -1){
-            //console.log("down vote & vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: 1}});
-            Posts.update(postId, {$pull: {voted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {downVoted: Meteor.userId()}});
-          } else {
-            //console.log("down voted; up vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: -2}});
-            Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {upVoted: Meteor.userId()}});
-          }
-        } else {
-          //console.log("down voted & voted");
-          var postId =Session.get('post');
-          Posts.update(postId, {$inc: {score: -1}});
-          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
-          Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
-        } 
-        checkVotes(selectedAnime);
+        Meteor.call('decrease', selectedAnime);
+        //checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
   },
 
   'click #messageButton': function(){
@@ -214,23 +182,25 @@ Template.newsfeed.events({
 
    'click #readAll': function(){
       allPosts = Posts.find().fetch();
+      console.log(allPosts);
+
       //console.log(allPosts);
-      
+
       var posts = _.pluck(allPosts, 'post');
       var reversePosts = posts.reverse()
 
       _.each(reversePosts, function(post){
         var msg = new SpeechSynthesisUtterance(post);
         msg.onend = function(){
-          playAudio();      
-        }      
+          playAudio();
+        }
         window.speechSynthesis.speak(msg);
       })
     },
 
-    'change #selectSort' : function(){
-      var val = $("#selectSort option:selected").text();
-      //console.log(val);
+    'change #dropdownSelector' : function(){
+      var val = $("#dropdownSelector option:selected").text();
+      console.log(val);
       if(val == "Newest"){
         Session.set('postsSort', {submitted: -1});
       } else if (val == "Oldest"){
@@ -259,7 +229,7 @@ var pauseTimeout = null;
   console.log("\n\nSPEAKING: "+text+"\n\n");
   var msg = new SpeechSynthesisUtterance(text+".  Ready");
   msg.onend = function(event){
-    console.log("speech over"+ "said '"+msg.text+"'\n\n RECOGNIZING\n\n"); 
+    console.log("speech over"+ "said '"+msg.text+"'\n\n RECOGNIZING\n\n");
     final_transcript = '';
     recognition.start();
     //pauseTimeout = window.setTimeout(function(){handle_user_input("next")},5000);
@@ -287,10 +257,10 @@ function handle_user_input(u){
     say("OK!  Resetting!");
     responded = true;
   } else if (u.indexOf("repeat")>-1){
-    say(numbers[i-1]);  
+    say(numbers[i-1]);
     responded = true;
   }
-  
+
 }
 
 var final_transcript = '';
@@ -333,7 +303,7 @@ if ('webkitSpeechRecognition' in window) {
     //handle_user_input(words);
         if (event.results[i].isFinal) {
           console.log("    onResult: final result is |"+event.results[i][0].transcript.trim()+"|");
-          final_transcript += 
+          final_transcript +=
       capitalize(event.results[i][0].transcript.trim()) +" -- " + Math.round(100*event.results[i][0].confidence)+"%\n";
       console.log('    onResult: final events.results[i][0].transcript = '+ JSON.stringify(event.results[i][0].transcript));
         } else {
@@ -344,11 +314,11 @@ if ('webkitSpeechRecognition' in window) {
       //final_transcript = capitalize(final_transcript);
     console.log("ready to handle input: '"+final_transcript+"'");
     handle_user_input(final_transcript);
-    
+
       final_span.innerHTML = linebreak(final_transcript);
       interim_span.innerHTML = linebreak(interim_transcript);
-    
-    
+
+
     };
 }
 
@@ -373,7 +343,7 @@ function startDictation(event) {
   }
   final_transcript = '';
   recognition.lang = 'en-US';
-  
+
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
   recognition.start();
@@ -431,7 +401,7 @@ function removePost(selectedId){
       ComMessages.remove(commes._id);
     })
     Comments.remove(comment._id);
-  }); 
+  });
   _.each(Messages.find({postId:selectedId}).fetch(), function(message){
     Messages.remove(message._id)
   });
@@ -498,7 +468,7 @@ function search(){
                 words[i] = '<span class="highlight">' + word + "</span>";
             }
             else{
-            }   
+            }
         }
         p.innerHTML = words.join(' ');
     }
@@ -506,4 +476,3 @@ function search(){
 s.addEventListener('keydown', find , false);
 s.addEventListener('keyup', find , false);
 }
-

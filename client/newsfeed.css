@@ -1,9 +1,17 @@
-
+.postInformation .col-md-4{
+  padding-right: 0px;
+  padding-left: 0px;
+}
 .navbar { background-color: white; }
 .brand { font-size: 2em;}
 a:link { text-decoration: none;}
 a:hover { text-decoration: none;}
 .navbar-inner{ padding: 1em 0em 0.8em;}
+@media (min-width: 1200px) {
+  .container{
+    max-width: 970px;
+  }
+}
 body{
   background-color: #f3f3f3;
   padding-bottom: 70px;
@@ -16,6 +24,10 @@ p{margin: 0;}
 	font-size: 18px;
 	color: #534540;
 	font-weight: 50;
+}
+
+.title{
+  text-align: center;
 }
 a.postInfo {
   color: #000;
@@ -131,6 +143,11 @@ button.waves-effect.waves-light {
   width: auto;
 }
 
+#dropdownSelector {
+  background-color: #A5A6A7;
+  text-align: center;
+}
+
 
 #delete {
     background-color: #FFF;
@@ -184,19 +201,28 @@ text-align: right;
 }
 
 .readAllPosts{
-  text-align: center
+  text-align:center;
 }
+
 
 .postInformation{
   max-height: 2em;
 }
+.postInformation div{
+  display: inline-block;
+}
+
+
+.flagDelete{
+  padding-left: 0px;
+  margin-left: 0px;
+}
 #container {
-    margin: auto;
     text-align:center;
-    width: 35%;
 
 }
-#selectSort{
+.selectSort{
+  text-align: center;
 }
 
 #container * {

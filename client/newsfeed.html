@@ -6,24 +6,35 @@
 <input type="search" placeholder="Search posts here" id="searchInput" name="search"/>
 <button class="btn waves-effect waves-light" type="submit" id="submitButton" name="action">Search</button>
 </div>
+
+</div>
+
+
   <div class="posts">
     <div class="form-style">
-      <div class="container">
         <ul class="list-group">
+          <div class="title">
+            <h4>See what's happening around you!</h4>
+          </div>
+          <br>
 
-          <h4>See what's happening around you!</h4>
-          <div class = "readAllPosts">
-           <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
-           </div>
-           <br>
-          <div id="container">
-            <select name="selectSort" id="selectSort">
-              <option value="" disabled selected>Sorting by</option>
-              <option value="1" id="timeUp">Newest</option>
-              <option value="2" id="timeDown">Oldest</option>
-              <option value="3" id="voteUp">Highest Score</option>
-              <option value="4" id="voteUp">Lowest Score</option>
-            </select>
+          <div class = "readAndDrop">
+            <div class = "readAllPosts">
+              <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
+            </div>
+            <br>
+            <div id="container">
+              <a class='dropdown btn' id="dropdownSelector" href='#' data-activates='dropdownButton'>Sort by:</a>
+              <ul id='dropdownButton' class='dropdown-content'>
+                <li id="timeUp"><a>Newest</a></li>
+                <li class="divider"></li>
+                <li id="timeDown"><a>Oldest</a></li>
+                <li class="divider"></li>
+                <li id="voteUp"><a>Highest Score</a></li>
+                <li class="divider"></li>
+                <li id="voteDown"><a>Lowest Score</a></li>
+              </ul>
+            </div>
           </div>
           <br>
 
@@ -40,13 +51,13 @@
           </div> -->
 
           <br>
-
-          {{#each posts}}
-            {{> postInfo}}
-          {{/each}}
+          <div class="collection">
+            {{#each posts}}
+              {{> postInfo}}
+            {{/each}}
+          </div>
         </ul>
 
-      </div>
     </div>
   </div>
   <footer>
@@ -65,55 +76,53 @@
 </template>
 
 <template name="postInfo">
-  <div class="posts">
-    <li class="list-group-item">
-      <a class="postInfo" href="#">
-          <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
-          <br>
-        <div class = "postInformation">
-          <div class="col-md-4" align="left">
-            {{#if ismyrow}}
-              <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
-            {{/if}}
-            <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left" style="vertical-align: middle;">flag</i></button>
+  <ul class="collection-item">
+    <div class="posts">
+        <a class="postInfo" href="#">
+            <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
+            <br>
+          <div class = "postInformation">
+            <div class="col-md-4 col-xs-3" id="flagDelete" align="left">
+              {{#if ismyrow}}
+                <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
+              {{/if}}
+              <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left" style="vertical-align: middle;">flag</i></button>
+            </div>
+            <div class="col-md-4 col-xs-6" align="center">
+              <p id="comment" >{{commentCount}} {{commentPlural}}</p>
+            </div>
+            <div class="col-md-4 col-xs-3" align="right">
+              <p id = "score">{{score}}</p>
+            </div>
           </div>
-          <div class="col-md-4" align="center">
-            <p id="comment" >{{commentCount}} {{commentPlural}}</p>
+          <br><br>
+          <div class="saymes">
+              {{#if ismyrow}}
+                <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
+                <span class="glyphicon glyphicon-envelope"></span>
+                </button>
+              {{else}}
+                <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+                <span class="glyphicon glyphicon-envelope"></span>
+                </button>
+              {{/if}}
+              <button class="waves-effect waves-light btn" id="say">Say</button>
           </div>
-          <div class="col-md-4" align="right">
-            <p id = "score">{{score}}</p>
-          </div>
-          <br><br><br>
-        </div>
-        <br><br><br>
-
-        <div class="saymes">
-            {{#if ismyrow}}
-              <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
-              <span class="glyphicon glyphicon-envelope"></span>
+          <div class="votebut">
+              <button class="waves-effect waves-light btn" id="increment">
+              <span class="glyphicon glyphicon-thumbs-up"></span>
               </button>
-            {{else}}
-              <button class= "btn waves-effect waves-light" id="messageButton" align="center">
-              <span class="glyphicon glyphicon-envelope"></span>
+              <button class="waves-effect waves-light btn" id="decrement">
+              <span class="glyphicon glyphicon-thumbs-down"></span>
               </button>
-            {{/if}}
-            <button class="waves-effect waves-light btn" id="say">Say</button>
-        </div>
-        <div class="votebut">
-            <button class="waves-effect waves-light btn" id="increment">
-            <span class="glyphicon glyphicon-thumbs-up"></span>
-            </button>
-            <button class="waves-effect waves-light btn" id="decrement">
-            <span class="glyphicon glyphicon-thumbs-down"></span>
-            </button>
-        </div>
-        <div row = "time" style ="text-align: right">
-          <small id = "submitted">
-            {{submitted}}
-          </small>
-        </div>
+          </div>
+          <div row = "time" style ="text-align: right">
+            <small id = "submitted">
+              {{submitted}}
+            </small>
+          </div>
 
-      </a>
-    </li>
-  </div>
+        </a>
+      </div>
+    </ul>
 </template>

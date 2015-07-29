@@ -1,5 +1,7 @@
 Meteor.startup(function() {
 	
+	 Posts._ensureIndex({ "location": "2dsphere"});
+	
 	// if (Posts.find().count()==0){
 		
 

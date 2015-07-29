@@ -13,7 +13,7 @@ Meteor.publish("theReceivedMessages", function(){
 });
 
 Meteor.publish("myPosts",function(){
-	return Posts.find({owner:Meteor.userId()})
+	return Posts.find({owner:this.userId})
 });
 
 Meteor.publish("closePosts",function(position){
