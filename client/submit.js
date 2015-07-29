@@ -1,6 +1,3 @@
-Session.set('voices',window.speechSynthesis.getVoices());
-voices = [];
-theVoice=null;
 
 Meteor.startup(function() {
     start = userLocation();
@@ -87,6 +84,11 @@ function userLocation() {
     return Session.get("myLocation");
 
 }
+
+Session.set('voices',window.speechSynthesis.getVoices());
+voices = [];
+theVoice=null;
+
 
 ulfun = userLocation;
 
