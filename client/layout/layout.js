@@ -137,7 +137,7 @@ var numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "
 var position = 0;
 
 if ('webkitSpeechRecognition' in window) {
-  console.log("webkit is available!");
+  //console.log("webkit is available!");
   var recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;

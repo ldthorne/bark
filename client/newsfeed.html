@@ -12,7 +12,7 @@
       <div class="container">
         <ul class="list-group">
 
-          <h4>Live feed of what people are saying around you</h4>
+          <h4>See what's happening around you!</h4>
           <div class = "readAllPosts">
            <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
            </div>
@@ -26,6 +26,7 @@
               <option value="4" id="voteUp">Lowest Score</option>
             </select>
           </div>
+          <br><br>
 
           <hr>
 <!--           <div class = "newOld">
@@ -38,7 +39,8 @@
             <button class="btn waves-effect waves-light" id="voteUp"><i class="material-icons left">favorite</i>Highest Score</button>
             <button class="btn waves-effect waves-light" id="voteDown"><i class="material-icons left">favorite_border</i>Lowest Score</button>
           </div> -->
-          
+
+          <br>
 
           {{#each posts}}
             {{> postInfo}}

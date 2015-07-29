@@ -12,17 +12,19 @@ Meteor.publish("theReceivedMessages", function(){
 	return Messages.find({ownerId: currentUserId});
 });
 
-
+Meteor.publish("myPosts",function(){
+	return Posts.find({owner:Meteor.userId()})
+});
 
 Meteor.publish("closePosts",function(position){
 	// console.log("published closePosts with p="+JSON.stringify(position));
 	var closePosts = Posts.find(
-		{level:0, 
+		{level:0,
 		 location:{
 				$near:
 				{
-					$geometry: { 
-						type: "Point",  
+					$geometry: {
+						type: "Point",
 						coordinates: [ position.longitude, position.latitude ] },
 					$minDistance: 0,
 					$maxDistance: 5000
@@ -41,7 +43,7 @@ var levels = [5,50,500,5000,50000]; // distance in miles for each level
 Meteor.publish("viewablePosts",function(level, position){
 	// console.log("published closePosts with p="+JSON.stringify(position));
 	var closePosts = Posts.find(
-		{level:level, 
+		{level:level,
 		 location:{
 				$near:
 				{
@@ -63,7 +65,7 @@ Meteor.publish("farPosts",function(){
 	return Posts.find({level:1});
 });
 
- 
+
 
 Meteor.publish("theSentComMessages",function(){
 	var currentUserId = this.userId;
@@ -78,4 +80,3 @@ Meteor.publish("theReceivedComMessages", function(){
 
 
 Meteor.publish("theEmojis", function(){return Emojis.find();});
-
