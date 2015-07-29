@@ -99,7 +99,7 @@ Template.newsfeed.events({
     'click #flag': function(){
       if(Meteor.user()) {
         var selectedPost = Posts.findOne({_id:this._id});
-        console.log($.inArray(Meteor.userId(), selectedPost.hasFlagged));
+        //console.log($.inArray(Meteor.userId(), selectedPost.hasFlagged));
         if($.inArray(Meteor.userId(), selectedPost.hasFlagged) == -1){
           var r = confirm('This cannot be undone. Are you sure you want to flag the post?');
           if(r){
@@ -190,7 +190,7 @@ Template.newsfeed.events({
 
    'click #readAll': function(){
       allPosts = Posts.find().fetch();
-      console.log(allPosts);
+      //console.log(allPosts);
       
       var posts = _.pluck(allPosts, 'post');
       var reversePosts = posts.reverse()
@@ -206,7 +206,7 @@ Template.newsfeed.events({
 
     'change #selectSort' : function(){
       var val = $("#selectSort option:selected").text();
-      console.log(val);
+      //console.log(val);
       if(val == "Newest"){
         Session.set('postsSort', {submitted: -1});
       } else if (val == "Oldest"){
@@ -274,14 +274,14 @@ var recognizing = false;
 
 function putPosts(){
   allPosts = Posts.find().fetch();
-  console.log(allPosts);
+  //console.log(allPosts);
 }
 
 
 var position = 0;
 
 if ('webkitSpeechRecognition' in window) {
-  console.log("webkit is available!");
+  //console.log("webkit is available!");
   var recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
