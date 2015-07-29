@@ -20,7 +20,9 @@
 {{#if currentUser}}
   {{> commentForm}}
   <hr>
-  {{> emojiTable}}
+  <div class="emojis">
+    {{> emojiTable}}
+  </div>
 {{else}}
   <hr>
   <h5 style="text-align:center">Please <a href="{{pathFor 'login'}}">log in</a> to make comment</h5>
