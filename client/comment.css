@@ -22,3 +22,12 @@ p{
 .commentScore{
 	text-align: right;
 }
+.emojis {
+  display: none; /* This is how it looks on mobile */
+}
+
+@media (min-width: 993px) {
+  .emojis {
+    display: block; /* This is how it looks on desktop */
+  }
+}

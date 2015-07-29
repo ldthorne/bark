@@ -237,9 +237,9 @@ Template.newsfeed.events({
       })
     },
 
-    'change #selectSort' : function(){
-      var val = $("#selectSort option:selected").text();
-      //console.log(val);
+    'change #dropdownSelector' : function(){
+      var val = $("#dropdownSelector option:selected").text();
+      console.log(val);
       if(val == "Newest"){
         Session.set('postsSort', {submitted: -1});
       } else if (val == "Oldest"){
