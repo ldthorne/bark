@@ -1,8 +1,8 @@
 body{
 	padding-top: 70px;
 }
-body { 
-    background: url(/images/cream_dust.png) repeat 0 0;
+body {
+    background-color: grey;
 }
 body {
     font-family: 'Ubuntu', sans-serif;
@@ -36,14 +36,14 @@ body {
 #navbar .navbar-nav > li > a:focus {
     color: #333;
 }
-#navbar .navbar-nav > .active > a, 
-#navbar .navbar-nav > .active > a:hover, 
+#navbar .navbar-nav > .active > a,
+#navbar .navbar-nav > .active > a:hover,
 #navbar .navbar-nav > .active > a:focus {
     color: #555;
     background-color: #E7E7E7;
 }
-#navbar .navbar-nav > .open > a, 
-#navbar .navbar-nav > .open > a:hover, 
+#navbar .navbar-nav > .open > a,
+#navbar .navbar-nav > .open > a:hover,
 #navbar .navbar-nav > .open > a:focus {
     color: #555;
     background-color: #D5D5D5;
@@ -58,8 +58,8 @@ body {
     border-top-color: #333;
     border-bottom-color: #333;
 }
-#navbar .navbar-nav > .open > a .caret, 
-#navbar .navbar-nav > .open > a:hover .caret, 
+#navbar .navbar-nav > .open > a .caret,
+#navbar .navbar-nav > .open > a:hover .caret,
 #navbar .navbar-nav > .open > a:focus .caret {
     border-top-color: #555;
     border-bottom-color: #555;

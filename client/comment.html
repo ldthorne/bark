@@ -7,9 +7,11 @@
 {{#if isComments}}
 	<div class = "container">
     <ul class = "list-group">
-      {{#each commentFunc}}
-    		{{> commentBloc}}
-      {{/each}}
+      <div class = "collection">
+        {{#each commentFunc}}
+      		{{> commentBloc}}
+        {{/each}}
+      </div>
     </ul>
   </div>
 {{else}}
@@ -28,12 +30,12 @@
 
 <template name="commentBloc">
 
-  <li class = "list-group-item">
-    
+  <ul class = "collection-item">
+
     <h5 class="break-el">{{#emojione}} {{comment}} {{/emojione}}</h5>
     <br>
     <div class = "deletebutton">
-      {{#if ismyrow}} 
+      {{#if ismyrow}}
         <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
       {{/if}}
       <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left">flag</i></button>
@@ -43,10 +45,7 @@
     <div class ="commentScore">
       <p style="font: 18px">{{score}}</p>
     </div>
-    <div row = "time">
-     <small id = "submitted">{{submitted}}</small>
-    </div>
-    <br><br>
+    <br>
     <div class="saymes">
         <button class="waves-effect waves-light btn" id="say">Say</button>
         {{#if ismyrow}}
@@ -67,8 +66,13 @@
         <span class="glyphicon glyphicon-thumbs-down"></span>
         </button>
     </div>
-  
-  </li>
+    <div row = "time" style ="text-align: right">
+      <small id = "submitted">
+        {{submitted}}
+      </small>
+    </div>
+
+  </ul>
 
 </template>
 
@@ -76,12 +80,12 @@
 
     <div class="form-style">
       <div class="container">
-        <form class="commentsSubmitForm"> 
+        <form class="commentsSubmitForm">
         <div>
           <input type="text" id="comment" class="comment-form form-control" name="comment" placeholder="Type your comment here"/>
         </div>
            <button class="btn waves-effect waves-light" type="submit" name="action">comment
-          </button>  
+          </button>
         </form>
       </div>
     </div>

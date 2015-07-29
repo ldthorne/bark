@@ -4,6 +4,11 @@
 a:link { text-decoration: none;}
 a:hover { text-decoration: none;}
 .navbar-inner{ padding: 1em 0em 0.8em;}
+@media (min-width: 1200px) {
+  .container{
+    max-width: 970px;
+  }
+}
 body{
   background-color: #f3f3f3;
   padding-bottom: 70px;
