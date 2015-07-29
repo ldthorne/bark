@@ -12,22 +12,29 @@
     <div class="form-style">
       <div class="container">
         <ul class="list-group">
-
-          <h4>See what's happening around you!</h4>
-          <div class = "readAllPosts">
-           <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
-           </div>
-           <br>
-          <div id="container">
-            <select name="selectSort" id="selectSort">
-              <option value="" disabled selected>Sorting by</option>
-              <option value="1" id="timeUp">Newest</option>
-              <option value="2" id="timeDown">Oldest</option>
-              <option value="3" id="voteUp">Highest Score</option>
-              <option value="4" id="voteUp">Lowest Score</option>
-            </select>
+          <div class="title">
+            <h4>See what's happening around you!</h4>
           </div>
-          <br><br>
+          <br>
+          <div class = "readAndDrop">
+            <div class = "readAllPosts">
+              <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
+            </div>
+            <br>
+            <div id="container">
+              <a class='dropdown btn' id="dropdownSelector" href='#' data-activates='dropdownButton'>Sort by:</a>
+              <ul id='dropdownButton' class='dropdown-content'>
+                <li id="timeUp"><a>Newest</a></li>
+                <li class="divider"></li>
+                <li id="timeDown"><a>Oldest</a></li>
+                <li class="divider"></li>
+                <li id="voteUp"><a>Highest Score</a></li>
+                <li class="divider"></li>
+                <li id="voteDown"><a>Lowest Score</a></li>
+              </ul>
+            </div>
+          </div>
+          <br>
 
           <hr>
 <!--           <div class = "newOld">
@@ -72,16 +79,16 @@
           <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
           <br>
         <div class = "postInformation">
-          <div class="col-md-4" align="left">
+          <div class="col-md-4 col-xs-4" id="flagDelete" align="left">
             {{#if ismyrow}}
               <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
             {{/if}}
             <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left" style="vertical-align: middle;">flag</i></button>
           </div>
-          <div class="col-md-4" align="center">
+          <div class="col-md-4 col-xs-4" align="center">
             <p id="comment" >{{commentCount}} {{commentPlural}}</p>
           </div>
-          <div class="col-md-4" align="right">
+          <div class="col-md-4 col-xs-4" align="right">
             <p id = "score">{{score}}</p>
           </div>
         </div>

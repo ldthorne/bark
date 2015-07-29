@@ -6,7 +6,14 @@ Session.set('postsSort', {submitted: -1});
 
 Template.newsfeed.rendered = function(){
   $(document).ready(function() {
-    $('select').material_select();
+    $(".dropdown").dropdown({
+      hover:false,
+      belowOrigin: true
+    });
+
+    $('select').material_select({
+      belowOrigin: true
+    });
   });
   putPosts();
 
@@ -47,14 +54,14 @@ Template.postInfo.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-  
+
   'click #delete': function(){removePost(this._id);},
 
   'click #comment': function(){
       Meteor.defer(function() {Router.go('comment');});
   }
 
- 
+
 });
 
 
@@ -93,7 +100,7 @@ Template.newsfeed.events({
     'click': function(){
       var postId = this._id;
       Session.set('post', postId);
-      //checkVotes(Posts.findOne({_id: postId})); 
+      //checkVotes(Posts.findOne({_id: postId}));
     },
 
     'click #flag': function(){
@@ -109,7 +116,7 @@ Template.newsfeed.events({
           }
         checkFlags(selectedPost)
         } else{
-          alert("You've already flagged this post.")  
+          alert("You've already flagged this post.")
         }
       }else{
         alert("You must log in to vote. Log in and try again.");
@@ -145,7 +152,7 @@ Template.newsfeed.events({
       }
 
       //Meteor.call('upVote', )
-      
+
     },
 
     'click #decrement': function(){
@@ -172,12 +179,12 @@ Template.newsfeed.events({
           Posts.update(postId, {$inc: {score: -1}});
           Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
           Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
-        } 
+        }
         checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
   },
 
   'click #messageButton': function(){
@@ -191,15 +198,15 @@ Template.newsfeed.events({
    'click #readAll': function(){
       allPosts = Posts.find().fetch();
       console.log(allPosts);
-      
+
       var posts = _.pluck(allPosts, 'post');
       var reversePosts = posts.reverse()
 
       _.each(reversePosts, function(post){
         var msg = new SpeechSynthesisUtterance(post);
         msg.onend = function(){
-          playAudio();      
-        }      
+          playAudio();
+        }
         window.speechSynthesis.speak(msg);
       })
     },
@@ -235,7 +242,7 @@ var pauseTimeout = null;
   console.log("\n\nSPEAKING: "+text+"\n\n");
   var msg = new SpeechSynthesisUtterance(text+".  Ready");
   msg.onend = function(event){
-    console.log("speech over"+ "said '"+msg.text+"'\n\n RECOGNIZING\n\n"); 
+    console.log("speech over"+ "said '"+msg.text+"'\n\n RECOGNIZING\n\n");
     final_transcript = '';
     recognition.start();
     //pauseTimeout = window.setTimeout(function(){handle_user_input("next")},5000);
@@ -263,10 +270,10 @@ function handle_user_input(u){
     say("OK!  Resetting!");
     responded = true;
   } else if (u.indexOf("repeat")>-1){
-    say(numbers[i-1]);  
+    say(numbers[i-1]);
     responded = true;
   }
-  
+
 }
 
 var final_transcript = '';
@@ -309,7 +316,7 @@ if ('webkitSpeechRecognition' in window) {
     //handle_user_input(words);
         if (event.results[i].isFinal) {
           console.log("    onResult: final result is |"+event.results[i][0].transcript.trim()+"|");
-          final_transcript += 
+          final_transcript +=
       capitalize(event.results[i][0].transcript.trim()) +" -- " + Math.round(100*event.results[i][0].confidence)+"%\n";
       console.log('    onResult: final events.results[i][0].transcript = '+ JSON.stringify(event.results[i][0].transcript));
         } else {
@@ -320,11 +327,11 @@ if ('webkitSpeechRecognition' in window) {
       //final_transcript = capitalize(final_transcript);
     console.log("ready to handle input: '"+final_transcript+"'");
     handle_user_input(final_transcript);
-    
+
       final_span.innerHTML = linebreak(final_transcript);
       interim_span.innerHTML = linebreak(interim_transcript);
-    
-    
+
+
     };
 }
 
@@ -349,7 +356,7 @@ function startDictation(event) {
   }
   final_transcript = '';
   recognition.lang = 'en-US';
-  
+
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
   recognition.start();
@@ -407,7 +414,7 @@ function removePost(selectedId){
       ComMessages.remove(commes._id);
     })
     Comments.remove(comment._id);
-  }); 
+  });
   _.each(Messages.find({postId:selectedId}).fetch(), function(message){
     Messages.remove(message._id)
   });
@@ -473,7 +480,7 @@ function submittime(submitted){
 //             var found = false;
 //             if (window.find) {        // Firefox, Google Chrome, Safari
 //                 supported = true;
-//                     // if some content is selected, the start position of the search 
+//                     // if some content is selected, the start position of the search
 //                     // will be the end position of the selection
 //                 found = window.find (str);
 //             }
@@ -482,7 +489,7 @@ function submittime(submitted){
 //                     var textRange = document.selection.createRange ();
 //                     if (textRange.findText) {   // Internet Explorer
 //                         supported = true;
-//                             // if some content is selected, the start position of the search 
+//                             // if some content is selected, the start position of the search
 //                             // will be the position after the start position of the selection
 //                         if (textRange.text.length > 0) {
 //                             textRange.collapse (true);
