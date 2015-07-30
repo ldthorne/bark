@@ -2,7 +2,7 @@
   <div class="posts">
     <div class="form-style">
       <div class="container">
-        
+
         {{#if currentUser}}
 
           <h4>Your posts</h4>
@@ -21,7 +21,7 @@
           <hr>
 
           <h4>Your comments</h4>
-         
+
           {{#if hasComments}}
             <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
             <ul class="list-group">
@@ -33,7 +33,7 @@
           {{else}}
             <p> Maybe try making a comment on a post... </p>
           {{/if}}
-            
+
         {{else}}
           <h4 style="text-align:center">You have to log in to see your profile</h4>
           <hr>
@@ -54,9 +54,8 @@
 <template name="yourPosts">
   <div class="posts">
     <li class="list-group-item">
-      <a class="yourPosts" href="#">
         <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
-        <h6 id="comment" align="center">{{commentCount}} comment(s)</h6> 
+        <h6 id="comment" align="center">{{commentCount}} comment(s)</h6>
         <p align="right">{{score}}</p>
         <button class="waves-effect waves-light btn" id="incrementPost">
         <span class="glyphicon glyphicon-thumbs-up"></span>
@@ -69,16 +68,15 @@
         </button>
         <button class="waves-effect waves-light btn" id="say">Say</button>
 
-       <!--  {{#if ismyrow}} 
+       <!--  {{#if ismyrow}}
           <button class="waves-effect waves-light btn">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           </button>
         {{/if}} -->
-        {{#if ismyrow}} 
+        {{#if ismyrow}}
           <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
         {{/if}}
 
-      </a> 
     </li>
   </div>
 </template>
@@ -97,16 +95,16 @@
         </button>
         <button class="waves-effect waves-light btn" id="say">Say</button>
 
-       <!--  {{#if ismyrow}} 
+       <!--  {{#if ismyrow}}
           <button class="waves-effect waves-light btn">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           </button>
         {{/if}} -->
-        {{#if ismyrow}} 
+        {{#if ismyrow}}
           <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
         {{/if}}
 
-      </a> 
+      </a>
     </li>
   </div>
 </template>
