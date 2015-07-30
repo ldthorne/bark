@@ -3,29 +3,34 @@
     <div class="form-style">
       <div class="container">
         {{#if currentUser}}
-          <form class="postsSubmitForm">
-            <h4>Bark! It’s anonymous.</h4>
+          <h4>Bark! It’s anonymous.</h4>
           <div>
             <div><a href="#" id="start_button">Dictate</a></div>
             <span id="final_span" class="final"></span>
             <span id="interim_span" class="interim"></span>
-            <input type="text" maxlength="160" id="post" class="post-form form-control" name="post" placeholder="Type your post here"/>
+            <form class="postsSubmitForm">
+            <div class="input-field">
+              <label>Post</label>
+              <input type="text" maxlength="160" id="post" class="post-form form-control" name="post">
+            </div>
+            
 
-          </div>
+          
             <!-- <p>Current location: ({{getLat}}, {{getLng}})</p> -->
             <!-- <input type="submit" value="Send post" class="btn btn-primary">   -->
             <button class="btn waves-effect waves-light" type="submit" id="submitButton" name="action">Submit
             </button>
             <!-- <h5>{{charatersLeft}}</h5> -->
-          </form>
-          <hr>
+            </form>
+            <hr>
+          </div>
           <div class="emojis">
             {{> emojiTable}}
           </div>
         {{else}}
           <h4 style="text-align:center">You have to log in to post something</h4>
           <hr>
-          <div class="container">
+          <div class="container at-input">
             {{> atForm}}
           </div>
         {{/if}}

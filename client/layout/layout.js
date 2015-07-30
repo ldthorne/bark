@@ -117,6 +117,9 @@ function handle_user_input(u){
     } else if(u.indexOf('messages')>-1 || u.indexOf('inbox')>-1 || u.indexOf('message')>-1){
       recognition.stop();
       Router.go('inbox');
+    } else if ((i!=0)&&(u.indexOf('comment')>-1 || u.indexOf('comments'>-1))){
+      Session.set('post', numbers[i-1]._id);
+      Router.go('comment');
     }
   } else if (u.indexOf('up vote')>-1 || u.indexOf('upvote')>-1 || u.indexOf('like')>-1){
     // console.log("score : "+numbers[i-1].score);
@@ -128,9 +131,8 @@ function handle_user_input(u){
     Meteor.call('decrease', numbers[i-1]);
     say("downvote recorded");
     //checkVotes(numbers[i-1]);
-  } else if (u.indexOf('comment')>-1 || u.indexOf('comments'>-1)){
-    Session.set('post', numbers[i-1]._id);
-    Router.go('comment');
+  } else if (u.indexOf('stop')>-1 || u.indexOf('pause')>-1) {
+    recognition.stop();
   }
   // } else {
   //   say("eh?");

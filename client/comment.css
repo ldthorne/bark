@@ -31,3 +31,15 @@ p{
     display: block; /* This is how it looks on desktop */
   }
 }
+
+ .input-field input[type=text]:focus{
+  border-bottom: 1px solid #79BED8;
+  -webkit-box-shadow: 0 1px 0 0 #79BED8;
+  -moz-box-shadow: 0 1px 0 0 #79BED8;
+  box-shadow: 0 1px 0 0 #79BED8;
+
+} 
+
+.input-field input[type=text]:focus + label {
+     color: #79BED8;
+}

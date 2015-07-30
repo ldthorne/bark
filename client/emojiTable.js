@@ -21,6 +21,7 @@ Template.emojiTable.events({
 			$("#messageText").val($("#messageText").val()+this.code);
 			$("#post").val($("#post").val()+this.code);
 			$("#comment").val($("#comment").val()+this.code);
+			$("#comMessageText").val($("#comMessageText").val()+this.code);
 		}
     },
     'click #one': function(){
