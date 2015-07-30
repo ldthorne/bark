@@ -153,7 +153,7 @@ Template.newsfeed.events({
         var selectedAnime = Posts.findOne({_id:this._id});
         console.log("about to meteor call");
         Meteor.call('increase', selectedAnime);
-        //checkVotes(selectedAnime);
+        checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
@@ -165,7 +165,7 @@ Template.newsfeed.events({
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
         Meteor.call('decrease', selectedAnime);
-        //checkVotes(selectedAnime);
+        checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
@@ -347,39 +347,18 @@ function startDictation(event) {
   interim_span.innerHTML = '';
   recognition.start();
 }
+var votesForLevels = [-5,5,10,20,40,50,100,200,400,800,1600,3200,6400];
 
 function checkVotes(selected){
     var p = Posts.findOne({_id:selected._id});
-    //numbers may seem off.. were not sure how to fix
+    var postLevel = selected.level;
+    var score = selected.score;
 
-    //console.log(selected.score);
-   if(selected.score >=5 && selected.score <10){
-    Posts.update({_id: p._id}, {$set: {radius:4}});
-    //console.log("radius should be 4");
-     //console.log(selected.radius);
-  } else if(selected.score >=10 && selected.score <20){
-    Posts.update({_id: p._id}, {$set: {radius:6}});
-     //console.log("radius should be 6");
-     //console.log(selected.radius);
-  }else if(selected.score >=20 && selected.score <40){
-    Posts.update({_id: p._id}, {$set: {radius:8}});
-  }else if(selected.score >=40 && selected.score <50){
-    Posts.update({_id: p._id}, {$set: {radius:10}});
-  }else if(selected.score >=50 && selected.score <100){
-    Posts.update({_id: p._id}, {$set: {radius:15}});
-  }else if(selected.score >=100 && selected.score <200){
-    Posts.update({_id: p._id}, {$set: {radius:20}});
-  }else if(selected.score >=200 && selected.score <400){
-    Posts.update({_id: p._id}, {$set: {radius:30}});
-  }else if(selected.score >=400 && selected.score <800){
-    Posts.update({_id: p._id}, {$set: {radius:35}});
-  }else if(selected.score >=800 && selected.score <1600){
-    Posts.update({_id: p._id}, {$set: {radius:50}});
-  }else if(selected.score >=1600 && selected.score <3200){
-    Posts.update({_id: p._id}, {$set: {radius:100}});
-  }else if(selected.score >=1600){
-    Posts.update({_id: p._id}, {$set: {radius:1000000}});
-  }
+    if(score<votesForLevels[postLevel]){
+      Posts.update({_id: p._id}, {$inc: {level:-1}});
+    }else if (score>=votesForLevels[postLevel+1]){
+      Posts.update({_id: p._id}, {$inc: {level:1}});
+    }
   if(selected.score <= -4){
     removePost(selected._id);
     //console.log("should delete");
