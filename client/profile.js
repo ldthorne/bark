@@ -95,6 +95,28 @@ Template.yourPosts.events({
       alert("You must be logged in to comment. Login and try again.");
     }
   }
+  },
+
+  'click #flagPost': function(){
+    if(Meteor.user()) {
+      var selectedPost = Posts.findOne({_id:this._id});
+      //console.log($.inArray(Meteor.userId(), selectedPost.hasFlagged));
+      if($.inArray(Meteor.userId(), selectedPost.hasFlagged) == -1){
+        var r = confirm('This cannot be undone. Are you sure you want to flag the post?');
+        if(r){
+          var postId = Session.get('post');
+          Posts.update(postId, {$inc: {numberFlags: 1}});
+          Posts.update(postId, {$addToSet: {hasFlagged: Meteor.userId()}});
+        }
+      Meteor.call("checkFlags",selectedPost);
+      } else{
+        alert("You've already flagged this post.")
+      }
+    }else{
+      alert("You must log in to vote. Log in and try again.");
+    }
+  },
+
 
 
 });
@@ -105,6 +127,25 @@ Template.yourComments.events({
     var msg = new SpeechSynthesisUtterance(Comments.findOne({_id:this._id}).comment);
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
+  },
+  'click #flagComment': function(){
+    if(Meteor.user()) {
+      var selectedComment = Comments.findOne({_id:this._id});
+      console.log($.inArray(Meteor.userId(), selectedComment.hasFlagged));
+      if($.inArray(Meteor.userId(), selectedComment.hasFlagged) == -1){
+        var r = confirm('This cannot be undone. Are you sure you want to flag the comment?');
+        if(r){
+          var commentId = Session.get('comment');
+          Comments.update(commentId, {$inc: {numberFlags: 1}});
+          Comments.update(commentId, {$addToSet: {hasFlagged: Meteor.userId()}});
+        }
+      Meteor.call("checkFlag", selectedComment)
+      } else{
+        alert("You've already flagged this comment.")
+      }
+    }else{
+      alert("You must log in to vote. Log in and try again.");
+    }
   },
 
   'click .jbsapp-delete-icon': function(){Comments.remove(this._id);
@@ -136,65 +177,14 @@ Template.profile.events({
       //checkVotes(Posts.findOne({_id: postId}));
     },
     'click #incrementPost': function () {
-      if(Meteor.user()) {
-        var selectedAnime = Posts.findOne({_id:this._id});
-        if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
-          if($.inArray(Meteor.userId(), selectedAnime.upVoted) !== -1){
-            //console.log("up vote & vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: -1}});
-            Posts.update(postId, {$pull: {voted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {upVoted: Meteor.userId()}});
-          } else {
-            //console.log("up voted; down vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: 2}});
-            Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {downVoted: Meteor.userId()}});
-          }
-        } else {
-          //console.log("up voted & voted");
-          var postId = Session.get('post');
-          Posts.update(postId, {$inc: {score: 1}});
-          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
-          Posts.update(postId, {$addToSet: {upVoted: Meteor.userId()}});
-        }
-      } else {
-        alert("You must log in to vote. Log in and try again.");
-      }
+      var selectedAnime = Posts.findOne({_id:this._id});
+      Meteor.call('increase', selectedAnime);
 
     },
 
     'click #decrementPost': function(){
-
-      if(Meteor.user()) {
-        var selectedAnime = Posts.findOne({_id:this._id});
-        if($.inArray(Meteor.userId(), selectedAnime.voted) !== -1) {
-          if($.inArray(Meteor.userId(), selectedAnime.downVoted) !== -1){
-            //console.log("down vote & vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: 1}});
-            Posts.update(postId, {$pull: {voted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {downVoted: Meteor.userId()}});
-          } else {
-            //console.log("down voted; up vote removed");
-            var postId = Session.get('post');
-            Posts.update(postId, {$inc: {score: -2}});
-            Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
-            Posts.update(postId, {$pull: {upVoted: Meteor.userId()}});
-          }
-        } else {
-          //console.log("down voted & voted");
-          var postId =Session.get('post');
-          Posts.update(postId, {$inc: {score: -1}});
-          Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
-          Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
-        }
-        checkVotes(selectedAnime);
-      } else {
-        alert("You must log in to vote. Log in and try again.");
-      }
-
+      var selectedAnime = Posts.findOne({_id:this._id});
+      Meteor.call('decrease', selectedAnime);
   	},
 
   'click #incrementComment': function () {

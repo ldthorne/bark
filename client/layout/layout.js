@@ -9,11 +9,11 @@ Template.layout.rendered = function(){
   $(".button-collapse").sideNav({
     closeOnClick:true
   });
-  $(".dropdown-button").dropdown({ 
+  $(".dropdown-button").dropdown({
     hover: true,
     belowOrigin: true
   });
-  $(".dropdown-button1").dropdown({ 
+  $(".dropdown-button1").dropdown({
     hover: false,
     belowOrigin: true
   });
@@ -71,12 +71,12 @@ function sayitnow(text, stop){
 
   var msg = new SpeechSynthesisUtterance(text+". "+ (stop ? "goodbye":"ready"));
   msg.onend = function(event){
-    console.log("speech over"+ "said '"+msg.text+"' .... starting recognition!"); 
+    console.log("speech over"+ "said '"+msg.text+"' .... starting recognition!");
     final_transcript = '';
     if(!stop){
       recognition.start();
     }
-    
+
     //pauseTimeout = window.setTimeout(function(){handle_user_input("next")},5000);
   };
   window.speechSynthesis.speak(msg);
@@ -103,7 +103,7 @@ function handle_user_input(u){
     say("OK!  Resetting!");
     responded = true;
   } else if (u.indexOf("repeat")>-1){
-    say(numbers[i-1].post);  
+    say(numbers[i-1].post);
     responded = true;
   } else if (u.indexOf("stop")>-1){
     say("okay", "stop");
@@ -137,13 +137,13 @@ function handle_user_input(u){
   // } else {
   //   say("eh?");
   // }
-  
+
 };
 
   // var final_transcript = '';
   // var recognizing = false;
   // var dictating = false;
-  
+
 var final_transcript = '';
 var recognizing = false;
 var numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
@@ -184,7 +184,7 @@ if ('webkitSpeechRecognition' in window) {
     // }
         if (event.results[i].isFinal) {
           console.log("final result is |"+event.results[i][0].transcript.trim()+"|");
-          final_transcript += 
+          final_transcript +=
       capitalize(event.results[i][0].transcript.trim()) +" -- " + Math.round(100*event.results[i][0].confidence)+"%\n";
       console.log('final events.results[i][0].transcript = '+ JSON.stringify(event.results[i][0].transcript));
         } else {
@@ -195,13 +195,13 @@ if ('webkitSpeechRecognition' in window) {
       //final_transcript = capitalize(final_transcript);
     console.log("ready to handle input: '"+final_transcript+"'");
     handle_user_input(final_transcript);
-    
+
       //final_span.innerHTML = linebreak(final_transcript);
       //interim_span.innerHTML = linebreak(interim_transcript);
-    
-    
+
+
     };
-}  
+}
 
 var two_line = /\n\n/g;
 var one_line = /\n/g;
