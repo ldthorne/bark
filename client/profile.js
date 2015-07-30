@@ -14,9 +14,29 @@ Template.profile.helpers({
     _.each(scores, function(score){
       sum+=score;
     });
-  
+
     return sum;
   },
+
+  totalScore: function(){
+    sum=0;
+    yourComments= Comments.find({commenter: Meteor.userId()}).fetch();
+    var scores = _.pluck(yourComments, 'score');
+    _.each(scores, function(score){
+      sum+=score;
+      console.log(sum);
+    });
+
+    yourPosts = Posts.find({owner: Meteor.userId()}).fetch();
+    var scores = _.pluck(yourPosts, 'score');
+    _.each(scores, function(score){
+      sum+=score;
+      console.log(sum);
+
+    });
+    return sum;
+  },
+
 
   totalCommentScore: function() {
     sum=0;
@@ -25,7 +45,7 @@ Template.profile.helpers({
     _.each(scores, function(score){
       sum+=score;
     });
-  
+
     return sum;
   },
 
@@ -41,7 +61,16 @@ Template.profile.helpers({
 
 Template.yourPosts.helpers({
   ismyrow: function(){return Meteor.userId() == this.owner},
-  commentCount: function(){return Comments.find({fromPost:this._id}).count()}
+  commentCount: function(){
+    return Comments.find({fromPost:this._id}).count()
+  },
+  commentPlural: function(){
+    if(Comments.find({fromPost:this._id}).count()==1){
+      return "comment";
+    } else {
+      return "comments";
+    }
+  },
 });
 
 Template.yourComments.helpers({
@@ -55,7 +84,7 @@ Template.yourPosts.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-  
+
   'click .jbsapp-delete-icon': function(){removePost(this._id);
   },
 
@@ -67,7 +96,7 @@ Template.yourPosts.events({
     }
   }
 
- 
+
 });
 
 Template.yourComments.events({
@@ -77,7 +106,7 @@ Template.yourComments.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-  
+
   'click .jbsapp-delete-icon': function(){Comments.remove(this._id);
   },
 
@@ -89,7 +118,7 @@ Template.yourComments.events({
     }
   }
 
- 
+
 });
 
 
@@ -102,9 +131,9 @@ Template.profile.events({
       var postId = this._id;
       Session.set('post', postId);
       var commentId = this._id;
-      Session.set('comment', commentId); 
+      Session.set('comment', commentId);
 
-      //checkVotes(Posts.findOne({_id: postId})); 
+      //checkVotes(Posts.findOne({_id: postId}));
     },
     'click #incrementPost': function () {
       if(Meteor.user()) {
@@ -133,7 +162,7 @@ Template.profile.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
     },
 
     'click #decrementPost': function(){
@@ -160,12 +189,12 @@ Template.profile.events({
           Posts.update(postId, {$inc: {score: -1}});
           Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
           Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
-        } 
+        }
         checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
   	},
 
   'click #incrementComment': function () {
@@ -195,7 +224,7 @@ Template.profile.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
     },
 
     'click #decrementComment': function(){
@@ -238,15 +267,15 @@ Template.profile.events({
    'click #readAllPosts': function(){
     allPosts = Posts.find({owner:Meteor.userId()}).fetch();
     console.log(allPosts);
-    
+
     var posts = _.pluck(allPosts, 'post');
     var reversePosts = posts.reverse()
 
     _.each(reversePosts, function(post){
       var msg = new SpeechSynthesisUtterance(post);
       msg.onend = function(){
-        playAudio();      
-      }      
+        playAudio();
+      }
       window.speechSynthesis.speak(msg);
     })
   },
@@ -254,15 +283,15 @@ Template.profile.events({
     'click #readAllComments': function(){
     allComments = Comments.find({commenter:Meteor.userId()}).fetch();
     console.log(allComments);
-    
+
     var comments = _.pluck(allComments, 'comment');
     var reverseComments = comments.reverse()
 
     _.each(reverseComments, function(comment){
       var msg = new SpeechSynthesisUtterance(comment);
       msg.onend = function(){
-        playAudio();      
-      }      
+        playAudio();
+      }
       window.speechSynthesis.speak(msg);
     })
   }
@@ -312,7 +341,7 @@ function checkVotes(selected){
 function removePost(selectedId){
   _.each(Comments.find({fromPost:selectedId}).fetch(), function(comment){
     Comments.remove(comment._id);
-  }); 
+  });
   _.each(Messages.find({postId:selectedId}).fetch(), function(message){
     Messages.remove(message._id)
   });
