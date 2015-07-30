@@ -146,6 +146,7 @@ button.waves-effect.waves-light {
 #dropdownSelector {
   background-color: #A5A6A7;
   text-align: center;
+  width: 161.625px;
 }
 
 
@@ -204,7 +205,6 @@ text-align: right;
   text-align:center;
 }
 
-
 .postInformation{
   max-height: 2em;
 }
@@ -226,5 +226,13 @@ text-align: right;
 }
 
 #container * {
-    text-align:center;
+  text-align:center;
+}
+
+#dropdownButton a{
+  color: black;
+}
+
+#dropdownButton li{
+ width:161.625px;
 }
