@@ -3,14 +3,7 @@
     <div class="form-style">
       <div class="container">
         
-      <div row="splitbetween">
-
-        
         {{#if currentUser}}
-
-
-        <div class="col-md-4 col-xs-6">
-
 
           <h4>Your posts</h4>
           {{#if hasPosts}}
@@ -25,10 +18,7 @@
               <p> Maybe try making a post... </p>
           {{/if}}
 
-        </div>
-
-        <div class="col-md-4 col-xs-6">
-          
+          <hr>
 
           <h4>Your comments</h4>
          
@@ -43,8 +33,6 @@
           {{else}}
             <p> Maybe try making a comment on a post... </p>
           {{/if}}
-
-        </div>
             
         {{else}}
           <h4 style="text-align:center">You have to log in to see your profile</h4>
@@ -57,8 +45,6 @@
         {{/if}}
 
 
-
-      </div><!--row-->
 
     </div>
   </div>

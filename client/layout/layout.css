@@ -1,3 +1,6 @@
+nav .material-icons {
+	line-height: 2.2;
+}
 body{
 	padding-top: 70px;
 }
@@ -108,4 +111,12 @@ body {
   #desktopFAB {
     display: block; /* This is how it looks on desktop */
   }
+}
+
+#dropdown1 a{
+  color: black;
+}
+
+#dropdown1 li{
+ width:150px;
 }

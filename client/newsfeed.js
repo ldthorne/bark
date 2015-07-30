@@ -198,19 +198,18 @@ Template.newsfeed.events({
       })
     },
 
-    'change #dropdownSelector' : function(){
-      var val = $("#dropdownSelector option:selected").text();
-      console.log(val);
-      if(val == "Newest"){
+    'click #timeUp' : function(){
         Session.set('postsSort', {submitted: -1});
-      } else if (val == "Oldest"){
-        Session.set('postsSort', {submitted: 1});
-      } else if (val == "Highest Score"){
-        Session.set('postsSort', {score: -1});
-      } else if (val == "Lowest Score"){
-        Session.set('postsSort', {score: 1});
-      }
     },
+    'click #timeDown':function(){
+        Session.set('postsSort', {submitted: 1});
+    },
+    'click #voteUp':function(){
+        Session.set('postsSort', {score: -1});
+    },
+    'click #voteDown':function(){
+        Session.set('postsSort', {score: 1});
+    }
 });
 
 function say(text){
