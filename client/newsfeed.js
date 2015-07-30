@@ -125,7 +125,6 @@ Template.newsfeed.events({
     'click': function(){
       var postId = this._id;
       Session.set('post', postId);
-      //checkVotes(Posts.findOne({_id: postId}));
     },
 
     'click #flag': function(){
@@ -139,7 +138,7 @@ Template.newsfeed.events({
             Posts.update(postId, {$inc: {numberFlags: 1}});
             Posts.update(postId, {$addToSet: {hasFlagged: Meteor.userId()}});
           }
-        checkFlags(selectedPost)
+        Meteor.call("checkFlags",selectedPost);
         } else{
           alert("You've already flagged this post.")
         }
@@ -153,7 +152,6 @@ Template.newsfeed.events({
         var selectedAnime = Posts.findOne({_id:this._id});
         console.log("about to meteor call");
         Meteor.call('increase', selectedAnime);
-        checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
@@ -165,7 +163,6 @@ Template.newsfeed.events({
       if(Meteor.user()) {
         var selectedAnime = Posts.findOne({_id:this._id});
         Meteor.call('decrease', selectedAnime);
-        checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
@@ -348,30 +345,6 @@ function startDictation(event) {
   recognition.start();
 }
 var votesForLevels = [-5,5,10,20,40,50,100,200,400,800,1600,3200,6400];
-
-function checkVotes(selected){
-    var p = Posts.findOne({_id:selected._id});
-    var postLevel = selected.level;
-    var score = selected.score;
-
-    if(score<votesForLevels[postLevel]){
-      Posts.update({_id: p._id}, {$inc: {level:-1}});
-    }else if (score>=votesForLevels[postLevel+1]){
-      Posts.update({_id: p._id}, {$inc: {level:1}});
-    }
-  if(selected.score <= -4){
-    removePost(selected._id);
-    //console.log("should delete");
-  }
-}
-
-function checkFlags(selected){
-  if(selected.numberFlags >= 4){
-    removePost(selected._id);
-    //should delete if more than 4 flags
-  }
-}
-
 
 function removePost(selectedId){
   _.each(Comments.find({fromPost:selectedId}).fetch(), function(comment){
