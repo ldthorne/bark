@@ -84,11 +84,11 @@ function sayitnow(text, stop){
 
 var i = 0;
 
-function handle_user_input(u){
+function handle_user_input(u) {
   var responded = false;
   console.log("hui: "+u+" i="+i);
   u = u.toLowerCase();
-  if ((u.indexOf("next")>-1) || (u.indexOf("start")>-1) || (u.indexOf("read")>-1)) {
+  if ((u.indexOf("next")>-1) || (u.indexOf("start")>-1) || (u.indexOf("read post")>-1) || (u.indexOf("read posts")>-1)) {
     if (i < numbers.length){
       console.log("saying "+i+"th post");
       say(numbers[i++].post);
@@ -105,7 +105,7 @@ function handle_user_input(u){
   } else if (u.indexOf("repeat")>-1){
     say(numbers[i-1].post);  
     responded = true;
-  } else if (u.indexOf("stop")>-1){
+  } else if (u.indexOf("stop")>-1 || u.indexOf('pause')>-1){
     say("okay", "stop");
   } else if (u.indexOf('navigate')>-1){
     if(u.indexOf('submit')>-1 || u.indexOf('post')>-1){
@@ -120,19 +120,43 @@ function handle_user_input(u){
     } else if ((i!=0)&&(u.indexOf('comment')>-1 || u.indexOf('comments'>-1))){
       Session.set('post', numbers[i-1]._id);
       Router.go('comment');
+    } else if ((i!=0)&&(u.indexOf('message')>-1 || u.indexOf('messages'>-1))){
+      Session.set('post', numbers[i-1]._id);
+      Router.go('message');
     }
   } else if (u.indexOf('up vote')>-1 || u.indexOf('upvote')>-1 || u.indexOf('like')>-1){
     // console.log("score : "+numbers[i-1].score);
     Meteor.call('increase', numbers[i-1]);
     say("upvote recorded");
-    //checkVotes(numbers[i-1]);
+    checkVotes(numbers[i-1]);
   } else if (u.indexOf('down vote')>-1 || u.indexOf('downvote')>-1 || u.indexOf('dislike')>-1){
     // console.log("score : "+numbers[i-1].score);
     Meteor.call('decrease', numbers[i-1]);
     say("downvote recorded");
-    //checkVotes(numbers[i-1]);
-  } else if (u.indexOf('stop')>-1 || u.indexOf('pause')>-1) {
-    recognition.stop();
+    checkVotes(numbers[i-1]);
+  } else if (u.indexOf('read comments')>-1) {
+    if(Comments.find({fromPost:numbers[i-1]._id}).count() == 0){
+      say("There are no comments on this post");
+    } else {
+      coms= Comments.find({fromPost:numbers[i-1]._id}, {sort: {submitted: 1}}).fetch();
+      console.log(coms);
+      plucked = _.pluck(coms, 'comment');
+      console.log(plucked);
+      all="";
+      s = 0
+      _.each(plucked, function(comment){
+        s++;
+        all+= s+ ". " + comment + ". "
+      });
+      console.log(all);
+      say(all);
+    }
+  } else if (u.indexOf('go back')>-1 || u.indexOf('return')>-1 || u.indexOf('last')>-1){
+    console.log('old' + numbers[i].post)
+    i--;
+    say(numbers[--i].post);
+    console.log('new' + numbers[i].post)
+    i++
   }
   // } else {
   //   say("eh?");
@@ -218,165 +242,6 @@ function startDictation(event) {
   console.log("starting dictation");
   recognition.start();
 }
-
-  // if ('webkitSpeechRecognition' in window) {
-  //   var recognition = new webkitSpeechRecognition();
-  //     recognition.continuous = true;
-  //     recognition.interimResults = true;
- 
-  //     recognition.onstart = function() {
-  //       recognizing = true;
-  //     };
- 
-  //     recognition.onerror = function(event) {
-  //       console.log(event.error);
-  //     };
- 
-  //     recognition.onend = function() {
-  //       recognizing = false;
-  //     };
- 
-  //     recognition.onresult = function(event) {
-
-  //     myevent = event;
-  //       var interim_transcript = '';
-
-  //       for (var i = event.resultIndex; i < event.results.length; ++i) {
-  //       	console.log("recognizing" + event.results[i][0].transcript);
-  //       	//$("#test").html(interim_transcript);
-  //         if (event.results[i][0].transcript.indexOf("stop") > -1){
-  //           recognition.stop();
-  //           return;
-  //         } if((event.results[i][0].transcript.indexOf("submit") > -1) || (event.results[i][0].transcript.indexOf("post") > -1)){
-  //         	recognition.stop();
-  //         	Router.go("submit");
-  //         } if ((event.results[i][0].transcript.indexOf("inbox") > -1) || (event.results[i][0].transcript.indexOf("messages") > -1)) {
-  //         	recognition.stop();
-  //         	Router.go("inbox");
-  //         } if ((event.results[i][0].transcript.indexOf("newsfeed") > -1) || (event.results[i][0].transcript.indexOf("home") > -1) || (event.results[i][0].transcript.indexOf("news feed") > -1)) {
-  //         	recognition.stop();
-  //         	Router.go("newsfeed");
-
-  //         } if (Router.current().route.getName() == "submit"){
-  //         		if((event.results[i][0].transcript.indexOf("dictate") > -1) || (event.results[i][0].transcript.indexOf("dictation") > -1)){
-  //         			dictating=true;
-          			
-  //         		}
-  //         }
-  //         if((Router.current().route.getName() == "newsfeed")){
-  //               if((event.results[i][0].transcript.indexOf("read") > -1)){
-  //                   if(!alreadyRead){
-  //                     readPosts();
-  //                     alreadyRead = true;
-  //                   }
-  //                   if(
-  //                     (event.results[i][0].transcript.indexOf("upvote") > -1) || 
-  //                     (event.results[i][0].transcript.indexOf("a boat") > -1) || 
-  //                     (event.results[i][0].transcript.indexOf("like") > -1) || 
-  //                     (event.results[i][0].transcript.indexOf("upload") > -1) || 
-  //                     (event.results[i][0].transcript.indexOf("up vote") > -1)){
-  //                       console.log("done");
-  //                       recognition.stop();
-  //                   }
-  //               }
-  //         } 
-  //         // if (Router.current().route.getName() == "newsfeed"){
-
-  //         // }
-  //         if(event.results[i].isFinal) {
-  //           final_transcript += event.results[i][0].transcript.trim() +".\n";
-  //           console.log("final :");
-  //           if(dictating){
-  //           	dictating=false;
-  //           	 $("#post").val(final_transcript);
-  //           	} else{
-  //           		 $("#test").html("bark! thinks you said: " + final_transcript);
-  //           	}
-            
-  //         } else {
-  //           interim_transcript += event.results[i][0].transcript;
-  //           console.log("not final");
-  //           if (dictating){
-  //            	$("#post").val(interim_transcript);
-  //           } else{
-  //           	$("#test").html("bark! thinks you said: " + interim_transcript);
-  //           }
-  //         }
-  //       }
-        
-  //     };
-  // }
-
-// function readPosts(){
-//     allPosts = Posts.find().fetch();
-//     console.log(allPosts);
-    
-//     var posts = _.pluck(allPosts, 'post');
-//     var postsId = _.pluck(allPosts, '_id')
-//     var reversePosts = posts.reverse()
-//     var reversePostsId = postsId.reverse()
-//     var zipped = _.zip(reversePosts, reversePostsId)
-//     _.each(zipped, function(pair){
-//       // console.log(pair[0]);
-//       // console.log(pair[1]);
-//       Session.set("currentPost", pair[1])
-//       console.log(Session.get("currentPost"));
-//       var msg = new SpeechSynthesisUtterance(pair[0]);
-//       msg.onend = function(){
-//         playAudio();      
-//       }      
-//       window.speechSynthesis.speak(msg);
-//     })
-
-
-// }
-
-// function readPosts(){
-//     allPosts = Posts.find().fetch();
-//     console.log(allPosts);
-    
-//     var posts = _.pluck(allPosts, 'post');
-//     var postsId = _.pluck(allPosts, '_id')
-//     var reversePosts = posts.reverse()
-//     var reversePostsId = postsId.reverse()
-//     var zipped = _.zip(reversePosts, reversePostsId)
-//     _.each(zipped, function(pair){
-//       // var myVar=setInterval(function () {timedOutput(pair)}, 1000);
-//       timedOutput(pair);      
-
-//     })
-//   }
-
-// function timedOutput(pair){
-//   Session.set("currentPost", pair[1])
-//   var msg = new SpeechSynthesisUtterance(pair[0]);
-//   msg.onend = function(){
-//     playAudio();      
-//   }      
-//   var myVar=setInterval(function() {readOut()},10000);
-//   function readOut(){
-//     window.speechSynthesis.speak(msg);
-//   }
-// }
-
-
-// function playAudio(){
-//   audio.play();
-// }
-
-
-
-
-// function startMic(event) {
-//   if (recognizing) {
-//     recognition.stop();
-//     return;
-//   }
-//   final_transcript = '';
-//   recognition.lang = 'en-US';
-//   recognition.start();
-// }
-
 
 Template.layout.helpers({
   loggedIn: function(){
