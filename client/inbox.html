@@ -44,8 +44,9 @@
 			<h4 style="text-align:center">You need to log in to see messages</h4>
 			<hr>
 			<div class="container">
-				<div class="postsSubmit">
-		            {{> atForm}}
+				<div class="postsSubmit at-input">
+					{{> atForm}}
+		            
 		        </div>
 		    </div>
 		{{/if}}
@@ -76,13 +77,21 @@
 
 	{{#if isPost}}
 	<form id="postReplyForm">
-		<input type="text" class="postReply" name="postReply" id="postReply" placeholder="Type your reply here"/>
+		<div class ="input-field">
+			<label>Reply</label>
+			<input type="text" class="postReply" name="postReply" id="postReply"/>
+		</div>
+		
 		<button class="btn waves-effect waves-light" type="submit" name="action">Send reply
 		</button>  
  	</form>
  	{{else}}
  	<form id="commentReplyForm">
-		<input type="text" class="commentReply" name="commentReply" id="commentReply" placeholder="Type your reply here"/>
+ 		<div class="input-field">
+ 			<label>Reply</label>
+ 			<input type="text" class="commentReply" name="commentReply" id="commentReply"/>
+ 		</div>
+		
 		<button class="btn waves-effect waves-light" type="submit" name="action">Send reply
 		</button>  
  	</form>
