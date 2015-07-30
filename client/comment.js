@@ -10,7 +10,7 @@ Template.comment.helpers({
 	postTitle: function() {
 		var pt =  Posts.findOne(Session.get('post'));
 		return pt.post;
-	},
+	}, 
 
 	commentFunc: function(){
 		return Comments.find({fromPost: Session.get('post')}, {sort: {submitted: 1}});
@@ -18,6 +18,7 @@ Template.comment.helpers({
 });
 
 Template.commentForm.events({
+
 
   'submit .commentsSubmitForm': function(event) {
     event.preventDefault();
@@ -27,19 +28,29 @@ Template.commentForm.events({
     if (comment == "") {
       alert("You can’t insert an empty comment. Try to write something funny instead.");
     } else {
+      if (recognizing) {
+        recognition.stop();
+      } else {
       var fromPost = Session.get('post');
       Meteor.call('commentInsert', comment, fromPost);
       Meteor.defer(function() {Router.go('comment');});
       $("#comment").val('');
-    }
+    } 
   }
+},
+
+  'click #start_button': function(event){
+    startDictation(event);
+  }
+
 
 });
 
 Template.commentBloc.helpers({
-  ismyrow: function(){return Meteor.userId() == this.commenter},
-
-  submitted:function(){
+   ismyrow: function(){return Meteor.userId() == this.commenter},
+  
+    submitted:function(){
+    console.log(this.submitted);
     return submittime(this.submitted);
   }
 
@@ -59,7 +70,7 @@ Template.commentBloc.events({
   },
 	'click': function(){
       var commentId = this._id;
-      Session.set('comment', commentId);
+      Session.set('comment', commentId); 
     },
 
     'click #flag': function(){
@@ -75,7 +86,7 @@ Template.commentBloc.events({
           }
         checkFlags(selectedComment)
         } else{
-          alert("You've already flagged this comment.")
+          alert("You've already flagged this comment.")  
         }
       }else{
         alert("You must log in to vote. Log in and try again.");
@@ -108,7 +119,7 @@ Template.commentBloc.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-
+      
     },
 
     'click #decrement': function(){
@@ -157,7 +168,7 @@ function checkFlags(selected){
   }
 }
 
-function removeComment(selectedId){
+function removeComment(selectedId){ 
   _.each(ComMessages.find({commentId:selectedId}).fetch(), function(message){
     ComMessages.remove(message._id)
   });
@@ -209,3 +220,77 @@ var tTime=new Date(submitted);
     }
     return since;
 }
+
+
+
+  var final_transcript = '';
+  var recognizing = false;
+  
+  if ('webkitSpeechRecognition' in window) {
+    var recognition = new webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+ 
+      recognition.onstart = function() {
+        recognizing = true;
+        console.log("listening!");
+      };
+ 
+      recognition.onerror = function(event) {
+        console.log(event.error);
+      };
+ 
+      recognition.onend = function() {
+        recognizing = false;
+        console.log("dictation has stopped");
+      };
+ 
+      recognition.onresult = function(event) {
+      myevent = event;
+        var interim_transcript = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i][0].transcript.indexOf("stop") > -1){
+            recognition.stop()
+            return;
+          }
+          if(event.results[i].isFinal) {
+            final_transcript += capitalize(event.results[i][0].transcript.trim()) +".\n";
+          } else {
+            interim_transcript += event.results[i][0].transcript;
+          }
+        }
+        final_transcript = final_transcript;
+       
+       document.getElementById("comment").value = final_transcript;
+       //document.getElementById("post").value = linebreak(interim_transcript);
+       
+      
+        
+      };
+  }
+ 
+  var two_line = /\n\n/g;
+  var one_line = /\n/g;
+  function linebreak(s) {
+    return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+  }
+ 
+  function capitalize(s) {
+    return s.replace(s.substr(0,1), function(m) { return m.toUpperCase(); });
+  }
+ 
+  function startDictation(event) {
+    if (recognizing) {
+      recognition.stop();
+      return;
+    }
+    final_transcript = '';
+    interim_transcript='';
+    recognition.lang = 'en-US';
+    final_span.innerHTML = '';
+    interim_span.innerHTML = '';
+    recognition.start();
+
+  }
+
+

@@ -2,6 +2,7 @@ Meteor.methods({
   postInsert: function(post, location) {
     var postId = Posts.insert({
       level: 0,
+      radius : 2,
       numberFlags: 0,
       post : post,
       score : 0,
@@ -71,7 +72,7 @@ Meteor.methods({
           ComMessages.remove(commessage._id)
       });
 
-      _.each(Comments.find({commenter:user}).fetch(), function(comment){
+      _.each(Comments.find({commenter:user}).fetch(), function(comment){  
           _.each(ComMessages.find({comment:comment._id}).fetch(), function(commessage){
             ComMessages.remove(commessage._id);
           });
