@@ -1,11 +1,13 @@
 
 <template name= "newsfeed">
 
-<!--
+
 <div row="searchRow">
 <input type="search" placeholder="Search posts here" id="searchInput" name="search"/>
 <button class="btn waves-effect waves-light" type="submit" id="submitButton" name="action">Search</button>
-</div> -->
+
+</div>
+
 
   <div class="posts">
     <div class="form-style">
@@ -14,6 +16,7 @@
             <h4>See what's happening around you!</h4>
           </div>
           <br>
+
           <div class = "readAndDrop">
             <div class = "readAllPosts">
               <button class="waves-effect waves-light btn" id="readAll"><i class="material-icons left">volume_up</i>Read All</button>
@@ -32,7 +35,7 @@
               </ul>
             </div>
           </div>
-          <br>
+          
 
           <hr>
 <!--           <div class = "newOld">
@@ -46,7 +49,6 @@
             <button class="btn waves-effect waves-light" id="voteDown"><i class="material-icons left">favorite_border</i>Lowest Score</button>
           </div> -->
 
-          <br>
           <div class="collection">
             {{#each posts}}
               {{> postInfo}}

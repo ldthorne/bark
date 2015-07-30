@@ -2,3 +2,5 @@
 *.mov
 .wav
 secret/*
+.pem
+.key
