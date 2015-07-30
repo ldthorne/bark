@@ -38,7 +38,7 @@ Meteor.publish("closePosts",function(position){
 	return closePosts;
 });
 
-var levels = [5,50,500,5000,50000]; // distance in miles for each level
+var levels = [4,6,8,10,15,20,30,40,50,100,1000,10000,30000]; // distance in miles for each level
 
 Meteor.publish("viewablePosts",function(level, position){
 	// console.log("published closePosts with p="+JSON.stringify(position));
@@ -54,6 +54,7 @@ Meteor.publish("viewablePosts",function(level, position){
 			}
 		}
 	);
+
 	var cpArray = closePosts.fetch();
 	// console.log("closePosts = "+cpArray);
 	// _.each(cpArray,function(x){console.dir(x)});

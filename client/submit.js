@@ -85,12 +85,6 @@ function userLocation() {
 
 }
 
-Session.set('voices',window.speechSynthesis.getVoices());
-voices = [];
-theVoice=null;
-
-
-ulfun = userLocation;
 
   var final_transcript = '';
   var recognizing = false;
@@ -102,6 +96,7 @@ ulfun = userLocation;
  
       recognition.onstart = function() {
         recognizing = true;
+        console.log("listening!");
       };
  
       recognition.onerror = function(event) {
@@ -110,6 +105,7 @@ ulfun = userLocation;
  
       recognition.onend = function() {
         recognizing = false;
+        console.log("dictation has stopped");
       };
  
       recognition.onresult = function(event) {
@@ -126,10 +122,12 @@ ulfun = userLocation;
             interim_transcript += event.results[i][0].transcript;
           }
         }
-        //final_transcript = capitalize(final_transcript);
+        final_transcript = final_transcript;
        
-       document.getElementById("post").value = linebreak(final_transcript);
-       document.getElementById("post").value = linebreak(interim_transcript);
+       document.getElementById("post").value = final_transcript;
+       //document.getElementById("post").value = linebreak(interim_transcript);
+       
+      
         
       };
   }
@@ -150,8 +148,10 @@ ulfun = userLocation;
       return;
     }
     final_transcript = '';
+    interim_transcript='';
     recognition.lang = 'en-US';
-    recognition.start();
     final_span.innerHTML = '';
     interim_span.innerHTML = '';
+    recognition.start();
+
   }

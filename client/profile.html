@@ -1,39 +1,52 @@
 <template name= "profile">
   <div class="posts">
     <div class="form-style">
-      <div class="container">
-        
-        {{#if currentUser}}
 
-          <h4>Your posts</h4>
-          {{#if hasPosts}}
-            <button class="waves-effect waves-light btn" id="readAllPosts">Read All</button>
-            <ul class="list-group">
-    		    {{#each posts}}
-    			   {{> yourPosts}}
-    		    {{/each}}
-            </ul>
-            <p>Sum of votes on all your posts: {{totalPostScore}}</p>
+        {{#if currentUser}}
+          <div class="yourInfo">
+            <h4>Your profile</h4>
+            <h5>Your total barkarma: {{totalScore}}</h5>
+          </div>
+          <hr>
+          <div class="yourInfo">
+            <h4>Your posts</h4>
+            <h5>Your total post barkarma: {{totalPostScore}}</h5>
+          </div>
+
+            {{#if hasPosts}}
+              <div class="readPostButton">
+                <button class="waves-effect waves-light btn" id="readAllPosts">Read All</button>
+              </div>
+              <div class="collection">
+                {{#each posts}}
+                 {{> yourPosts}}
+                {{/each}}
+              </div>
           {{else}}
-              <p> Maybe try making a post... </p>
+              <p> You don't have any barks. Try barking something! </p>
           {{/if}}
 
           <hr>
 
-          <h4>Your comments</h4>
-         
+          <div class="yourInfo">
+            <h4>Your comments</h4>
+            <h5>Your total comment barkarma: {{totalCommentScore}}</h5>
+          </div>
+
           {{#if hasComments}}
-            <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
-            <ul class="list-group">
-    		    {{#each comments}}
-    			   {{> yourComments}}
-    		    {{/each}}
-            </ul>
-            <p>Sum of votes on all your comments: {{totalCommentScore}}</p>
+            <div class="readPostButton">
+              <button class="waves-effect waves-light btn" id="readAllComments">Read All</button>
+            </div>
+            <div class="collection">
+      		    {{#each comments}}
+      			   {{> yourComments}}
+      		    {{/each}}
+            </div>
+
           {{else}}
             <p> Maybe try making a comment on a post... </p>
           {{/if}}
-            
+
         {{else}}
           <h4 style="text-align:center">You have to log in to see your profile</h4>
           <hr>
@@ -46,67 +59,104 @@
 
 
 
-    </div>
   </div>
 </div>
 </template>
 
 <template name="yourPosts">
-  <div class="posts">
-    <li class="list-group-item">
-      <a class="yourPosts" href="#">
-        <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
-        <h6 id="comment" align="center">{{commentCount}} comment(s)</h6> 
-        <p align="right">{{score}}</p>
-        <button class="waves-effect waves-light btn" id="incrementPost">
-        <span class="glyphicon glyphicon-thumbs-up"></span>
-        </button>
-        <button class="waves-effect waves-light btn" id="decrementPost">
-        <span class="glyphicon glyphicon-thumbs-down"></span>
-        </button>
-        <button class= "btn waves-effect waves-light" id="messageButton" align="center">
-        <span class="glyphicon glyphicon-envelope"></span>
-        </button>
-        <button class="waves-effect waves-light btn" id="say">Say</button>
+  <ul class="collection-item">
+    <div class="posts">
+        <a class="postInfo" href="#">
+            <h5 class="break-el">{{#emojione}} {{post}} {{/emojione}}</h5>
+            <br>
+          <div class = "postInformation">
+            <div class="col-md-4 col-xs-3" id="flagDelete" align="left">
+              {{#if ismyrow}}
+                <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
+              {{/if}}
+              <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left" style="vertical-align: middle;">flag</i></button>
+            </div>
+            <div class="col-md-4 col-xs-6" align="center">
+              <p id="comment" >{{commentCount}} {{commentPlural}}</p>
+            </div>
+            <div class="col-md-4 col-xs-3" align="right">
+              <p id = "score">{{score}}</p>
+            </div>
+          </div>
+          <br><br>
+          <div class="saymes">
+              {{#if ismyrow}}
+                <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
+                <span class="glyphicon glyphicon-envelope"></span>
+                </button>
+              {{else}}
+                <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+                <span class="glyphicon glyphicon-envelope"></span>
+                </button>
+              {{/if}}
+              <button class="waves-effect waves-light btn" id="say">Say</button>
+          </div>
+          <div class="votebut">
+              <button class="waves-effect waves-light btn" id="incrementPost">
+              <span class="glyphicon glyphicon-thumbs-up"></span>
+              </button>
+              <button class="waves-effect waves-light btn" id="decrementPost">
+              <span class="glyphicon glyphicon-thumbs-down"></span>
+              </button>
+          </div>
+          <div row = "time" style ="text-align: right">
+            <small id = "submittedPost">
+              {{submittedPost}}
+            </small>
+          </div>
 
-       <!--  {{#if ismyrow}} 
-          <button class="waves-effect waves-light btn">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          </button>
-        {{/if}} -->
-        {{#if ismyrow}} 
-          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
-        {{/if}}
-
-      </a> 
-    </li>
-  </div>
+        </a>
+      </div>
+    </ul>
 </template>
 
 <template name = "yourComments">
-	<div class="posts">
-    <li class="list-group-item">
-      <a class="yourComments" href="#">
-        <h5 class="break-el">{{#emojione}} {{comment}} {{/emojione}}</h5>
-        <p align="right">{{score}}</p>
+  <ul class = "collection-item">
+
+    <h5 class="break-el">{{#emojione}} {{comment}} {{/emojione}}</h5>
+    <br>
+    <div class = "deletebutton">
+      {{#if ismyrow}}
+        <button id="delete" class="waves-effect waves-light btn-flat"><i class="material-icons left">delete</i></button>
+      {{/if}}
+      <button id="flag" style="width:10px" class="waves-effect waves-light btn-flat"><i class="material-icons left">flag</i></button>
+
+    </div>
+
+    <div class ="commentScore">
+      <p style="font: 18px">{{score}}</p>
+    </div>
+    <br>
+    <div class="saymes">
+        <button class="waves-effect waves-light btn" id="say">Say</button>
+        {{#if ismyrow}}
+          <button class= "btn waves-effect waves-light" id="messageButton" align="center" disabled>
+          <span class="glyphicon glyphicon-envelope"></span>
+          </button>
+        {{else}}
+          <button class= "btn waves-effect waves-light" id="messageButton" align="center">
+          <span class="glyphicon glyphicon-envelope"></span>
+          </button>
+        {{/if}}
+    </div>
+    <div class="votebut">
         <button class="waves-effect waves-light btn" id="incrementComment">
         <span class="glyphicon glyphicon-thumbs-up"></span>
         </button>
         <button class="waves-effect waves-light btn" id="decrementComment">
         <span class="glyphicon glyphicon-thumbs-down"></span>
         </button>
-        <button class="waves-effect waves-light btn" id="say">Say</button>
+    </div>
+    <div row = "time" style ="text-align: right">
+      <small id = "submittedComment">
+        {{submittedComment}}
+      </small>
+    </div>
 
-       <!--  {{#if ismyrow}} 
-          <button class="waves-effect waves-light btn">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          </button>
-        {{/if}} -->
-        {{#if ismyrow}} 
-          <span class="glyphicon glyphicon-remove jbsapp-delete-icon" aria-hidden="true"></span>
-        {{/if}}
-
-      </a> 
-    </li>
-  </div>
+  </ul>
 </template>

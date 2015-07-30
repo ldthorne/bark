@@ -46,6 +46,18 @@ Deps.autorun(function(){
 	Meteor.subscribe('viewablePosts', 2, {latitude:lat,longitude:lng});
 	Meteor.subscribe('viewablePosts', 3, {latitude:lat,longitude:lng});
 	Meteor.subscribe('viewablePosts', 4, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 4, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 5, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 6, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 7, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 8, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 9, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 10, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 11, {latitude:lat,longitude:lng});
+	Meteor.subscribe('viewablePosts', 12, {latitude:lat,longitude:lng});
+
+
+
 	Meteor.subscribe("myPosts");
 	// console.log("in Autorun: changed position to "+ JSON.stringify(position));
 	// _.each(Posts.find().fetch(),function(x){console.dir(x);})

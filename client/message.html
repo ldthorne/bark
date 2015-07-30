@@ -2,14 +2,13 @@
 	<h4>New message</h4>
 
 	<form class="messageForm">
-		<div class="input-field">
-			<input type="text" id="messageText" class="post-form form-control" name="messageText"/>
-			<label>Message</label>
-		</div>
-		<input type="submit" value="Send message" class="btn btn-primary">
+		<input type="text" id="messageText" class="post-form form-control" name="messageText" placeholder="Type your message here"/>
+		<button class="btn waves-effect waves-light" type="submit">Send message
+		</button>
 	</form>
 
 	 <hr>
-     {{> emojiTable}}
-
+	 <div class="emojis">
+		 {{> emojiTable}}
+	 </div>
 </template>

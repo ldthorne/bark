@@ -14,9 +14,29 @@ Template.profile.helpers({
     _.each(scores, function(score){
       sum+=score;
     });
-  
+
     return sum;
   },
+
+  totalScore: function(){
+    sum=0;
+    yourComments= Comments.find({commenter: Meteor.userId()}).fetch();
+    var scores = _.pluck(yourComments, 'score');
+    _.each(scores, function(score){
+      sum+=score;
+      console.log(sum);
+    });
+
+    yourPosts = Posts.find({owner: Meteor.userId()}).fetch();
+    var scores = _.pluck(yourPosts, 'score');
+    _.each(scores, function(score){
+      sum+=score;
+      console.log(sum);
+
+    });
+    return sum;
+  },
+
 
   totalCommentScore: function() {
     sum=0;
@@ -25,7 +45,7 @@ Template.profile.helpers({
     _.each(scores, function(score){
       sum+=score;
     });
-  
+
     return sum;
   },
 
@@ -41,11 +61,27 @@ Template.profile.helpers({
 
 Template.yourPosts.helpers({
   ismyrow: function(){return Meteor.userId() == this.owner},
-  commentCount: function(){return Comments.find({fromPost:this._id}).count()}
+  commentCount: function(){
+    return Comments.find({fromPost:this._id}).count()
+  },
+  commentPlural: function(){
+    if(Comments.find({fromPost:this._id}).count()==1){
+      return "comment";
+    } else {
+      return "comments";
+    }
+  },
+  submittedPost:function(){
+
+    return submittime(this.submitted);
+  }
 });
 
 Template.yourComments.helpers({
   ismyrow: function(){return Meteor.userId() == this.commenter},
+  submittedComment:function(){
+    return submittime(this.submitted);
+  }
 });
 
 Template.yourPosts.events({
@@ -55,7 +91,7 @@ Template.yourPosts.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-  
+
   'click .jbsapp-delete-icon': function(){removePost(this._id);
   },
 
@@ -65,9 +101,10 @@ Template.yourPosts.events({
     } else {
       alert("You must be logged in to comment. Login and try again.");
     }
-  }
+  },
 
- 
+
+
 });
 
 Template.yourComments.events({
@@ -77,7 +114,7 @@ Template.yourComments.events({
     if (theVoice) msg.voice=theVoice;
     window.speechSynthesis.speak(msg);
   },
-  
+
   'click .jbsapp-delete-icon': function(){Comments.remove(this._id);
   },
 
@@ -87,9 +124,9 @@ Template.yourComments.events({
     } else {
       alert("You must be logged in to comment. Login and try again.");
     }
-  }
+  },
 
- 
+
 });
 
 
@@ -102,9 +139,9 @@ Template.profile.events({
       var postId = this._id;
       Session.set('post', postId);
       var commentId = this._id;
-      Session.set('comment', commentId); 
+      Session.set('comment', commentId);
 
-      //checkVotes(Posts.findOne({_id: postId})); 
+      //checkVotes(Posts.findOne({_id: postId}));
     },
     'click #incrementPost': function () {
       if(Meteor.user()) {
@@ -133,7 +170,7 @@ Template.profile.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
     },
 
     'click #decrementPost': function(){
@@ -160,12 +197,12 @@ Template.profile.events({
           Posts.update(postId, {$inc: {score: -1}});
           Posts.update(postId, {$addToSet: {voted: Meteor.userId()}});
           Posts.update(postId, {$addToSet: {downVoted: Meteor.userId()}});
-        } 
+        }
         checkVotes(selectedAnime);
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
   	},
 
   'click #incrementComment': function () {
@@ -195,7 +232,7 @@ Template.profile.events({
       } else {
         alert("You must log in to vote. Log in and try again.");
       }
-      
+
     },
 
     'click #decrementComment': function(){
@@ -238,15 +275,15 @@ Template.profile.events({
    'click #readAllPosts': function(){
     allPosts = Posts.find({owner:Meteor.userId()}).fetch();
     console.log(allPosts);
-    
+
     var posts = _.pluck(allPosts, 'post');
     var reversePosts = posts.reverse()
 
     _.each(reversePosts, function(post){
       var msg = new SpeechSynthesisUtterance(post);
       msg.onend = function(){
-        playAudio();      
-      }      
+        playAudio();
+      }
       window.speechSynthesis.speak(msg);
     })
   },
@@ -254,67 +291,90 @@ Template.profile.events({
     'click #readAllComments': function(){
     allComments = Comments.find({commenter:Meteor.userId()}).fetch();
     console.log(allComments);
-    
+
     var comments = _.pluck(allComments, 'comment');
     var reverseComments = comments.reverse()
 
     _.each(reverseComments, function(comment){
       var msg = new SpeechSynthesisUtterance(comment);
       msg.onend = function(){
-        playAudio();      
-      }      
+        playAudio();
+      }
       window.speechSynthesis.speak(msg);
     })
   }
 
 });
 
+var votesForLevels = [-5,5,10,20,40,50,100,200,400,800,1600,3200,6400];
+
 function checkVotes(selected){
     var p = Posts.findOne({_id:selected._id});
-    //numbers may seem off.. were not sure how to fix
+    var postLevel = selected.level;
+    var score = selected.score;
 
-    //console.log(selected.score);
-   if(selected.score >=5 && selected.score <10){
-    Posts.update({_id: p._id}, {$set: {radius:4}});
-    //console.log("radius should be 4");
-     //console.log(selected.radius);
-  } else if(selected.score >=10 && selected.score <20){
-    Posts.update({_id: p._id}, {$set: {radius:6}});
-     //console.log("radius should be 6");
-     //console.log(selected.radius);
-  }else if(selected.score >=20 && selected.score <40){
-    Posts.update({_id: p._id}, {$set: {radius:8}});
-  }else if(selected.score >=40 && selected.score <50){
-    Posts.update({_id: p._id}, {$set: {radius:10}});
-  }else if(selected.score >=50 && selected.score <100){
-    Posts.update({_id: p._id}, {$set: {radius:15}});
-  }else if(selected.score >=100 && selected.score <200){
-    Posts.update({_id: p._id}, {$set: {radius:20}});
-  }else if(selected.score >=200 && selected.score <400){
-    Posts.update({_id: p._id}, {$set: {radius:30}});
-  }else if(selected.score >=400 && selected.score <800){
-    Posts.update({_id: p._id}, {$set: {radius:35}});
-  }else if(selected.score >=800 && selected.score <1600){
-    Posts.update({_id: p._id}, {$set: {radius:50}});
-  }else if(selected.score >=1600 && selected.score <3200){
-    Posts.update({_id: p._id}, {$set: {radius:100}});
-  }else if(selected.score >=1600){
-    Posts.update({_id: p._id}, {$set: {radius:1000000}});
-  }
+    if(score<votesForLevels[postLevel]){
+      Posts.update({_id: p._id}, {$inc: {level:-1}});
+    }else if (score>=votesForLevels[postLevel+1]){
+      Posts.update({_id: p._id}, {$inc: {level:1}});
+    }
   if(selected.score <= -4){
     removePost(selected._id);
     //console.log("should delete");
-  } else {
-    //console.log('should not delete');
   }
 }
 
 function removePost(selectedId){
   _.each(Comments.find({fromPost:selectedId}).fetch(), function(comment){
     Comments.remove(comment._id);
-  }); 
+  });
   _.each(Messages.find({postId:selectedId}).fetch(), function(message){
     Messages.remove(message._id)
   });
   Posts.remove(selectedId);
+}
+
+function submittime(submitted){
+  var tTime=new Date(submitted);
+      var cTime=new Date();
+      var sinceMin=Math.round((cTime-tTime)/60000);
+      if(sinceMin==0)
+      {
+          var sinceSec=Math.round((cTime-tTime)/1000);
+          if(sinceSec<10)
+            var since='less than 10 seconds ago';
+          else if(sinceSec<20)
+            var since='less than 20 seconds ago';
+          else
+            var since='half a minute ago';
+      }
+      else if(sinceMin==1)
+      {
+          var sinceSec=Math.round((cTime-tTime)/1000);
+          if(sinceSec==30)
+            var since='half a minute ago';
+          else if(sinceSec<60)
+            var since='less than a minute ago';
+          else
+            var since='1 minute ago';
+      }
+      else if(sinceMin<45)
+          var since=sinceMin+' minutes ago';
+      else if(sinceMin>44&&sinceMin<60)
+          var since='about 1 hour ago';
+      else if(sinceMin<1440){
+          var sinceHr=Math.round(sinceMin/60);
+      if(sinceHr==1)
+        var since='about 1 hour ago';
+      else
+        var since='about '+sinceHr+' hours ago';
+      }
+      else if(sinceMin>1439&&sinceMin<2880)
+          var since='1 day ago';
+      else
+      {
+          var sinceDay=Math.round(sinceMin/1440);
+          var since=sinceDay+' days ago';
+      }
+      return since;
 }
