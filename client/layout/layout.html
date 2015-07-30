@@ -1,64 +1,71 @@
 <template name="layout">
 	<div class="container">
 		<ul id="dropdown1" class="dropdown-content">
-		  	<li><a href="{{pathFor 'settings'}}"><i class="material-icons right">settings</i>Settings</a></li>
+		  <li><a href="{{pathFor 'settings'}}"><i class="material-icons right">settings</i>Settings</a></li>
 			<li class="divider"></li>
 			<li><a href="{{pathFor 'profile'}}"><i class="material-icons right">face</i>Profile</a></li>
-		  	<li class="divider"></li>
+		  <li class="divider"></li>
 			<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
 		</ul>
 
-		<!-- <ul id="dropdown1copy" class="dropdown-content">
-		  	<li><a href="{{pathFor 'settings'}}"><i class="material-icons right">settings</i>Settings</a></li>
-			<li class="divider"></li>
-			<li><a href="{{pathFor 'profile'}}"><i class="material-icons right">face</i>Profile</a></li>
-		  	<li class="divider"></li>
-			<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
-		</ul> -->
 		<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
-		
+
 		    <div class="nav-wrapper">
 		      <a href="{{pathFor 'newsfeed'}}" class="brand-logo" id ="brandName" style="padding-left:20px">bark!</a>
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 		      <ul class="right hide-on-med-and-down" style="padding-right:20px">
 		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
-				<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
-				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
-				<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Advanced<i class="material-icons right">arrow_drop_down</i></a></li>
-				{{#if loggedIn}}
-					{{> atNavButton}}
-				{{else}}
-					<li><a href="{{pathFor 'login'}}">Login</a></li>
-				{{/if}}
-
+						<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
+						<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
+						<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Advanced<i class="material-icons right">arrow_drop_down</i></a></li>
+						{{#if loggedIn}}
+							{{> atNavButton}}
+						{{else}}
+							<li><a href="{{pathFor 'login'}}">Login</a></li>
+						{{/if}}
 		      </ul>
 		      <ul class="side-nav" id="mobile-demo">
 		        <li><a href="{{pathFor 'newsfeed'}}"><i class="material-icons right">home</i>Newsfeed</a></li>
-				<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
-				<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
-				<li><a href="{{pathFor 'settings'}}"><i class="material-icons right">settings</i>Settings</a></li>
-				<li><a href="{{pathFor 'profile'}}"><i class="material-icons right">face</i>Profile</a></li>
-				<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
-				{{#if loggedIn}}
-					{{> atNavButton}}
-				{{else}}
-					<li><a href="{{pathFor 'login'}}">Login</a></li>
-				{{/if}}
-			</ul>
-
+						<li><a href="{{pathFor 'inbox'}}"><i class="material-icons right">email</i>Inbox</a></li>
+						<li><a href="{{pathFor 'submit'}}"><i class="material-icons right">mode_edit</i>Submit a Post</a></li>
+						<li><a href="{{pathFor 'settings'}}"><i class="material-icons right">settings</i>Settings</a></li>
+						<li><a href="{{pathFor 'profile'}}"><i class="material-icons right">face</i>Profile</a></li>
+						<li><a href="{{pathFor 'feedback'}}">Feedback</a></li>
+						{{#if loggedIn}}
+							{{> atNavButton}}
+						{{else}}
+							<li><a href="{{pathFor 'login'}}">Login</a></li>
+						{{/if}}
+					</ul>
 		    </div>
 	  	</nav>
 	  	<div id="test">
 	  	</div>
 
-		
+
 		<!-- Here is where the actual content of the page gets inserted by the router! -->
 		{{> yield}}
-		
+
 	</div>
 	<body>
 	</body>
 
 	<footer>
+		<div class="fixed-action-btn" id="mobileFAB" style="bottom: 45px; right: 24px;">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">add</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating blue" id="micbutton"><i class="material-icons">mic</i></a></li>
+        <li><a class="btn-floating green" href="/inbox"><i class="material-icons">email</i></a></li>
+        <li><a class="btn-floating yellow darken-1" href="/submit"><i class="material-icons">mode_edit</i></a></li>
+
+      </ul>
+    </div>
+		<div class="fixed-action-btn" id="desktopFAB" style="bottom: 45px; right: 24px;">
+			<a class="btn-floating btn-large green lighten-1" id="micbutton"><i class="large material-icons">mic</i>
+			</a>
+		</div>
+
 	</footer>
 </template>

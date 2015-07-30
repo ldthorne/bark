@@ -1,3 +1,6 @@
+nav .material-icons {
+	line-height: 2.2;
+}
 body{
 	padding-top: 70px;
 }
@@ -88,4 +91,32 @@ body {
 #at-nav-button {
     background-color: #A5A6A7;
     width: auto;
+}
+
+#mobileFAB {
+  display: block; /* This is how it looks on mobile */
+}
+
+@media (min-width: 600px) {
+  #mobileFAB {
+    display: none; /* This is how it looks on desktop */
+  }
+}
+
+#desktopFAB {
+  display: none; /* This is how it looks on mobile */
+}
+
+@media (min-width: 600px) {
+  #desktopFAB {
+    display: block; /* This is how it looks on desktop */
+  }
+}
+
+#dropdown1 a{
+  color: black;
+}
+
+#dropdown1 li{
+ width:150px;
 }
