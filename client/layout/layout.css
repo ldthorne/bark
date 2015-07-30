@@ -1,3 +1,9 @@
+footer{
+	padding-bottom: 40px;
+}
+.bottomPadding{
+	padding-bottom: 30px;
+}
 nav .material-icons {
 	line-height: 2.2;
 }
