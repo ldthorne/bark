@@ -88,14 +88,6 @@ Template.yourPosts.events({
   'click .jbsapp-delete-icon': function(){removePost(this._id);
   },
 
-  'click #comment': function(){
-    if(Meteor.user()){
-      Meteor.defer(function() {Router.go('comment');});
-    } else {
-      alert("You must be logged in to comment. Login and try again.");
-    }
-  }
-  },
 
   'click #flagPost': function(){
     if(Meteor.user()) {
@@ -117,6 +109,13 @@ Template.yourPosts.events({
     }
   },
 
+  'click #comment': function(){
+    if(Meteor.user()){
+      Meteor.defer(function() {Router.go('comment');});
+    } else {
+      alert("You must be logged in to comment. Login and try again.");
+    }
+  }
 
 
 });

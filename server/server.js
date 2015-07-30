@@ -175,7 +175,7 @@ function checkVotes(selected){
     //console.log("should delete");
   }
 }
-}
+
 
 function removePost(selectedId){
   _.each(Comments.find({fromPost:selectedId}).fetch(), function(comment){
