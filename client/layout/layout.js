@@ -157,6 +157,8 @@ function handle_user_input(u) {
       console.log(all);
       say(all);
     }
+  } else if (u.indexOf('help')>-1 || u.indexOf('info')>-1 || u.indexOf('information')>-1){
+    Router.go('help');
   } else if (u.indexOf('go back')>-1 || u.indexOf('return')>-1 || u.indexOf('last')>-1){
     console.log('old' + numbers[i].post)
     i--;
