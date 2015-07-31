@@ -37,7 +37,7 @@ Template.layout.events({
     if (!running) {
       running = true;
       i = 0;
-      numbers= Posts.find({}, {limit: 3, sort: Session.get('postsSort')}).fetch();
+      numbers= Posts.find({}, {sort: Session.get('postsSort')}).fetch();
       sayitnow("what would you like me to do? I can read posts or navigate to a new page for you");
       //sayitnow(numbers[i++].post);
 
