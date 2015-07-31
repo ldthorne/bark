@@ -1,0 +1,6 @@
+ul.commands{
+	list-style-type: circle;
+}
+ul.commands li {
+	list-style-type: circle;
+}

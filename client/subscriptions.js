@@ -5,6 +5,7 @@ Meteor.subscribe("theSentMessages");
 Meteor.subscribe("theReceivedMessages");
 Meteor.subscribe("theSentComMessages");
 Meteor.subscribe("theReceivedComMessages");
+// Meteor.subscribe("userData");
 
 Meteor.subscribe("theEmojis");
 

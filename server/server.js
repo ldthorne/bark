@@ -1,3 +1,12 @@
+
+// Accounts.onCreateUser(function(options, user) {
+ 
+//   Meteor.users.update(user, {$set: {canMessage: true}});
+//   console.log('profle update');
+
+//   return user;
+// });
+
 Meteor.methods({
   postInsert: function(post, location) {
     var postId = Posts.insert({

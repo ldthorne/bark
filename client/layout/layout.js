@@ -1,3 +1,9 @@
+// Meteor.users.deny({
+//   update: function() {
+//     return true;
+//   }
+// });
+
 Session.set('voices',window.speechSynthesis.getVoices());
 voices = [];
 theVoice=null;
@@ -114,7 +120,7 @@ function handle_user_input(u) {
     } else if(u.indexOf('newsfeed')>-1 || u.indexOf('home')>-1 || u.indexOf('news feed')>-1){
       recognition.stop();
       Router.go('newsfeed');
-    } else if(u.indexOf('messages')>-1 || u.indexOf('inbox')>-1 || u.indexOf('message')>-1){
+    } else if(u.indexOf('inbox')>-1){
       recognition.stop();
       Router.go('inbox');
     } else if ((i!=0)&&(u.indexOf('comment')>-1 || u.indexOf('comments'>-1))){

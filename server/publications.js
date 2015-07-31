@@ -1,3 +1,13 @@
+// Meteor.publish("userData", function () {
+//   if (this.userId) {
+//   	//console.log(Meteor.users.find());
+//     //return Meteor.users.find()
+//     //return Meteor.users.find({_id: this.userId},
+//                           //   {fields: {'canMessage': 1}});
+//   } else {
+//     this.ready();
+//   }
+// });
 Meteor.publish("thePosts",function(){return Posts.find();});
 Meteor.publish("theComments",function(){return Comments.find();});
 Meteor.publish("theProfiles",function(){return Profiles.find();});
