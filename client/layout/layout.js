@@ -113,6 +113,8 @@ function handle_user_input(u) {
     responded = true;
   } else if (u.indexOf("stop")>-1 || u.indexOf('pause')>-1){
     say("okay", "stop");
+  }else if (u.indexOf("who is the coolest person")>-1 || u.indexOf('coolest')>-1){
+    say("daniel thorne!");
   } else if (u.indexOf('navigate')>-1){
     if(u.indexOf('submit')>-1 || u.indexOf('post')>-1){
       recognition.stop();
