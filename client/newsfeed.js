@@ -32,7 +32,7 @@ function deleteOld(){
   allPosts = Posts.find().fetch();
   _.each(allPosts, function(post){
     var today = new Date();
-    if((today.getTime()-post.submitted.getTime())/(1000 * 60 * 60 * 24)<3){
+    if((today.getTime()-post.submitted.getTime())/(1000 * 60 * 60 * 24)>3){
       removePost(post._id);    
     }
   });
