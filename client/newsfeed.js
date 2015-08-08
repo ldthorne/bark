@@ -23,19 +23,23 @@ Template.newsfeed.rendered = function(){
 
 };
 
-Template.newsfeed.created = function(){
-  deleteOld();
-}
+
 
 
 function deleteOld(){
   allPosts = Posts.find().fetch();
+  removedPost = false;
   _.each(allPosts, function(post){
     var today = new Date();
     if((today.getTime()-post.submitted.getTime())/(1000 * 60 * 60 * 24)>3){
-      removePost(post._id);    
+      removePost(post._id);
+      removedPost = true;
     }
   });
+  if(removedPost){
+    alert("Posts have been deleted.")
+    removedPost=false;
+  }
 }
 
 
