@@ -158,6 +158,7 @@ Meteor.methods({
   checkFlags: function(selected){
     if(selected.numberFlags >= 4){
       removePost(selected._id);
+      alert("You were the 5th person to flag this post. The post was deleted because of you!")
       //should delete if more than 4 flags
     }
   }
@@ -180,6 +181,7 @@ function checkVotes(selected){
     }
   if(selected.score <= -4){
     removePost(selected._id);
+    alert("You lowered the score below -5. The post was deleted because of you!")
     //console.log("should delete");
   }
 }
