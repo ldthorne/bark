@@ -8,7 +8,7 @@ bark! is built using JavaScript, jQuery, HTML, and CSS on the Meteor framework. 
 The project is still actively being developed, with new features (such as increased security, better UI/UX, photo and video posts, and an Android and iOS application) under development. 
 
 ## How can I access it?
-Great question. You can currently access it at http://leiner.i-cs.brandeis.edu:4500, but it's due to be taken down any day. We're currently looking at servers hosts that can natively support Meteor applications.
+Great question. You can currently access it at http://leiner.cs-i.brandeis.edu:4500, but it's due to be taken down any day. We're currently looking at servers hosts that can natively support Meteor applications.
 
 If you really can't wait to use the app, feel free to clone it down and run it locally!
 
