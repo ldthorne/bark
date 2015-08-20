@@ -16,6 +16,7 @@ Template.newsfeed.rendered = function(){
     });
   });
   putPosts();
+
   if(!this._rendered) {
     this._rendered = true;
     deleteOld()
@@ -23,11 +24,19 @@ Template.newsfeed.rendered = function(){
 
 };
 
+arePosts = false;
+if(arePosts == false){
+  allPosts = Posts.find().fetch();
+  if(allPosts.length == 0){
+    alert("There are no posts. This could be because no one has posted any content near you in the past three days, or because there is a problem figuring out your current location.");
+  }
+  arePosts= true;
+}
 
 
 
 function deleteOld(){
-  allPosts = Posts.find().fetch();
+  allPosts = Posts.find().fetch();  
   removedPost = false;
   _.each(allPosts, function(post){
     var today = new Date();
@@ -288,9 +297,14 @@ var recognizing = false;
 
 function putPosts(){
   allPosts = Posts.find().fetch();
+  console.log(allPosts.length);
+
+
 
   //console.log(allPosts);
 }
+
+
 
 
 
