@@ -218,7 +218,10 @@ Template.newsfeed.events({
 
       var posts = _.pluck(allPosts, 'post');
       var reversePosts = posts.reverse()
-
+      if(allPosts.length == 0){
+        var msg = new SpeechSynthesisUtterance("There are no posts currently. Please check back later.");
+        window.speechSynthesis.speak(msg);
+      }
       _.each(reversePosts, function(post){
         var msg = new SpeechSynthesisUtterance(post);
         msg.onend = function(){
