@@ -14,5 +14,7 @@ If you really can't wait to use the app, feel free to clone it down and run it l
 
 ## Founding Members
 Luke Dorney
+
 Leon Daniel Thorne
+
 Jason Theoharis
