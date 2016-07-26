@@ -5,7 +5,7 @@ bark! an anonymous, geo-location based, grassroots social media platform. It is 
 bark! is built using JavaScript, jQuery, MongoDB, HTML, and CSS on the Meteor platform. We used numerous Meteor packages, which are visible in .meteor/packages. We received a huge amount of help from Professor Timothy Hickey, Professor Marie Meteer, Jessica Hyunh, Melanie Kaplan-Cohen, and Samuel Bernheim.
 
 ## What's next?
-The project is still actively being developed, with new features (such as increased security, better UI/UX, photo and video posts, and an Android and iOS application) under development. 
+We've halted all development on the application as of 08/2015.
 
 ## How can I access it?
 You can currently access it at http://leiner.cs-i.brandeis.edu:4500, but it's due to be taken down any day. We're currently looking at servers hosts that can natively support Meteor applications.
